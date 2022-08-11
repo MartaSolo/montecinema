@@ -6,6 +6,6 @@ import HomePage from "./pages/HomePage.vue";
   <HomePage />
 </template>
 
-<!-- <style lang="scss">
-@import "@/assets/stylesheets/base";
-</style> -->
+<style lang="scss">
+@import "@/assets/stylesheets/main";
+</style>
