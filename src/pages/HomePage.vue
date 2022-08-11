@@ -11,7 +11,8 @@
   <div class="contact">Contact</div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/stylesheets/colors";
 .header {
   border: 1px solid blue;
 }
@@ -21,7 +22,7 @@
 }
 .soon {
   height: 100px;
-  border: 1px solid orange;
+  border: 1px solid $colorAccent;
 }
 .screenings {
   height: 200px;

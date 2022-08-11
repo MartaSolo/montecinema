@@ -1,0 +1,21 @@
+@import "./normalize.scss";
+@import "./fonts.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $fontPrimary;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1440px;
+}
