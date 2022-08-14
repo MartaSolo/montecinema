@@ -1,15 +1,15 @@
 <script>
-import NavBar from "../components/Header/HeaderMain.vue";
+import HeaderPrimary from "../components/Header/HeaderPrimary.vue";
 
 export default {
   components: {
-    NavBar,
+    HeaderPrimary,
   },
 };
 </script>
 
 <template>
-  <NavBar />
+  <HeaderPrimary />
   <div class="hero">Hero</div>
   <div class="soon">Coming soon</div>
   <div class="screenings">Screenings</div>
@@ -17,15 +17,13 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/stylesheets/colors";
-
 .hero {
   height: 100px;
   border: 1px solid red;
 }
 .soon {
   height: 100px;
-  border: 1px solid $colorAccent;
+  border: 1px solid $colorRedBittersweet;
 }
 .screenings {
   height: 200px;

@@ -7,21 +7,16 @@
 
 body {
   font-family: $fontPrimary;
+  color: $colorGreyTuna;
 }
 
 a {
   text-decoration: none;
   cursor: pointer;
+  color: $colorGreyTuna;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  }
-  
-.container {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1440px;
+button {
+  background-color: $colorWhiteSnow;
+  cursor: pointer;
 }

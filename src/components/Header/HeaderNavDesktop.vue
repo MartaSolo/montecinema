@@ -1,0 +1,34 @@
+<script>
+import { defineComponent } from "vue";
+import HeaderLogo from "./HeaderLogo.vue";
+import HeaderNavMenu from "./HeaderNavMenu.vue";
+import HeaderNavRedirect from "./HeaderNavRedirect.vue";
+
+export default defineComponent({
+  name: "HeaderNavDesktop",
+  components: {
+    HeaderLogo,
+    HeaderNavMenu,
+    HeaderNavRedirect,
+  },
+});
+</script>
+
+<template>
+  <nav class="nav">
+    <HeaderLogo />
+    <HeaderNavMenu />
+    <HeaderNavRedirect />
+  </nav>
+</template>
+
+<style lang="scss" scoped>
+.nav {
+  @include mediumScreen {
+    width: 100%;
+    height: 100%;
+    @include flexRowCenterCenter;
+    justify-content: space-between;
+  }
+}
+</style>

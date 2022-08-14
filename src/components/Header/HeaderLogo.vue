@@ -3,6 +3,7 @@ import { defineComponent } from "vue";
 import LogoMonte from "../../assets/images/logo_montecinema.svg";
 
 export default defineComponent({
+  name: "HeaderLogo",
   components: {
     LogoMonte,
   },
@@ -16,7 +17,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .header__logo {
   display: block;
-  border: 1px solid black;
   width: 183px;
   height: 38px;
 }

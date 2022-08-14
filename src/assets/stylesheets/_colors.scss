@@ -1,49 +1,31 @@
-// Snow white
-$colorBackgroundPrimary: rgba(255, 255, 255, 1);
-// blue bg
-// rgba(235, 243, 254, 1)
-$colorTextPrimary: rgba(0, 0, 0, 1);
-
+// White
+$colorWhiteSnow: rgba(255, 255, 255, 1);
+$colorBlackShadow: rgba(0, 0, 0, 0.02);
+$colorBlack: rgba(255, 255, 255,1);
 
 // Red
-// Cherry Red
-$colorAccent: rgba(236, 17, 21, 1); 
-// Totem Pole
-$colorAccentHover: rgba(166, 12, 14, 1);
-// Bittersweet
-$colorAccentLight: rgba(244, 112, 115, 1); 
-// Sweet Pink
-// rgba(247, 160, 161, 1)
-// Cosmos
-// rgba(251, 207, 208, 1)
-// Fair Pink
-// rgba(253, 235, 235, 1)
-// Wisp Pink
-// rgba(254, 246, 246, 1)
+$colorRedCherry: rgba(236, 17, 21, 1); 
+$colorRedTotemPole: rgba(166, 12, 14, 1);
+$colorRedBittersweet: rgba(244, 112, 115, 1); 
+$colorRedSweetPink:rgba(247, 160, 161, 1);
+$colorRedCosmos: rgba(251, 207, 208, 1);
+$colorRedFairPink:rgba(253, 235, 235, 1);
+$colorRedWispPink: rgba(254, 246, 246, 1);
 
 
 // Grey
-// Charade
-$colorCheckboxText: rgba(41, 42, 51, 1); 
-// Tuna
-$colorTitlePrimary: rgba(52, 53, 65, 1); 
-// Abbey
-// rgba(72, 73, 84, 1)
-// Mid gray
-// rgba(93, 93, 103, 1)
-// Jumbo
-$colorInputPlaceholder: rgba(133, 134, 141, 1); 
-// Bombay
-// rgba(174, 174, 179, 1)
-// Iron
-// rgba(214, 215, 217, 1)
-// Gray / jakiś szary
-// rgba(234, 234, 234, 1)
-// Athens Gray
-$colorInputBackground: rgba(247, 247, 247, 1); 
+$colorGreyCharade: rgba(41, 42, 51, 1); 
+$colorGreyTuna: rgba(52, 53, 65, 1); 
+$colorGreyAbbey:rgba(72, 73, 84, 1);
+$colorGreyMid:rgba(93, 93, 103, 1);
+$colorGreyJumbo: rgba(133, 134, 141, 1); 
+$colorGreyBombay:rgba(174, 174, 179, 1);
+$colorGreyIron:rgba(214, 215, 217, 1);
+$colorGreyAthens: rgba(247, 247, 247, 1); 
 $colorInputBgHover: rgba(229, 229, 229, 1); 
 
-$colorTitleSecondary: rgb(120, 120, 120);
+
+
 $colorShadow: rgba(52, 53, 65, 0.15);
 
 $colorInputCorrect: rgba(39, 174, 96, 1);
