@@ -35,11 +35,20 @@ export default defineComponent({
 }
 .link.register,
 .link.login,
-.link.account {
+.link.account,
+.link.welcome {
   @include buttonLarge;
   width: 310px;
   @include mediumScreen {
     @include buttonMedium;
+  }
+}
+.link.welcome {
+  @include buttonLarge;
+  width: 310px;
+  @include mediumScreen {
+    width: 224px;
+    align-self: flex-start;
   }
 }
 .link.login {

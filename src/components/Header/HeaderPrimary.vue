@@ -33,7 +33,7 @@ export default defineComponent({
 
 <template>
   <header class="header">
-    <SectionContainer class="header">
+    <SectionContainer class="header__container">
       <HeaderNavMobile v-if="mobileView" />
       <HeaderNavDesktop v-if="!mobileView" />
     </SectionContainer>
@@ -50,8 +50,11 @@ export default defineComponent({
     height: 112px;
   }
 }
-.header.container {
+.header__container {
   height: 100%;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>
