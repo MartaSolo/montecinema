@@ -1,9 +1,9 @@
 <script>
 import { defineComponent } from "vue";
-import ButtonIcon from "../Global/ButtonIcon.vue";
-import HeaderLogo from "./HeaderLogo.vue";
-import HeaderNavMenu from "./HeaderNavMenu.vue";
-import HeaderNavRedirect from "./HeaderNavRedirect.vue";
+import ButtonIcon from "@/components/Global/ButtonIcon.vue";
+import HeaderLogo from "@/components/Header/HeaderLogo.vue";
+import HeaderNavMenu from "@/components/Header/HeaderNavMenu.vue";
+import HeaderNavRedirect from "@/components/Header/HeaderNavRedirect.vue";
 
 export default defineComponent({
   name: "HeaderNavMobile",

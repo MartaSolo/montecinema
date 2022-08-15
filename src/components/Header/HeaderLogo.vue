@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import LogoMonte from "../../assets/images/logo_montecinema.svg";
+import LogoMonte from "@/assets/images/logo_montecinema.svg";
 
 export default defineComponent({
   name: "HeaderLogo",

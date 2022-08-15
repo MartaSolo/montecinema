@@ -1,7 +1,7 @@
 <script>
 import { defineComponent } from "vue";
-import MenuIconOpen from "../../assets/images/navigation-menu.svg";
-import MenuIconClose from "../../assets/images/close.svg";
+import MenuIconOpen from "@/assets/images/navigation-menu.svg";
+import MenuIconClose from "@/assets/images/close.svg";
 
 export default defineComponent({
   props: {

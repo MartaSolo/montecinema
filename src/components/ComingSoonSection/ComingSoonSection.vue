@@ -1,7 +1,7 @@
 <script>
 import { defineComponent } from "vue";
-import SectionContainer from "../Global/SectionContainer.vue";
-import ComingSoonMovies from "./ComingSoonMovies.vue";
+import SectionContainer from "@/components/Global/SectionContainer.vue";
+import ComingSoonMovies from "@/components/ComingSoonSection/ComingSoonMovies.vue";
 
 export default defineComponent({
   name: "ComingSoonSection",

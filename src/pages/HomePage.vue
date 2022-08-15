@@ -1,7 +1,7 @@
 <script>
-import HeaderPrimary from "../components/Header/HeaderPrimary.vue";
-import WeclomeSection from "../components/WelcomeSection/WeclomeSection.vue";
-import ComingSoonSection from "../components/ComingSoonSection/ComingSoonSection.vue";
+import HeaderPrimary from "@/components/Header/HeaderPrimary.vue";
+import WeclomeSection from "@/components/WelcomeSection/WeclomeSection.vue";
+import ComingSoonSection from "@/components/ComingSoonSection/ComingSoonSection.vue";
 
 export default {
   components: {

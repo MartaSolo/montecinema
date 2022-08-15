@@ -1,8 +1,8 @@
 <script>
 import { defineComponent } from "vue";
-import ImageBasic from "../Global/ImageBasic.vue";
-import MovieCategory from "./MovieCategory.vue";
-import MovieLength from "./MovieLength.vue";
+import ImageBasic from "@/components/Global/ImageBasic.vue";
+import MovieCategory from "@/components/Global/MovieCategory.vue";
+import MovieLength from "@/components/Global/MovieLength.vue";
 
 export default defineComponent({
   name: "MovieCardBasic",

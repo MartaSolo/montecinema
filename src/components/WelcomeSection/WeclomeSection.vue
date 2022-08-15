@@ -1,10 +1,10 @@
 <script>
 import { defineComponent } from "vue";
-import SectionContainer from "../Global/SectionContainer.vue";
-import SectionTitlePrimary from "../Global/SectionTitlePrimary.vue";
-import SectionDescription from "../Global/SectionDescription.vue";
-import LinkBasic from "../Global/LinkBasic.vue";
-import ImageBasic from "../Global/ImageBasic.vue";
+import SectionContainer from "@/components/Global/SectionContainer.vue";
+import SectionTitlePrimary from "@/components/Global/SectionTitlePrimary.vue";
+import SectionDescription from "@/components/Global/SectionDescription.vue";
+import LinkBasic from "@/components/Global/LinkBasic.vue";
+import ImageBasic from "@/components/Global/ImageBasic.vue";
 
 export default defineComponent({
   name: "WeclomeSection",
@@ -50,7 +50,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .welcome__section {
-  // border: 1px solid blue;
   width: 100%;
   height: 562px;
   @include mediumScreen {

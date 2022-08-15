@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import MovieCardBasic from "../Global/MovieCardBasic.vue";
+import MovieCardBasic from "@/components/Global/MovieCardBasic.vue";
 
 export default defineComponent({
   name: "ComingSoonMovies",

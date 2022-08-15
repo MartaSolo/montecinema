@@ -17,7 +17,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <a class="nav__link" href="{{url}}">{{ text }}</a>
+  <a class="nav__link" href="url">{{ text }}</a>
 </template>
 
 <style lang="scss" scoped>

@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import LinkBasic from "../Global/LinkBasic.vue";
+import LinkBasic from "@/components/Global/LinkBasic.vue";
 
 export default defineComponent({
   name: "HeaderNavRedirect",

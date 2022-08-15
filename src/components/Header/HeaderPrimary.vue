@@ -1,8 +1,8 @@
 <script>
 import { defineComponent } from "vue";
-import SectionContainer from "../Global/SectionContainer.vue";
-import HeaderNavMobile from "./HeaderNavMobile.vue";
-import HeaderNavDesktop from "./HeaderNavDesktop.vue";
+import SectionContainer from "@/components/Global/SectionContainer.vue";
+import HeaderNavMobile from "@/components/Header/HeaderNavMobile.vue";
+import HeaderNavDesktop from "@/components/Header/HeaderNavDesktop.vue";
 
 export default defineComponent({
   name: "HeaderPrimary",
@@ -14,7 +14,6 @@ export default defineComponent({
   methods: {
     onResize() {
       this.mobileView = window.innerWidth <= 1024;
-      console.log(this.mobileView);
     },
   },
   mounted() {
