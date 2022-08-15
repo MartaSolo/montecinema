@@ -32,4 +32,10 @@ export default defineComponent({
   height: 100%;
   object-fit: contain;
 }
+.movie__card-image {
+  padding-bottom: 16px;
+  max-height: 191px;
+  object-fit: cover;
+  object-position: top;
+}
 </style>

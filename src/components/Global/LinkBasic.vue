@@ -12,14 +12,16 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    class: {
+      type: String,
+    },
     colorTheme: {
       type: String,
-      default: "red-white",
     },
   },
   computed: {
     classes() {
-      return [`link link__${this.colorTheme}`];
+      return [`link ${this.class} ${this.colorTheme}`];
     },
   },
 });
@@ -61,13 +63,13 @@ export default defineComponent({
     width: 165px;
   }
 }
-.link__accent-text {
+.link.accent-text {
   @include buttonAccentText;
 }
-.link__accent-filled {
+.link.accent-filled {
   @include buttonAccentFilled;
 }
-.link__light-filled {
+.link.light-filled {
   @include buttonLightFilled;
 }
 </style>

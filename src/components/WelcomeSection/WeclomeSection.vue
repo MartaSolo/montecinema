@@ -19,8 +19,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <section class="weclome__section">
-    <SectionContainer class="weclome__container">
+  <section class="welcome__section">
+    <SectionContainer class="welcome__container">
       <div class="welcome__text">
         <SectionTitlePrimary
           title="Welcome to the best cinema in Monterail"
@@ -49,7 +49,7 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
-.weclome__section {
+.welcome__section {
   // border: 1px solid blue;
   width: 100%;
   height: 562px;
@@ -57,7 +57,7 @@ export default defineComponent({
     height: 618px;
   }
 }
-.weclome__container {
+.welcome__container {
   height: 100%;
   width: 100%;
   background-color: $colorRedWispPink;

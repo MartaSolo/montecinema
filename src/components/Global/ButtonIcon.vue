@@ -5,8 +5,13 @@ import MenuIconClose from "../../assets/images/close.svg";
 
 export default defineComponent({
   props: {
-    type: String,
-    icon: String,
+    icon: {
+      type: String,
+      required: true,
+    },
+    class: {
+      type: String,
+    },
   },
   computed: {
     open() {
@@ -14,6 +19,9 @@ export default defineComponent({
     },
     close() {
       return this.icon === "closeMenu" ? true : false;
+    },
+    classes() {
+      return [`button__icon ${this.class}`];
     },
   },
   components: {
@@ -24,10 +32,20 @@ export default defineComponent({
 </script>
 
 <template>
-  <button v-if="open" class="button__icon" @click="$emit('click', $event)">
+  <button
+    v-if="open"
+    type="button"
+    :class="classes"
+    @click="$emit('click', $event)"
+  >
     <MenuIconOpen />
   </button>
-  <button v-if="close" class="button__icon" @click="$emit('click', $event)">
+  <button
+    v-if="close"
+    type="button"
+    :class="classes"
+    @click="$emit('click', $event)"
+  >
     <MenuIconClose />
   </button>
 </template>

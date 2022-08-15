@@ -31,14 +31,14 @@ export default defineComponent({
   <HeaderLogo />
   <ButtonIcon
     v-if="!menuOpen"
-    type="button"
     icon="openMenu"
+    class="open"
     @click="toggleMenu"
   />
   <ButtonIcon
     v-if="menuOpen"
-    type="button"
     icon="closeMenu"
+    class="close"
     @click="toggleMenu"
   />
   <nav v-if="menuOpen" class="nav">

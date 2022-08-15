@@ -3,11 +3,21 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "SectionContainer",
+  props: {
+    class: {
+      type: String,
+    },
+  },
+  computed: {
+    classes() {
+      return [`container ${this.class}`];
+    },
+  },
 });
 </script>
 
 <template>
-  <div class="container"><slot /></div>
+  <div :class="classes"><slot /></div>
 </template>
 
 <style lang="scss" scoped>

@@ -39,7 +39,9 @@ export default defineComponent({
   }
 }
 .section__description.welcome {
-  width: 600px;
   align-self: flex-start;
+  @include mediumScreen {
+    width: 600px;
+  }
 }
 </style>

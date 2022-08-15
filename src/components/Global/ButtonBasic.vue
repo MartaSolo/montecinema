@@ -12,6 +12,9 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    class: {
+      type: String,
+    },
     colorTheme: {
       type: String,
       default: "red-white",
@@ -19,7 +22,7 @@ export default defineComponent({
   },
   computed: {
     classes() {
-      return [`button button__${this.colorTheme}`];
+      return [`button ${this.class} button__${this.colorTheme}`];
     },
   },
 });
