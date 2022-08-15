@@ -4,6 +4,7 @@ import MenuIconOpen from "@/assets/images/navigation-menu.svg";
 import MenuIconClose from "@/assets/images/close.svg";
 
 export default defineComponent({
+  emits: ["iconClick"],
   props: {
     icon: {
       type: String,
@@ -36,7 +37,7 @@ export default defineComponent({
     v-if="open"
     type="button"
     :class="classes"
-    @click="$emit('click', $event)"
+    @click="$emit('iconClick', $event)"
   >
     <MenuIconOpen />
   </button>
@@ -44,7 +45,7 @@ export default defineComponent({
     v-if="close"
     type="button"
     :class="classes"
-    @click="$emit('click', $event)"
+    @click="$emit('iconClick', $event)"
   >
     <MenuIconClose />
   </button>

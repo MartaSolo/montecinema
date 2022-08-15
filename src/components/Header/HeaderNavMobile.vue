@@ -7,7 +7,6 @@ import HeaderNavRedirect from "@/components/Header/HeaderNavRedirect.vue";
 
 export default defineComponent({
   name: "HeaderNavMobile",
-  emits: ["toggleMenu"],
   data() {
     return {
       menuOpen: false,
@@ -33,13 +32,13 @@ export default defineComponent({
     v-if="!menuOpen"
     icon="openMenu"
     class="open"
-    @click="toggleMenu"
+    @iconClick="toggleMenu"
   />
   <ButtonIcon
     v-if="menuOpen"
     icon="closeMenu"
     class="close"
-    @click="toggleMenu"
+    @iconClick="toggleMenu"
   />
   <nav v-if="menuOpen" class="nav">
     <HeaderNavMenu />
