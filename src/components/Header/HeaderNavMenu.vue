@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import HeaderNavLink from "@/components/Header/HeaderNavLink.vue";
+import HeaderNavLink from "@/components/header/HeaderNavLink.vue";
 
 export default defineComponent({
   name: "HeaderNavMenu",

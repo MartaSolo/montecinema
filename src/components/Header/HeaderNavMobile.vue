@@ -1,12 +1,18 @@
 <script>
 import { defineComponent } from "vue";
-import ButtonIcon from "@/components/Global/ButtonIcon.vue";
-import HeaderLogo from "@/components/Header/HeaderLogo.vue";
-import HeaderNavMenu from "@/components/Header/HeaderNavMenu.vue";
-import HeaderNavRedirect from "@/components/Header/HeaderNavRedirect.vue";
+import ButtonIcon from "@/components/global/ButtonIcon.vue";
+import HeaderLogo from "@/components/header/HeaderLogo.vue";
+import HeaderNavMenu from "@/components/header/HeaderNavMenu.vue";
+import HeaderNavRedirect from "@/components/header/HeaderNavRedirect.vue";
 
 export default defineComponent({
   name: "HeaderNavMobile",
+  components: {
+    ButtonIcon,
+    HeaderNavMenu,
+    HeaderNavRedirect,
+    HeaderLogo,
+  },
   data() {
     return {
       menuOpen: false,
@@ -16,12 +22,6 @@ export default defineComponent({
     toggleMenu() {
       this.menuOpen = !this.menuOpen;
     },
-  },
-  components: {
-    ButtonIcon,
-    HeaderNavMenu,
-    HeaderNavRedirect,
-    HeaderLogo,
   },
 });
 </script>

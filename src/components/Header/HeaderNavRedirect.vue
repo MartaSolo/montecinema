@@ -1,17 +1,17 @@
 <script>
 import { defineComponent } from "vue";
-import BaseLink from "@/components/Global/BaseLink.vue";
+import BaseLink from "@/components/global/BaseLink.vue";
 
 export default defineComponent({
   name: "HeaderNavRedirect",
+  components: {
+    BaseLink,
+  },
   data() {
     return {
       // userLogged: true,
       userLogged: false,
     };
-  },
-  components: {
-    BaseLink,
   },
 });
 </script>

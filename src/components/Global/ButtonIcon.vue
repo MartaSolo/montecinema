@@ -4,7 +4,11 @@ import MenuIconOpen from "@/assets/images/navigation-menu.svg";
 import MenuIconClose from "@/assets/images/close.svg";
 
 export default defineComponent({
-  emits: ["iconClick"],
+  name: "ButtonIcon",
+  components: {
+    MenuIconOpen,
+    MenuIconClose,
+  },
   props: {
     icon: {
       type: String,
@@ -14,6 +18,7 @@ export default defineComponent({
       type: String,
     },
   },
+  emits: ["iconClick"],
   computed: {
     open() {
       return this.icon === "openMenu" ? true : false;
@@ -24,10 +29,6 @@ export default defineComponent({
     classes() {
       return [`button__icon ${this.class}`];
     },
-  },
-  components: {
-    MenuIconOpen,
-    MenuIconClose,
   },
 });
 </script>

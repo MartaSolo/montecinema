@@ -1,10 +1,10 @@
 <script>
 import { defineComponent } from "vue";
-import SectionContainer from "@/components/Global/SectionContainer.vue";
-import SectionTitlePrimary from "@/components/Global/SectionTitlePrimary.vue";
-import SectionDescription from "@/components/Global/SectionDescription.vue";
-import BaseLink from "@/components/Global/BaseLink.vue";
-import BaseImage from "@/components/Global/BaseImage.vue";
+import SectionContainer from "@/components/global/SectionContainer.vue";
+import SectionTitlePrimary from "@/components/global/SectionTitlePrimary.vue";
+import SectionDescription from "@/components/global/SectionDescription.vue";
+import BaseLink from "@/components/global/BaseLink.vue";
+import BaseImage from "@/components/global/BaseImage.vue";
 
 export default defineComponent({
   name: "WeclomeSection",

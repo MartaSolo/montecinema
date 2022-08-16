@@ -1,9 +1,10 @@
 <script>
 import { defineComponent } from "vue";
-import BaseMovieCard from "@/components/Global/BaseMovieCard.vue";
+import BaseMovieCard from "@/components/global/BaseMovieCard.vue";
 
 export default defineComponent({
   name: "ComingSoonMovies",
+  components: { BaseMovieCard },
   data() {
     return {
       movies: [
@@ -52,8 +53,6 @@ export default defineComponent({
       ],
     };
   },
-
-  components: { BaseMovieCard },
 });
 </script>
 

@@ -1,7 +1,7 @@
 <script>
 import { defineComponent } from "vue";
-import SectionContainer from "@/components/Global/SectionContainer.vue";
-import ComingSoonMovies from "@/components/ComingSoonSection/ComingSoonMovies.vue";
+import SectionContainer from "@/components/global/SectionContainer.vue";
+import ComingSoonMovies from "@/components/comingSoonSection/ComingSoonMovies.vue";
 
 export default defineComponent({
   name: "ComingSoonSection",
@@ -17,7 +17,7 @@ export default defineComponent({
     <SectionContainer class="soon__container">
       <div class="soon__text">
         <h3 class="soon__title-primary">
-          Soon<span class="soon__title-secondary"> in the cinema</span>
+          Soon <span class="soon__title-secondary">in the cinema</span>
         </h3>
         <a href="#" class="soon__link">See all</a>
       </div>

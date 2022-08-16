@@ -1,20 +1,20 @@
 <script>
 import { defineComponent } from "vue";
-import SectionContainer from "@/components/Global/SectionContainer.vue";
-import HeaderNavMobile from "@/components/Header/HeaderNavMobile.vue";
-import HeaderNavDesktop from "@/components/Header/HeaderNavDesktop.vue";
+import SectionContainer from "@/components/global/SectionContainer.vue";
+import HeaderNavMobile from "@/components/header/HeaderNavMobile.vue";
+import HeaderNavDesktop from "@/components/header/HeaderNavDesktop.vue";
 
 export default defineComponent({
   name: "HeaderPrimary",
+  components: {
+    SectionContainer,
+    HeaderNavMobile,
+    HeaderNavDesktop,
+  },
   data() {
     return {
       mobileView: true,
     };
-  },
-  methods: {
-    onResize() {
-      this.mobileView = window.innerWidth <= 1024;
-    },
   },
   mounted() {
     addEventListener("resize", this.onResize);
@@ -22,10 +22,10 @@ export default defineComponent({
   unmounted() {
     removeEventListener("resize", this.onResize);
   },
-  components: {
-    SectionContainer,
-    HeaderNavMobile,
-    HeaderNavDesktop,
+  methods: {
+    onResize() {
+      this.mobileView = window.innerWidth <= 1024;
+    },
   },
 });
 </script>

@@ -1,11 +1,12 @@
 <script>
 import { defineComponent } from "vue";
-import BaseImage from "@/components/Global/BaseImage.vue";
-import MovieCategory from "@/components/Global/MovieCategory.vue";
-import MovieLength from "@/components/Global/MovieLength.vue";
+import BaseImage from "@/components/global/BaseImage.vue";
+import MovieCategory from "@/components/global/MovieCategory.vue";
+import MovieLength from "@/components/global/MovieLength.vue";
 
 export default defineComponent({
   name: "MovieCardBasic",
+  components: { MovieLength, BaseImage, MovieCategory },
   props: {
     movie: {
       type: Object,
@@ -21,7 +22,6 @@ export default defineComponent({
         : `${hours}h ${minutes} min`;
     },
   },
-  components: { MovieLength, BaseImage, MovieCategory },
 });
 </script>
 
