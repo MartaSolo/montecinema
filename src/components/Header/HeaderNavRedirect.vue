@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import LinkBasic from "@/components/Global/LinkBasic.vue";
+import BaseLink from "@/components/Global/BaseLink.vue";
 
 export default defineComponent({
   name: "HeaderNavRedirect",
@@ -11,28 +11,28 @@ export default defineComponent({
     };
   },
   components: {
-    LinkBasic,
+    BaseLink,
   },
 });
 </script>
 
 <template>
   <div class="nav__links">
-    <LinkBasic
+    <BaseLink
       v-if="userLogged"
       class="account"
       url="#"
       text="My Account"
       colorTheme="light-filled"
     />
-    <LinkBasic
+    <BaseLink
       v-if="!userLogged"
       class="register"
       url="#"
       text="Register"
       colorTheme="accent-text"
     />
-    <LinkBasic
+    <BaseLink
       v-if="!userLogged"
       class="login"
       url="#"

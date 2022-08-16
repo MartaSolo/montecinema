@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import MovieCardBasic from "@/components/Global/MovieCardBasic.vue";
+import BaseMovieCard from "@/components/Global/BaseMovieCard.vue";
 
 export default defineComponent({
   name: "ComingSoonMovies",
@@ -53,13 +53,13 @@ export default defineComponent({
     };
   },
 
-  components: { MovieCardBasic },
+  components: { BaseMovieCard },
 });
 </script>
 
 <template>
   <div class="soon__movies">
-    <MovieCardBasic v-for="movie in movies" :key="movie.id" :movie="movie" />
+    <BaseMovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
   </div>
 </template>
 

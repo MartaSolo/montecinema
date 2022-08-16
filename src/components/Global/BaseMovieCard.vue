@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import ImageBasic from "@/components/Global/ImageBasic.vue";
+import BaseImage from "@/components/Global/BaseImage.vue";
 import MovieCategory from "@/components/Global/MovieCategory.vue";
 import MovieLength from "@/components/Global/MovieLength.vue";
 
@@ -21,7 +21,7 @@ export default defineComponent({
         : `${hours}h ${minutes} min`;
     },
   },
-  components: { MovieLength, ImageBasic, MovieCategory },
+  components: { MovieLength, BaseImage, MovieCategory },
 });
 </script>
 
@@ -29,7 +29,7 @@ export default defineComponent({
   <div class="movie__card">
     <h4 class="movie__card-title">{{ movie.title }}</h4>
     <MovieLength class="movie__card-length" :length="movieLength" />
-    <ImageBasic
+    <BaseImage
       :src="movie.poster_url"
       :alt="movie.title"
       class="movie__card-image"

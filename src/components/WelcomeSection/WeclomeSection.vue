@@ -3,8 +3,8 @@ import { defineComponent } from "vue";
 import SectionContainer from "@/components/Global/SectionContainer.vue";
 import SectionTitlePrimary from "@/components/Global/SectionTitlePrimary.vue";
 import SectionDescription from "@/components/Global/SectionDescription.vue";
-import LinkBasic from "@/components/Global/LinkBasic.vue";
-import ImageBasic from "@/components/Global/ImageBasic.vue";
+import BaseLink from "@/components/Global/BaseLink.vue";
+import BaseImage from "@/components/Global/BaseImage.vue";
 
 export default defineComponent({
   name: "WeclomeSection",
@@ -12,8 +12,8 @@ export default defineComponent({
     SectionContainer,
     SectionTitlePrimary,
     SectionDescription,
-    LinkBasic,
-    ImageBasic,
+    BaseLink,
+    BaseImage,
   },
 });
 </script>
@@ -30,7 +30,7 @@ export default defineComponent({
           description="Best movies, best experiences, best people. And all that doesn’t exist. Yikes."
           class="welcome"
         />
-        <LinkBasic
+        <BaseLink
           url="#"
           text="Book a ticket"
           colorTheme="accent-filled"
@@ -38,7 +38,7 @@ export default defineComponent({
         />
       </div>
       <div class="welcome__image">
-        <ImageBasic
+        <BaseImage
           src="/src/assets/images/cinema.jpeg"
           alt="spectators in the cinema hall"
           class="welcome"
