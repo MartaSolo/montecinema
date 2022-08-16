@@ -8,27 +8,16 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    class: {
-      type: String,
-    },
-  },
-  computed: {
-    movieLength() {
-      return `${this.movie.length / 60}h ${this.movie.length % 60}min`;
-    },
-    classes() {
-      return [`movie-length ${this.class}`];
-    },
   },
 });
 </script>
 
 <template>
-  <div :class="classes">{{ length }}</div>
+  <div class="movie__length">{{ length }}</div>
 </template>
 
 <style lang="scss" scoped>
-.movie-length {
+.movie__length {
   font-weight: 700;
   font-size: 0.9rem;
   color: $colorGreyJumbo;

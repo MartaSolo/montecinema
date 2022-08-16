@@ -8,24 +8,16 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    class: {
-      type: String,
-    },
-  },
-  computed: {
-    classes() {
-      return [`movie-category ${this.class}`];
-    },
   },
 });
 </script>
 
 <template>
-  <div :class="classes">{{ category }}</div>
+  <div class="movie__category">{{ category }}</div>
 </template>
 
 <style lang="scss" scoped>
-.movie-category {
+.movie__category {
   display: inline-block;
   font-weight: 700;
   font-size: 0.9rem;

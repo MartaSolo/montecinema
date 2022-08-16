@@ -1,17 +1,21 @@
 <script>
 import { defineComponent } from "vue";
-import ButtonIcon from "@/components/global/ButtonIcon.vue";
+import BaseButton from "@/components/global/BaseButton.vue";
 import HeaderLogo from "@/components/header/HeaderLogo.vue";
 import HeaderNavMenu from "@/components/header/HeaderNavMenu.vue";
 import HeaderNavRedirect from "@/components/header/HeaderNavRedirect.vue";
+import MenuIconOpen from "@/assets/images/navigation-menu.svg";
+import MenuIconClose from "@/assets/images/close.svg";
 
 export default defineComponent({
   name: "HeaderNavMobile",
   components: {
-    ButtonIcon,
+    BaseButton,
     HeaderNavMenu,
     HeaderNavRedirect,
     HeaderLogo,
+    MenuIconOpen,
+    MenuIconClose,
   },
   data() {
     return {
@@ -28,18 +32,21 @@ export default defineComponent({
 
 <template>
   <HeaderLogo />
-  <ButtonIcon
+  <BaseButton
     v-if="!menuOpen"
-    icon="openMenu"
-    class="open"
-    @iconClick="toggleMenu"
-  />
-  <ButtonIcon
+    type="button"
+    class="button__menu open"
+    colorTheme="accent-filled"
+    @click="toggleMenu"
+    ><MenuIconOpen
+  /></BaseButton>
+  <BaseButton
     v-if="menuOpen"
-    icon="closeMenu"
-    class="close"
-    @iconClick="toggleMenu"
-  />
+    type="button"
+    class="button__menu close"
+    @click="toggleMenu"
+    ><MenuIconClose
+  /></BaseButton>
   <nav v-if="menuOpen" class="nav">
     <HeaderNavMenu />
     <HeaderNavRedirect />
@@ -53,5 +60,11 @@ export default defineComponent({
   position: absolute;
   top: 90%;
   left: 0;
+}
+.button__menu {
+  border: 1px solid $colorWhiteSnow;
+  border-radius: 8px;
+  width: 50px;
+  height: 50px;
 }
 </style>

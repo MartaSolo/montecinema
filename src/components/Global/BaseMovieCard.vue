@@ -30,9 +30,9 @@ export default defineComponent({
     <h4 class="movie__card-title">{{ movie.title }}</h4>
     <MovieLength class="movie__card-length" :length="movieLength" />
     <BaseImage
+      class="movie__card-image"
       :src="movie.poster_url"
       :alt="movie.title"
-      class="movie__card-image"
     />
     <MovieCategory
       class="movie__card-category"
@@ -73,6 +73,12 @@ export default defineComponent({
   font-size: 2.25rem;
   margin: 0;
   flex-grow: 2;
+}
+.movie__card-image {
+  padding-bottom: 16px;
+  max-height: 191px;
+  object-fit: cover;
+  object-position: top;
 }
 .movie__card-category {
   align-self: flex-start;

@@ -13,7 +13,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <section class="soon__section">
+  <section class="soon">
     <SectionContainer class="soon__container">
       <div class="soon__text">
         <h3 class="soon__title-primary">
@@ -42,16 +42,16 @@ export default defineComponent({
   font-weight: 700;
   letter-spacing: 0.015em;
 }
-.soon__title-secondary {
-  display: none;
-  @include mediumScreen {
-    display: inline;
-  }
-}
 .soon__link {
   color: $colorRedCherry;
   &:hover {
     color: $colorRedTotemPole;
+  }
+}
+.soon__title-secondary {
+  display: none;
+  @include mediumScreen {
+    display: inline;
   }
 }
 </style>

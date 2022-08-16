@@ -4,17 +4,6 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "BaseButton",
   props: {
-    buttonType: {
-      type: String,
-      default: "button",
-    },
-    text: {
-      type: String,
-      required: true,
-    },
-    class: {
-      type: String,
-    },
     colorTheme: {
       type: String,
       validator(value) {
@@ -30,16 +19,14 @@ export default defineComponent({
       },
     },
   },
-  computed: {
-    classes() {
-      return [`button ${this.class} button__${this.colorTheme}`];
-    },
-  },
+  emits: ["click"],
 });
 </script>
 
 <template>
-  <button>{{ text }}</button>
+  <button class="button" :class="colorTheme" @click="$emit('click', $event)">
+    <slot></slot>
+  </button>
 </template>
 
 <style lang="scss" scoped>

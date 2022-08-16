@@ -58,7 +58,12 @@ export default defineComponent({
 
 <template>
   <div class="soon__movies">
-    <BaseMovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
+    <BaseMovieCard
+      v-for="movie in movies"
+      :key="movie.id"
+      :movie="movie"
+      class="soon__movie-card"
+    />
   </div>
 </template>
 

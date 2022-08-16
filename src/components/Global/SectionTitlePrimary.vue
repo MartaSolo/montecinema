@@ -8,20 +8,12 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    class: {
-      type: String,
-    },
-  },
-  computed: {
-    classes() {
-      return ["section__title-primary", `${this.class}`];
-    },
   },
 });
 </script>
 
 <template>
-  <h1 :class="classes">{{ title }}</h1>
+  <h1 class="section__title-primary">{{ title }}</h1>
 </template>
 
 <style lang="scss" scoped>
@@ -37,12 +29,6 @@ export default defineComponent({
   @include mediumScreen {
     font-size: 5rem;
     text-align: left;
-  }
-}
-.section__title-primary.welcome {
-  @include mediumScreen {
-    width: 600px;
-    align-self: flex-start;
   }
 }
 </style>

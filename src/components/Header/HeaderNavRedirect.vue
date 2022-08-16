@@ -21,24 +21,25 @@ export default defineComponent({
     <BaseLink
       v-if="userLogged"
       class="account"
-      url="#"
-      text="My Account"
+      href="#"
       colorTheme="light-filled"
-    />
+      >My Account</BaseLink
+    >
     <BaseLink
       v-if="!userLogged"
       class="register"
-      url="#"
+      href="#"
       text="Register"
       colorTheme="accent-text"
-    />
+      >Register</BaseLink
+    >
     <BaseLink
       v-if="!userLogged"
       class="login"
-      url="#"
-      text="Login"
+      href="#"
       colorTheme="accent-filled"
-    />
+      >Login</BaseLink
+    >
   </div>
 </template>
 
@@ -47,6 +48,26 @@ export default defineComponent({
   @include flexColumnCenterCenter;
   @include mediumScreen {
     flex-direction: row;
+  }
+}
+.link.register,
+.link.login,
+.link.account {
+  @include buttonLarge;
+  width: 310px;
+  @include mediumScreen {
+    @include buttonMedium;
+  }
+}
+
+.link.login {
+  @include mediumScreen {
+    margin-left: 1rem;
+  }
+}
+.link.account {
+  @include mediumScreen {
+    width: 165px;
   }
 }
 </style>

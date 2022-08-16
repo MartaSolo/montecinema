@@ -11,30 +11,14 @@ export default defineComponent({
     HeaderNavMobile,
     HeaderNavDesktop,
   },
-  data() {
-    return {
-      mobileView: true,
-    };
-  },
-  mounted() {
-    addEventListener("resize", this.onResize);
-  },
-  unmounted() {
-    removeEventListener("resize", this.onResize);
-  },
-  methods: {
-    onResize() {
-      this.mobileView = window.innerWidth <= 1024;
-    },
-  },
 });
 </script>
 
 <template>
   <header class="header">
     <SectionContainer class="header__container">
-      <HeaderNavMobile v-if="mobileView" />
-      <HeaderNavDesktop v-if="!mobileView" />
+      <div class="header__mobile"><HeaderNavMobile /></div>
+      <div class="header__desktop"><HeaderNavDesktop /></div>
     </SectionContainer>
   </header>
 </template>
@@ -55,5 +39,23 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.header__mobile {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include mediumScreen {
+    display: none;
+  }
+}
+.header__desktop {
+  display: none;
+  @include mediumScreen {
+    height: 100%;
+    width: 100%;
+    display: block;
+  }
 }
 </style>
