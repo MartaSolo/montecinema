@@ -5,7 +5,7 @@ import MovieCategory from "@/components/global/MovieCategory.vue";
 import MovieLength from "@/components/global/MovieLength.vue";
 
 export default defineComponent({
-  name: "MovieCardBasic",
+  name: "BaseMovieCard",
   components: { MovieLength, BaseImage, MovieCategory },
   props: {
     movie: {
