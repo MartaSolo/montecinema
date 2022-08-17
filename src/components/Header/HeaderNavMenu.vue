@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import HeaderNavLink from "./HeaderNavLink.vue";
+import HeaderNavLink from "@/components/header/HeaderNavLink.vue";
 
 export default defineComponent({
   name: "HeaderNavMenu",
@@ -12,9 +12,9 @@ export default defineComponent({
 
 <template>
   <div class="nav__menu">
-    <HeaderNavLink url="#" text="Movies" />
-    <HeaderNavLink url="#" text="Screenings" />
-    <HeaderNavLink url="#" text="Contact us" />
+    <HeaderNavLink href="#" text="Movies" />
+    <HeaderNavLink href="#" text="Screenings" />
+    <HeaderNavLink href="#" text="Contact us" />
   </div>
 </template>
 

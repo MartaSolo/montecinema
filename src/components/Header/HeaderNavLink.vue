@@ -8,16 +8,12 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    url: {
-      type: String,
-      reqiured: true,
-    },
   },
 });
 </script>
 
 <template>
-  <a class="nav__link" href="{{url}}">{{ text }}</a>
+  <a class="nav__link">{{ text }}</a>
 </template>
 
 <style lang="scss" scoped>

@@ -1,28 +1,11 @@
 <script>
 import { defineComponent } from "vue";
-import SectionContainer from "../Global/SectionContainer.vue";
-import HeaderNavMobile from "./HeaderNavMobile.vue";
-import HeaderNavDesktop from "./HeaderNavDesktop.vue";
+import SectionContainer from "@/components/global/SectionContainer.vue";
+import HeaderNavMobile from "@/components/header/HeaderNavMobile.vue";
+import HeaderNavDesktop from "@/components/header/HeaderNavDesktop.vue";
 
 export default defineComponent({
   name: "HeaderPrimary",
-  data() {
-    return {
-      mobileView: true,
-    };
-  },
-  methods: {
-    onResize() {
-      this.mobileView = window.innerWidth <= 1024;
-      console.log(this.mobileView);
-    },
-  },
-  mounted() {
-    addEventListener("resize", this.onResize);
-  },
-  unmounted() {
-    removeEventListener("resize", this.onResize);
-  },
   components: {
     SectionContainer,
     HeaderNavMobile,
@@ -33,9 +16,9 @@ export default defineComponent({
 
 <template>
   <header class="header">
-    <SectionContainer class="header">
-      <HeaderNavMobile v-if="mobileView" />
-      <HeaderNavDesktop v-if="!mobileView" />
+    <SectionContainer class="header__container">
+      <div class="header__mobile"><HeaderNavMobile /></div>
+      <div class="header__desktop"><HeaderNavDesktop /></div>
     </SectionContainer>
   </header>
 </template>
@@ -50,8 +33,29 @@ export default defineComponent({
     height: 112px;
   }
 }
-.header.container {
+.header__container {
   height: 100%;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__mobile {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include mediumScreen {
+    display: none;
+  }
+}
+.header__desktop {
+  display: none;
+  @include mediumScreen {
+    height: 100%;
+    width: 100%;
+    display: block;
+  }
 }
 </style>

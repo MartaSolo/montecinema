@@ -1,13 +1,22 @@
 <script>
 import { defineComponent } from "vue";
-import ButtonIcon from "../Global/ButtonIcon.vue";
-import HeaderLogo from "./HeaderLogo.vue";
-import HeaderNavMenu from "./HeaderNavMenu.vue";
-import HeaderNavRedirect from "./HeaderNavRedirect.vue";
+import BaseButton from "@/components/global/BaseButton.vue";
+import HeaderLogo from "@/components/header/HeaderLogo.vue";
+import HeaderNavMenu from "@/components/header/HeaderNavMenu.vue";
+import HeaderNavRedirect from "@/components/header/HeaderNavRedirect.vue";
+import MenuIconOpen from "@/assets/images/navigation-menu.svg";
+import MenuIconClose from "@/assets/images/close.svg";
 
 export default defineComponent({
   name: "HeaderNavMobile",
-  emits: ["toggleMenu"],
+  components: {
+    BaseButton,
+    HeaderNavMenu,
+    HeaderNavRedirect,
+    HeaderLogo,
+    MenuIconOpen,
+    MenuIconClose,
+  },
   data() {
     return {
       menuOpen: false,
@@ -18,29 +27,26 @@ export default defineComponent({
       this.menuOpen = !this.menuOpen;
     },
   },
-  components: {
-    ButtonIcon,
-    HeaderNavMenu,
-    HeaderNavRedirect,
-    HeaderLogo,
-  },
 });
 </script>
 
 <template>
   <HeaderLogo />
-  <ButtonIcon
+  <BaseButton
     v-if="!menuOpen"
     type="button"
-    icon="openMenu"
+    class="button__menu open"
+    colorTheme="accent-filled"
     @click="toggleMenu"
-  />
-  <ButtonIcon
+    ><MenuIconOpen
+  /></BaseButton>
+  <BaseButton
     v-if="menuOpen"
     type="button"
-    icon="closeMenu"
+    class="button__menu close"
     @click="toggleMenu"
-  />
+    ><MenuIconClose
+  /></BaseButton>
   <nav v-if="menuOpen" class="nav">
     <HeaderNavMenu />
     <HeaderNavRedirect />
@@ -54,5 +60,11 @@ export default defineComponent({
   position: absolute;
   top: 90%;
   left: 0;
+}
+.button__menu {
+  border: 1px solid $colorWhiteSnow;
+  border-radius: 8px;
+  width: 50px;
+  height: 50px;
 }
 </style>

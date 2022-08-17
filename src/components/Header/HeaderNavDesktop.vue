@@ -1,8 +1,8 @@
 <script>
 import { defineComponent } from "vue";
-import HeaderLogo from "./HeaderLogo.vue";
-import HeaderNavMenu from "./HeaderNavMenu.vue";
-import HeaderNavRedirect from "./HeaderNavRedirect.vue";
+import HeaderLogo from "@/components/header/HeaderLogo.vue";
+import HeaderNavMenu from "@/components/header/HeaderNavMenu.vue";
+import HeaderNavRedirect from "@/components/header/HeaderNavRedirect.vue";
 
 export default defineComponent({
   name: "HeaderNavDesktop",
