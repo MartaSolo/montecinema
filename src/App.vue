@@ -1,11 +1,10 @@
 <script setup>
-import HomePage from "./pages/HomePage.vue";
+import HeaderPrimary from "@/components/Header/HeaderPrimary.vue";
 </script>
 
 <template>
-  <HomePage />
+  <HeaderPrimary />
+  <router-view></router-view>
 </template>
 
-<style lang="scss">
-@import "@/assets/stylesheets/main";
-</style>
+<style lang="scss"></style>
