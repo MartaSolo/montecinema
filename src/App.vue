@@ -1,9 +1,8 @@
-<script setup>
-import HeaderPrimary from "@/components/Header/HeaderPrimary.vue";
-</script>
+<script setup></script>
 
 <template>
-  <HeaderPrimary />
+  <router-view name="HeaderPrimary"></router-view>
+  <router-view name="HeaderSecondary"></router-view>
   <router-view></router-view>
 </template>
 

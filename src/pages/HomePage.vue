@@ -1,11 +1,9 @@
 <script>
-import HeaderPrimary from "@/components/header/HeaderPrimary.vue";
 import WeclomeSection from "@/components/welcomeSection/WeclomeSection.vue";
 import ComingSoonSection from "@/components/comingSoonSection/ComingSoonSection.vue";
 
 export default {
   components: {
-    HeaderPrimary,
     WeclomeSection,
     ComingSoonSection,
   },
@@ -14,7 +12,6 @@ export default {
 
 <template>
   <div>
-    <HeaderPrimary />
     <WeclomeSection />
     <ComingSoonSection />
     <div class="screenings">Screenings</div>

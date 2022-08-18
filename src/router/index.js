@@ -4,42 +4,78 @@ const routes = [
   {
     path: "/",
     name: "HomePage",
-    component: () => import("@/pages/HomePage.vue"),
+    components: {
+      default: () => import("@/pages/HomePage.vue"),
+      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+    },
   },
   {
     path: "/movies",
     name: "AllMovies",
-    component: () => import("@/pages/AllMovies.vue"),
+    components: {
+      default: () => import("@/pages/AllMovies.vue"),
+      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+    },
   },
   {
     path: "/screenings",
     name: "AllScreenings",
-    component: () => import("@/pages/AllScreenings.vue"),
+    components: {
+      default: () => import("@/pages/AllScreenings.vue"),
+      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+    },
   },
   {
     path: "/contact",
     name: "ContactUs",
-    component: () => import("@/pages/ContactUs.vue"),
+    components: {
+      default: () => import("@/pages/ContactUs.vue"),
+      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+    },
   },
   {
     path: "/login",
     name: "UserLogIn",
-    component: () => import("@/pages/UserLogIn.vue"),
+    components: {
+      default: () => import("@/pages/UserLogIn.vue"),
+      HeaderSecondary: () => import("@/components/header/HeaderSecondary.vue"),
+    },
   },
   {
     path: "/register",
     name: "UserRegister",
-    component: () => import("@/pages/UserRegister.vue"),
+    components: {
+      default: () => import("@/pages/UserRegister.vue"),
+      HeaderSecondary: () => import("@/components/header/HeaderSecondary.vue"),
+    },
   },
   {
     path: "/account",
     name: "UserAccount",
-    component: () => import("@/pages/UserAccount.vue"),
+    components: {
+      default: () => import("@/pages/UserAccount.vue"),
+      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+    },
   },
   {
     path: "/book-ticket",
     name: "BookTicket",
-    component: () => import("@/pages/BookTicket.vue"),
+    components: {
+      default: () => import("@/pages/BookTicket.vue"),
+      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+    },
+  },
+  {
+    path: "/404",
+    name: "NotFound",
+    components: {
+      default: () => import("@/pages/NotFound.vue"),
+      HeaderSecondary: () => import("@/components/header/HeaderSecondary.vue"),
+    },
+  },
+  {
+    path: "/*",
+    redirect: "/404",
   },
 ];
 
