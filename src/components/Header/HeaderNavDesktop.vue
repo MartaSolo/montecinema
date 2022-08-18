@@ -27,7 +27,8 @@ export default defineComponent({
   @include mediumScreen {
     width: 100%;
     height: 100%;
-    @include flexRowCenterCenter;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
   }
 }

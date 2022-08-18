@@ -1,9 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
 
-import HomePage from "@/pages/Homepage.vue";
-import AllMovies from "@/pages/AllMovies.vue";
-import AllScreenings from "@/pages/AllScreenings.vue";
-
 const routes = [
   {
     path: "/",
@@ -34,6 +30,16 @@ const routes = [
     path: "/register",
     name: "UserRegister",
     component: () => import("@/pages/UserRegister.vue"),
+  },
+  {
+    path: "/account",
+    name: "UserAccount",
+    component: () => import("@/pages/UserAccount.vue"),
+  },
+  {
+    path: "/book-ticket",
+    name: "BookTicket",
+    component: () => import("@/pages/BookTicket.vue"),
   },
 ];
 

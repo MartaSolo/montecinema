@@ -1,12 +1,14 @@
 <script>
 import { defineComponent } from "vue";
 import SectionContainer from "@/components/global/SectionContainer.vue";
+import BaseButton from "../global/BaseButton.vue";
 import ComingSoonMovies from "@/components/comingSoonSection/ComingSoonMovies.vue";
 
 export default defineComponent({
   name: "ComingSoonSection",
   components: {
     SectionContainer,
+    BaseButton,
     ComingSoonMovies,
   },
 });
@@ -19,7 +21,12 @@ export default defineComponent({
         <h3 class="soon__title-primary">
           Soon <span class="soon__title-secondary">in the cinema</span>
         </h3>
-        <a href="#" class="soon__link">See all</a>
+        <BaseButton
+          class="soon__link"
+          :to="{ name: 'AllMovies' }"
+          colorTheme="accent-text"
+          >See all</BaseButton
+        >
       </div>
       <ComingSoonMovies />
     </SectionContainer>
@@ -33,8 +40,7 @@ export default defineComponent({
   align-items: center;
   padding: 60px 0 24px 0;
 }
-.soon__title-primary,
-.soon__link {
+.soon__title-primary {
   margin: 0;
   text-transform: uppercase;
   font-family: $fontSecondary;
@@ -43,9 +49,14 @@ export default defineComponent({
   letter-spacing: 0.015em;
 }
 .soon__link {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
   color: $colorRedCherry;
   &:hover {
     color: $colorRedTotemPole;
+    border: 2px solid $colorWhiteSnow;
   }
 }
 .soon__title-secondary {

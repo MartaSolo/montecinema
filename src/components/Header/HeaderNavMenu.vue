@@ -12,17 +12,34 @@ export default defineComponent({
 
 <template>
   <div class="nav__menu">
-    <HeaderNavLink href="#" text="Movies" />
-    <HeaderNavLink href="#" text="Screenings" />
-    <HeaderNavLink href="#" text="Contact us" />
+    <HeaderNavLink
+      active-class="nav__link-active"
+      :to="{ name: 'AllMovies' }"
+      text="Movies"
+    />
+    <HeaderNavLink
+      active-class="nav__link-active"
+      :to="{ name: 'AllScreenings' }"
+      text="Screenings"
+    />
+    <HeaderNavLink
+      active-class="nav__link-active"
+      :to="{ name: 'ContactUs' }"
+      text="Contact us"
+    />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .nav__menu {
   @include mediumScreen {
-    @include flexRowCenterCenter;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
   }
+}
+.nav__link-active {
+  border-bottom: 2px solid $colorRedCherry;
 }
 </style>

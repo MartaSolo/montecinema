@@ -13,12 +13,14 @@ export default defineComponent({
 </script>
 
 <template>
-  <a class="nav__link">{{ text }}</a>
+  <router-link class="nav__link">{{ text }}</router-link>
 </template>
 
 <style lang="scss" scoped>
 .nav__link {
-  @include flexRowCenterCenter;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: $fontPrimary;
   font-weight: 400;
   font-size: 1.1rem;
@@ -38,7 +40,7 @@ export default defineComponent({
     }
     &:hover {
       color: $colorGreyAbbey;
-      border-bottom: 2px solid $colorRedCherry;
+      border-bottom: 2px solid $colorRedBittersweet;
     }
   }
 }

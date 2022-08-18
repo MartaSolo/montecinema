@@ -35,15 +35,14 @@ export default defineComponent({
   <BaseButton
     v-if="!menuOpen"
     type="button"
-    class="button__menu open"
-    colorTheme="accent-filled"
+    class="menu__open"
     @click="toggleMenu"
     ><MenuIconOpen
   /></BaseButton>
   <BaseButton
     v-if="menuOpen"
     type="button"
-    class="button__menu close"
+    class="menu__close"
     @click="toggleMenu"
     ><MenuIconClose
   /></BaseButton>
@@ -61,7 +60,8 @@ export default defineComponent({
   top: 90%;
   left: 0;
 }
-.button__menu {
+.menu__open,
+.menu__close {
   border: 1px solid $colorWhiteSnow;
   border-radius: 8px;
   width: 50px;
