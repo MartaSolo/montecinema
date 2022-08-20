@@ -38,7 +38,7 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 60px 0 24px 0;
+  padding: 60px 0 34px 0;
 }
 .soon__title-primary {
   margin: 0;

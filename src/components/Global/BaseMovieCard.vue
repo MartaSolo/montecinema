@@ -43,6 +43,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .movie__card {
+  display: flex;
+  flex-direction: column;
   width: 327px;
   min-height: 339px;
   border-radius: 8px;
@@ -55,17 +57,9 @@ export default defineComponent({
     width: 444px;
     min-height: 371px;
     padding: 40px;
-    display: flex;
-    flex-direction: column;
-    &:nth-child(3) {
-      display: none;
-    }
   }
   @include largeScreen {
     width: 421px;
-    &:nth-child(3) {
-      display: block;
-    }
   }
 }
 .movie__card-title {

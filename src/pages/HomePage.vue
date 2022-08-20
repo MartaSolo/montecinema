@@ -1,11 +1,13 @@
 <script>
 import WeclomeSection from "@/components/welcomeSection/WeclomeSection.vue";
 import ComingSoonSection from "@/components/comingSoonSection/ComingSoonSection.vue";
+import ScreeningsSection from "../components/screeningsSection/ScreeningsSection.vue";
 
 export default {
   components: {
     WeclomeSection,
     ComingSoonSection,
+    ScreeningsSection,
   },
 };
 </script>
@@ -14,7 +16,7 @@ export default {
   <div>
     <WeclomeSection />
     <ComingSoonSection />
-    <div class="screenings">Screenings</div>
+    <ScreeningsSection />
     <div class="contact">Contact</div>
   </div>
 </template>
