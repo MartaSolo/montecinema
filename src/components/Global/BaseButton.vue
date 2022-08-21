@@ -147,7 +147,7 @@ export default defineComponent({
   color: $colorWhiteSnow;
   border: 2px solid $colorGreyTuna;
   &:hover {
-    border: 2px solid $colorGreyMid;
+    border: 2px solid $colorGreyBombay;
   }
 }
 .dark__empty {
@@ -155,7 +155,7 @@ export default defineComponent({
   color: $colorGreyTuna;
   border: 2px solid $colorGreyTuna;
   &:hover {
-    border: 2px solid $colorGreyMid;
+    border: 2px solid $colorGreyBombay;
   }
 }
 </style>

@@ -22,10 +22,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.screenings {
-  height: 200px;
-  border: 1px solid violet;
-}
 .contact {
   height: 50px;
   border: 1px solid yellow;

@@ -1,12 +1,13 @@
 <script>
 import { defineComponent } from "vue";
-import { getAllMovies } from "../../api/services/Movies";
+import { getAllMovies } from "@/api/services/Movies";
 import BaseMovieCard from "@/components/global/BaseMovieCard.vue";
-import LoadingData from "../global/LoadingData.vue";
+import LoadingData from "@/components/global/LoadingData.vue";
+import ErrorMessage from "@/components/global/ErrorMessage.vue";
 
 export default defineComponent({
   name: "ComingSoonMovies",
-  components: { BaseMovieCard, LoadingData },
+  components: { BaseMovieCard, LoadingData, ErrorMessage },
   data() {
     return {
       isLoading: false,
@@ -78,3 +79,20 @@ export default defineComponent({
   }
 }
 </style>
+
+<!-- methods: {
+    async getMovies() {
+      this.isLoading = true;
+      try {
+        const respData = await getAllMovies();
+        this.movies = respData.data;
+      } catch (error) {
+        this.errorMessage = error.message;
+      } finally {
+        this.isLoading = false;
+      }
+    },
+  },
+  mounted() {
+    this.getMovies();
+  }, -->

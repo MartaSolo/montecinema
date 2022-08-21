@@ -17,7 +17,9 @@ export default defineComponent({
 
 <template>
   <h2 class="section__title-secondary">{{ title }}</h2>
-  <h2 v-if="subtitle" class="section__subtitle-secondary">{{ subtitle }}</h2>
+  <h2 v-if="subtitle" class="section__subtitle-secondary">
+    {{ subtitle }}
+  </h2>
 </template>
 
 <style lang="scss" scoped>

@@ -26,6 +26,9 @@ export default defineComponent({
     toggleMenu() {
       this.menuOpen = !this.menuOpen;
     },
+    closeMenu() {
+      this.menuOpen = false;
+    },
   },
 });
 </script>
@@ -47,7 +50,7 @@ export default defineComponent({
     ><MenuIconClose
   /></BaseButton>
   <nav v-if="menuOpen" class="nav">
-    <HeaderNavMenu />
+    <HeaderNavMenu @click="closeMenu" />
     <HeaderNavRedirect />
   </nav>
 </template>
