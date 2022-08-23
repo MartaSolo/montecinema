@@ -12,6 +12,10 @@ export default defineComponent({
       type: Object,
       required: true,
     },
+    to: {
+      type: Object,
+      default: null,
+    },
   },
   computed: {
     movieLength() {
@@ -26,23 +30,25 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="movie__card">
-    <h4 class="movie__card-title">{{ movie.title }}</h4>
-    <MovieLength class="movie__card-length" :length="movieLength" />
-    <BaseImage
-      class="movie__card-image"
-      :src="movie.poster_url"
-      :alt="movie.title"
-    />
-    <MovieCategory
-      class="movie__card-category"
-      :category="this.movie.genre.name"
-    />
-  </div>
+  <router-link to="/" class="movie__card">
+    <div class="movie__card-content">
+      <h4 class="movie__card-title">{{ movie.title }}</h4>
+      <MovieLength class="movie__card-length" :length="movieLength" />
+      <BaseImage
+        class="movie__card-image"
+        :src="movie.poster_url"
+        :alt="movie.title"
+      />
+      <MovieCategory
+        class="movie__card-category"
+        :category="this.movie.genre.name"
+      />
+    </div>
+  </router-link>
 </template>
 
 <style lang="scss" scoped>
-.movie__card {
+.movie__card-content {
   display: flex;
   flex-direction: column;
   width: 327px;

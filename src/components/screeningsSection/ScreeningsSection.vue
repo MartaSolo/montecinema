@@ -9,14 +9,8 @@ export default defineComponent({
   components: { SectionTitleSecondary, SectionContainer, ScreeningsCalendar },
   data() {
     return {
-      dateRange: [new Date(), new Date()],
+      date: new Date(),
     };
-  },
-  methods: {
-    changeRangeDates(range) {
-      this.dateRange = range;
-      console.log(this.dateRange);
-    },
   },
 });
 </script>
@@ -28,7 +22,7 @@ export default defineComponent({
         title="Screenings:"
         subtitle="Friday 19/08/2022"
       ></SectionTitleSecondary>
-      <ScreeningsCalendar @changeDates="changeRangeDates" />
+      <ScreeningsCalendar v-model="date" />
     </SectionContainer>
   </section>
 </template>
