@@ -49,6 +49,7 @@ export default defineComponent({
         v-for="movie in comingSoonMovies"
         :key="movie.id"
         :movie="movie"
+        :to="{ name: 'MovieDetails', params: { movieId: movie.id } }"
         class="soon__movie-card"
       />
     </div>

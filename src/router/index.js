@@ -18,6 +18,15 @@ const routes = [
     },
   },
   {
+    path: "/movies/:movieId",
+    name: "MovieDetails",
+    components: {
+      default: () => import("@/pages/MovieDetails.vue"),
+      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+    },
+    props: true,
+  },
+  {
     path: "/screenings",
     name: "AllScreenings",
     components: {

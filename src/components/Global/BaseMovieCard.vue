@@ -30,7 +30,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <router-link to="/" class="movie__card">
+  <router-link :to="to" class="movie__card">
     <div class="movie__card-content">
       <h4 class="movie__card-title">{{ movie.title }}</h4>
       <MovieLength class="movie__card-length" :length="movieLength" />
