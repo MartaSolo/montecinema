@@ -1,8 +1,8 @@
 <script>
 import { defineComponent } from "vue";
 import SectionContainer from "@/components/global/SectionContainer.vue";
-import BaseButton from "../global/BaseButton.vue";
-import ComingSoonMovies from "@/components/comingSoonSection/ComingSoonMovies.vue";
+import BaseButton from "@/components/global/BaseButton.vue";
+import ComingSoonMovies from "@/components/comingSoon/ComingSoonMovies.vue";
 
 export default defineComponent({
   name: "ComingSoonSection",
@@ -10,6 +10,17 @@ export default defineComponent({
     SectionContainer,
     BaseButton,
     ComingSoonMovies,
+  },
+  props: {
+    moviesIsLoading: {
+      type: Boolean,
+    },
+    moviesErrorMessage: {
+      type: String,
+    },
+    moviesComingSoon: {
+      type: Array,
+    },
   },
 });
 </script>
@@ -28,7 +39,11 @@ export default defineComponent({
           >See all</BaseButton
         >
       </div>
-      <ComingSoonMovies />
+      <ComingSoonMovies
+        :moviesIsLoading="moviesIsLoading"
+        :moviesErrorMessage="moviesErrorMessage"
+        :moviesComingSoon="moviesComingSoon"
+      />
     </SectionContainer>
   </section>
 </template>

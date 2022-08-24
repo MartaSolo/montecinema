@@ -1,7 +1,7 @@
 <script>
 import { defineComponent } from "vue";
-import ScreeningMovieCard from "../global/ScreeningMovieCard.vue";
-import LoadingData from "../global/LoadingData.vue";
+import ScreeningMovieCard from "@components/global/ScreeningMovieCard.vue";
+import LoadingData from "@components/global/LoadingData.vue";
 
 export default defineComponent({
   name: "ScreeningsMovies",

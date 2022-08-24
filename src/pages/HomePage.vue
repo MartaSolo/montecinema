@@ -1,22 +1,61 @@
 <script>
-import WeclomeSection from "@/components/welcomeSection/WeclomeSection.vue";
-import ComingSoonSection from "@/components/comingSoonSection/ComingSoonSection.vue";
-import ScreeningsSection from "../components/screeningsSection/ScreeningsSection.vue";
+import { defineComponent } from "vue";
+import { getAllMovies } from "@/api/services/Movies";
+import WeclomeSection from "@/components/welcome/WeclomeSection.vue";
+import ComingSoonSection from "@/components/comingSoon/ComingSoonSection.vue";
+import ScreeningsSection from "@/components/screenings/ScreeningsSection.vue";
 
-export default {
+export default defineComponent({
+  name: "HomePage",
   components: {
     WeclomeSection,
     ComingSoonSection,
     ScreeningsSection,
   },
-};
+  data() {
+    return {
+      moviesIsLoading: false,
+      moviesErrorMessage: null,
+      movies: [],
+    };
+  },
+  computed: {
+    moviesComingSoon() {
+      return this.movies.slice(0, 3);
+    },
+  },
+  methods: {
+    async getMovies() {
+      this.moviesIsLoading = true;
+      try {
+        const respData = await getAllMovies();
+        this.movies = respData.data;
+      } catch (error) {
+        this.moviesErrorMessage = error.message;
+      } finally {
+        this.moviesIsLoading = false;
+      }
+    },
+  },
+  mounted() {
+    this.getMovies();
+  },
+});
 </script>
 
 <template>
   <div>
     <WeclomeSection />
-    <ComingSoonSection />
-    <ScreeningsSection />
+    <ComingSoonSection
+      :moviesIsLoading="moviesIsLoading"
+      :moviesErrorMessage="moviesErrorMessage"
+      :moviesComingSoon="moviesComingSoon"
+    />
+    <ScreeningsSection
+      :moviesIsLoading="moviesIsLoading"
+      :moviesErrorMessage="moviesErrorMessage"
+      :movies="movies"
+    />
     <div class="contact">Contact</div>
   </div>
 </template>
