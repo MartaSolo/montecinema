@@ -24,7 +24,7 @@ export default defineComponent({
     },
     size: {
       type: String,
-      validatro(value) {
+      validator(value) {
         return ["large", "medium", "small", "tiny"].includes(value);
       },
     },
@@ -38,20 +38,11 @@ export default defineComponent({
       return this.to ? "router-link" : "button";
     },
     classes() {
-      return {
-        button: true,
-        button__large: this.size === "large",
-        button__medium: this.size === "medium",
-        button__small: this.size === "small",
-        button__tiny: this.size === "tiny",
-        accent__filled: this.colorTheme === "accent-filled",
-        accent__empty: this.colorTheme === "accent-empty",
-        accent__text: this.colorTheme === "accent-text",
-        light__filled: this.colorTheme === "light-filled",
-        light__empty: this.colorTheme === "light-empty",
-        dark__filled: this.colorTheme === "dark-filled",
-        dark__empty: this.colorTheme === "dark-empty",
-      };
+      return [
+        "button",
+        this.size ? `button__${this.size}` : "",
+        this.colorTheme ? `${this.colorTheme}` : "",
+      ];
     },
   },
 });
@@ -100,7 +91,7 @@ export default defineComponent({
 }
 
 // color themes
-.accent__filled {
+.accent-filled {
   background-color: $colorRedCherry;
   color: $colorWhiteSnow;
   border: 2px solid $colorRedCherry;
@@ -109,7 +100,7 @@ export default defineComponent({
   }
 }
 
-.accent__empty {
+.accent-empty {
   background-color: $colorWhiteSnow;
   color: $colorRedCherry;
   border: 2px solid $colorRedCherry;
@@ -117,7 +108,7 @@ export default defineComponent({
     border: 2px solid $colorRedTotemPole;
   }
 }
-.accent__text {
+.accent-text {
   background-color: $colorWhiteSnow;
   color: $colorRedCherry;
   border: 2px solid $colorWhiteSnow;
@@ -126,7 +117,7 @@ export default defineComponent({
   }
 }
 
-.light__filled {
+.light-filled {
   background-color: $colorRedFairPink;
   color: $colorRedCherry;
   border: 2px solid $colorRedFairPink;
@@ -134,7 +125,7 @@ export default defineComponent({
     border: 2px solid $colorRedSweetPink;
   }
 }
-.light__empty {
+.light-empty {
   background-color: $colorWhiteSnow;
   color: $colorRedSweetPink;
   border: 2px solid $colorRedSweetPink;
@@ -142,7 +133,7 @@ export default defineComponent({
     border: 2px solid $colorRedCherry;
   }
 }
-.dark__filled {
+.dark-filled {
   background-color: $colorGreyTuna;
   color: $colorWhiteSnow;
   border: 2px solid $colorGreyTuna;
@@ -150,7 +141,7 @@ export default defineComponent({
     border: 2px solid $colorGreyBombay;
   }
 }
-.dark__empty {
+.dark-empty {
   background-color: $colorWhiteSnow;
   color: $colorGreyTuna;
   border: 2px solid $colorGreyTuna;

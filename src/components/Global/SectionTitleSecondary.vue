@@ -39,5 +39,6 @@ export default defineComponent({
 }
 .section__subtitle-secondary {
   color: $colorGreyJumbo;
+  padding-bottom: 32px;
 }
 </style>
