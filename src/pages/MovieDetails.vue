@@ -20,6 +20,11 @@ export default defineComponent({
       errorMessage: null,
     };
   },
+  computed: {
+    getMovieTitle() {
+      return this.movieDetails.title;
+    },
+  },
   methods: {
     async getMovieDetails() {
       this.isLoading = true;
@@ -42,10 +47,10 @@ export default defineComponent({
 <template>
   <div>
     <h1>Movie details page</h1>
-    <div class="movie__details">
-      <LoadingData v-if="isLoading" />
-      <ErrorMessage v-else-if="errorMessage">{{ error.message }}</ErrorMessage>
-      <div v-else>{{ movieDetails.title }}</div>
+    <LoadingData v-if="isLoading" />
+    <ErrorMessage v-else-if="errorMessage">{{ error.message }}</ErrorMessage>
+    <div v-else class="movie__details">
+      <!-- <div>{{ getMovieTitle }}</div> -->
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <script>
 import { defineComponent } from "vue";
 import SectionContainer from "@/components/global/SectionContainer.vue";
-import HeaderLogo from "@components/header/HeaderLogo.vue";
+import HeaderLogo from "@/components/header/HeaderLogo.vue";
 
 export default defineComponent({
   name: "HeaderPrimary",

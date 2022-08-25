@@ -101,7 +101,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .screenings__datepicker {
-  border: 1px solid blue;
+  // border: 1px solid blue;
 }
 .screenings__datepicker-label {
   text-transform: uppercase;
@@ -112,7 +112,7 @@ export default defineComponent({
 }
 
 .screenings__datepicker-buttons {
-  border: 1px solid red;
+  // border: 1px solid red;
   display: flex;
   flex-wrap: wrap;
   margin-top: 12px;

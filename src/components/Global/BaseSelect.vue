@@ -17,12 +17,15 @@ export default defineComponent({
       type: String,
       default: "",
     },
+    options: {
+      type: Array,
+      required: true,
+    },
   },
   emits: ["update:modelValue"],
   data() {
     return {
       selected: null,
-      options: ["movie1", "movie2", "movie3"],
     };
   },
   methods: {
@@ -42,14 +45,9 @@ export default defineComponent({
       @update:modelValue="passSelectedValue"
       :options="options"
       :placeholder="placeholder"
+      :close-on-select="true"
     >
     </VueMultiselect>
-    <!-- <VueMultiselect
-      v-model="selected"
-      :options="options"
-      :placeholder="placeholder"
-    >
-    </VueMultiselect> -->
   </div>
 </template>
 
@@ -57,7 +55,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .input__select {
-  border: 1px solid violet;
+  // border: 1px solid violet;
 }
 .input__select-label {
   display: inline-block;

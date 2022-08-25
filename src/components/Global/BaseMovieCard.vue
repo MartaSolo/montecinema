@@ -17,15 +17,6 @@ export default defineComponent({
       default: null,
     },
   },
-  computed: {
-    movieLength() {
-      const hours = Math.floor(this.movie.length / 60);
-      const minutes = String(this.movie.length % 60);
-      return minutes.length === 1
-        ? `${hours}h 0${minutes} min`
-        : `${hours}h ${minutes} min`;
-    },
-  },
 });
 </script>
 
@@ -33,7 +24,7 @@ export default defineComponent({
   <router-link :to="to" class="movie__card">
     <div class="movie__card-content">
       <h4 class="movie__card-title">{{ movie.title }}</h4>
-      <MovieLength class="movie__card-length" :length="movieLength" />
+      <MovieLength class="movie__card-length" :length="movie.length" />
       <BaseImage
         class="movie__card-image"
         :src="movie.poster_url"
