@@ -16,7 +16,7 @@ export default defineComponent({
   data() {
     return {
       movieDetails: null,
-      isLoading: false,
+      isLoading: true,
       errorMessage: null,
     };
   },
@@ -50,7 +50,7 @@ export default defineComponent({
     <LoadingData v-if="isLoading" />
     <ErrorMessage v-else-if="errorMessage">{{ error.message }}</ErrorMessage>
     <div v-else class="movie__details">
-      <!-- <div>{{ getMovieTitle }}</div> -->
+      <div>{{ getMovieTitle }}</div>
     </div>
   </div>
 </template>
