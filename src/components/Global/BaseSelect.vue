@@ -55,7 +55,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .input__select {
-  // border: 1px solid violet;
+  width: 325px;
+  @include mediumScreen {
+    height: 86px;
+  }
+  @include largeScreen {
+    width: 421px;
+  }
 }
 .input__select-label {
   display: inline-block;
@@ -64,9 +70,9 @@ export default defineComponent({
   font-size: 0.9rem;
   font-weight: 700;
   color: $colorRedBittersweet;
-  margin: 40px 0 12px 0;
+  margin-bottom: 12px;
   @include mediumScreen {
-    margin: 0 0 12px 0;
+    margin: 0 0 20px 0;
   }
 }
 </style>

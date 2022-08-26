@@ -47,8 +47,15 @@ export default defineComponent({
     selectedMovie() {
       return this.movies.filter((movie) => movie.title === this.selected);
     },
-    moviesFiltered() {
+    moviesFilteredByTitle() {
       return !this.selected ? this.movies : this.selectedMovie;
+    },
+    moviesFilteredByTitleAndDate() {
+      const moviesIdFromSeances = this.seances.map((seance) => seance.movie);
+      const moviesFilteredBySeances = this.moviesFilteredByTitle.filter(
+        (movie) => moviesIdFromSeances.includes(movie.id)
+      );
+      return moviesFilteredBySeances;
     },
     formattedDate() {
       return this.date.toISOString().substring(0, 10);
@@ -106,7 +113,7 @@ export default defineComponent({
         }}</ErrorMessage>
         <div v-else class="screenings__movies-cards">
           <ScreeningMovieCard
-            v-for="movie in moviesFiltered"
+            v-for="movie in moviesFilteredByTitleAndDate"
             :key="movie.id"
             :movie="movie"
             :movieSeances="movieSeances(movie.id)"
@@ -117,4 +124,13 @@ export default defineComponent({
   </section>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.screenings__filters {
+  margin-bottom: 48px;
+  @include mediumScreen {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+</style>

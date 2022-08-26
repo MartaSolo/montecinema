@@ -78,15 +78,18 @@ export default defineComponent({
   padding: 32px 16px;
   box-shadow: inset 0px -1px 0px $colorScreeningCardBoxShadow;
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-gap: 10px;
+  grid-template-columns: 68px auto;
+  grid-gap: 16px;
   @include mediumScreen {
-    width: 444px;
-    min-height: 371px;
+    grid-template-columns: 98px auto;
+    grid-template-rows: 72px 26px;
+    min-height: 212px;
     padding: 40px;
-  }
-  @include largeScreen {
-    width: 421px;
+    margin-bottom: 40px;
+    height: 178px;
+    box-shadow: 0px 24px 78px rgba(0, 0, 0, 0.08),
+      0px 5.36071px 17.4223px rgba(0, 0, 0, 0.0238443),
+      0px 1.59602px 5.18708px rgba(0, 0, 0, 0.0161557);
   }
 }
 
@@ -97,21 +100,45 @@ export default defineComponent({
   object-position: top;
   @include mediumScreen {
     grid-row: 1 / span 2;
+    width: 98px;
+    height: 132px;
   }
 }
+.screening__movie {
+  @include mediumScreen {
+    grid-row: 1;
+  }
+}
+
 .screening__movie-title {
-  font-weight: 700px;
+  font-weight: 700;
   font-size: 1.5rem;
   margin: 0;
+  margin-bottom: 8px;
+}
+.screening__movie-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.screening__movie-length {
+  padding: 8px 0;
 }
 .screening__movie-hours {
-  // border: 1px solid blue;
   grid-column: 1 / span 2;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
   @include mediumScreen {
     grid-column: 2;
+    height: 40px;
+  }
+}
+.screening__movie-hour {
+  @include mediumScreen {
+    height: 40px;
+    padding: 12px 32px;
+    font-size: 1rem;
   }
 }
 </style>
