@@ -4,6 +4,7 @@ import { getAllMovies } from "@/api/services/Movies";
 import WelcomeSection from "@/components/welcome/WelcomeSection.vue";
 import ComingSoonSection from "@/components/comingSoon/ComingSoonSection.vue";
 import ScreeningsSection from "@/components/screenings/ScreeningsSection.vue";
+import ContactUsSection from "@/components/contact/ContactUsSection.vue";
 
 export default defineComponent({
   name: "HomePage",
@@ -11,6 +12,7 @@ export default defineComponent({
     WelcomeSection,
     ComingSoonSection,
     ScreeningsSection,
+    ContactUsSection,
   },
   data() {
     return {
@@ -56,13 +58,8 @@ export default defineComponent({
       :moviesErrorMessage="moviesErrorMessage"
       :movies="movies"
     />
-    <div class="contact">Contact</div>
+    <ContactUsSection />
   </div>
 </template>
 
-<style lang="scss" scoped>
-.contact {
-  height: 50px;
-  border: 1px solid yellow;
-}
-</style>
+<style lang="scss" scoped></style>

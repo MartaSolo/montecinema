@@ -16,8 +16,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <h2 class="section__title-secondary">{{ title }}</h2>
-  <h2 v-if="subtitle" class="section__subtitle-secondary">
+  <h2 class="section__title-secondary" v-bind="$attrs">{{ title }}</h2>
+  <h2 v-if="subtitle" class="section__subtitle-secondary" v-bind="$attrs">
     {{ subtitle }}
   </h2>
 </template>
@@ -40,5 +40,8 @@ export default defineComponent({
 .section__subtitle-secondary {
   color: $colorGreyJumbo;
   padding-bottom: 32px;
+}
+.contact__title {
+  padding-bottom: 48px;
 }
 </style>
