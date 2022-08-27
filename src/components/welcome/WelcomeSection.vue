@@ -7,7 +7,7 @@ import BaseButton from "@/components/global/BaseButton.vue";
 import BaseImage from "@/components/global/BaseImage.vue";
 
 export default defineComponent({
-  name: "WeclomeSection",
+  name: "WelcomeSection",
   components: {
     SectionContainer,
     SectionTitlePrimary,
@@ -17,7 +17,6 @@ export default defineComponent({
   },
   data() {
     return {
-      // userLogged: true,
       userLogged: false,
     };
   },

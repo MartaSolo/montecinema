@@ -1,14 +1,14 @@
 <script>
 import { defineComponent } from "vue";
 import { getAllMovies } from "@/api/services/Movies";
-import WeclomeSection from "@/components/welcome/WeclomeSection.vue";
+import WelcomeSection from "@/components/welcome/WelcomeSection.vue";
 import ComingSoonSection from "@/components/comingSoon/ComingSoonSection.vue";
 import ScreeningsSection from "@/components/screenings/ScreeningsSection.vue";
 
 export default defineComponent({
   name: "HomePage",
   components: {
-    WeclomeSection,
+    WelcomeSection,
     ComingSoonSection,
     ScreeningsSection,
   },
@@ -45,7 +45,7 @@ export default defineComponent({
 
 <template>
   <div>
-    <WeclomeSection />
+    <WelcomeSection />
     <ComingSoonSection
       :moviesIsLoading="moviesIsLoading"
       :moviesErrorMessage="moviesErrorMessage"

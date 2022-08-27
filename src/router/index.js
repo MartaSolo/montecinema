@@ -6,7 +6,7 @@ const routes = [
     name: "HomePage",
     components: {
       default: () => import("@/pages/HomePage.vue"),
-      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+      Header: () => import("@/components/header/HeaderPrimary.vue"),
     },
   },
   {
@@ -14,7 +14,7 @@ const routes = [
     name: "AllMovies",
     components: {
       default: () => import("@/pages/AllMovies.vue"),
-      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+      Header: () => import("@/components/header/HeaderPrimary.vue"),
     },
   },
   {
@@ -22,7 +22,7 @@ const routes = [
     name: "MovieDetails",
     components: {
       default: () => import("@/pages/MovieDetails.vue"),
-      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+      Header: () => import("@/components/header/HeaderPrimary.vue"),
     },
     props: true,
   },
@@ -31,7 +31,7 @@ const routes = [
     name: "AllScreenings",
     components: {
       default: () => import("@/pages/AllScreenings.vue"),
-      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+      Header: () => import("@/components/header/HeaderPrimary.vue"),
     },
   },
   {
@@ -39,7 +39,7 @@ const routes = [
     name: "ContactUs",
     components: {
       default: () => import("@/pages/ContactUs.vue"),
-      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+      Header: () => import("@/components/header/HeaderPrimary.vue"),
     },
   },
   {
@@ -47,7 +47,7 @@ const routes = [
     name: "UserLogIn",
     components: {
       default: () => import("@/pages/UserLogIn.vue"),
-      HeaderSecondary: () => import("@/components/header/HeaderSecondary.vue"),
+      Header: () => import("@/components/header/HeaderSecondary.vue"),
     },
   },
   {
@@ -55,7 +55,7 @@ const routes = [
     name: "UserRegister",
     components: {
       default: () => import("@/pages/UserRegister.vue"),
-      HeaderSecondary: () => import("@/components/header/HeaderSecondary.vue"),
+      Header: () => import("@/components/header/HeaderSecondary.vue"),
     },
   },
   {
@@ -63,7 +63,7 @@ const routes = [
     name: "UserAccount",
     components: {
       default: () => import("@/pages/UserAccount.vue"),
-      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+      Header: () => import("@/components/header/HeaderPrimary.vue"),
     },
   },
   {
@@ -71,7 +71,7 @@ const routes = [
     name: "BookTicket",
     components: {
       default: () => import("@/pages/BookTicket.vue"),
-      HeaderPrimary: () => import("@/components/header/HeaderPrimary.vue"),
+      Header: () => import("@/components/header/HeaderPrimary.vue"),
     },
   },
   {
@@ -79,7 +79,7 @@ const routes = [
     name: "NotFound",
     components: {
       default: () => import("@/pages/NotFound.vue"),
-      HeaderSecondary: () => import("@/components/header/HeaderSecondary.vue"),
+      Header: () => import("@/components/header/HeaderSecondary.vue"),
     },
   },
   {
