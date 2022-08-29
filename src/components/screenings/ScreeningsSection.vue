@@ -1,6 +1,8 @@
 <script>
 import { defineComponent } from "vue";
 import { getAllSeances } from "@/api/services/Seances";
+import { mapState } from "pinia";
+import { useMoviesStore } from "@/stores/movies";
 import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue";
 import SectionContainer from "@/components/global/SectionContainer.vue";
 import BaseSelect from "@/components/global/BaseSelect.vue";
@@ -20,17 +22,6 @@ export default defineComponent({
     LoadingData,
     ErrorMessage,
   },
-  props: {
-    moviesIsLoading: {
-      type: Boolean,
-    },
-    moviesErrorMessage: {
-      type: String,
-    },
-    movies: {
-      type: Array,
-    },
-  },
   data() {
     return {
       date: new Date(),
@@ -41,6 +32,12 @@ export default defineComponent({
     };
   },
   computed: {
+    ...mapState(useMoviesStore, [
+      "movies",
+      "moviesIsLoading",
+      "moviesError",
+      "getErrorMessage",
+    ]),
     movieTitles() {
       return this.movies.map((movie) => movie.title);
     },
@@ -108,8 +105,8 @@ export default defineComponent({
       </div>
       <div class="screenings__movies">
         <LoadingData v-if="moviesIsLoading" />
-        <ErrorMessage v-else-if="moviesErrorMessage">{{
-          error.message
+        <ErrorMessage v-else-if="moviesError">{{
+          getErrorMessage
         }}</ErrorMessage>
         <div v-else class="screenings__movies-cards">
           <ScreeningMovieCard

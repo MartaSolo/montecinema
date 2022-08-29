@@ -11,17 +11,6 @@ export default defineComponent({
     BaseButton,
     ComingSoonMovies,
   },
-  props: {
-    moviesIsLoading: {
-      type: Boolean,
-    },
-    moviesErrorMessage: {
-      type: String,
-    },
-    moviesComingSoon: {
-      type: Array,
-    },
-  },
 });
 </script>
 
@@ -39,11 +28,7 @@ export default defineComponent({
           >See all</BaseButton
         >
       </div>
-      <ComingSoonMovies
-        :moviesIsLoading="moviesIsLoading"
-        :moviesErrorMessage="moviesErrorMessage"
-        :moviesComingSoon="moviesComingSoon"
-      />
+      <ComingSoonMovies />
     </SectionContainer>
   </section>
 </template>
