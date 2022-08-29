@@ -5,15 +5,24 @@ export default defineComponent({
   name: "MovieLength",
   props: {
     length: {
-      type: String,
+      type: Number,
       required: true,
+    },
+  },
+  computed: {
+    movieLength() {
+      const hours = Math.floor(this.length / 60);
+      const minutes = String(this.length % 60);
+      return minutes.length === 1
+        ? `${hours}h 0${minutes} min`
+        : `${hours}h ${minutes} min`;
     },
   },
 });
 </script>
 
 <template>
-  <div class="movie__length">{{ length }}</div>
+  <div class="movie__length">{{ movieLength }}</div>
 </template>
 
 <style lang="scss" scoped>

@@ -12,37 +12,36 @@ export default defineComponent({
       type: Object,
       required: true,
     },
-  },
-  computed: {
-    movieLength() {
-      const hours = Math.floor(this.movie.length / 60);
-      const minutes = String(this.movie.length % 60);
-      return minutes.length === 1
-        ? `${hours}h 0${minutes} min`
-        : `${hours}h ${minutes} min`;
+    to: {
+      type: Object,
+      default: null,
     },
   },
 });
 </script>
 
 <template>
-  <div class="movie__card">
-    <h4 class="movie__card-title">{{ movie.title }}</h4>
-    <MovieLength class="movie__card-length" :length="movieLength" />
-    <BaseImage
-      class="movie__card-image"
-      :src="movie.poster_url"
-      :alt="movie.title"
-    />
-    <MovieCategory
-      class="movie__card-category"
-      :category="this.movie.genre.name"
-    />
-  </div>
+  <router-link :to="to" class="movie__card">
+    <div class="movie__card-content">
+      <h4 class="movie__card-title">{{ movie.title }}</h4>
+      <MovieLength class="movie__card-length" :length="movie.length" />
+      <BaseImage
+        class="movie__card-image"
+        :src="movie.poster_url"
+        :alt="movie.title"
+      />
+      <MovieCategory
+        class="movie__card-category"
+        :category="this.movie.genre.name"
+      />
+    </div>
+  </router-link>
 </template>
 
 <style lang="scss" scoped>
-.movie__card {
+.movie__card-content {
+  display: flex;
+  flex-direction: column;
   width: 327px;
   min-height: 339px;
   border-radius: 8px;
@@ -55,17 +54,9 @@ export default defineComponent({
     width: 444px;
     min-height: 371px;
     padding: 40px;
-    display: flex;
-    flex-direction: column;
-    &:nth-child(3) {
-      display: none;
-    }
   }
   @include largeScreen {
     width: 421px;
-    &:nth-child(3) {
-      display: block;
-    }
   }
 }
 .movie__card-title {

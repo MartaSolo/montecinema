@@ -1,13 +1,26 @@
 <script>
 import { defineComponent } from "vue";
 import SectionContainer from "@/components/global/SectionContainer.vue";
-import ComingSoonMovies from "@/components/comingSoonSection/ComingSoonMovies.vue";
+import BaseButton from "@/components/global/BaseButton.vue";
+import ComingSoonMovies from "@/components/comingSoon/ComingSoonMovies.vue";
 
 export default defineComponent({
   name: "ComingSoonSection",
   components: {
     SectionContainer,
+    BaseButton,
     ComingSoonMovies,
+  },
+  props: {
+    moviesIsLoading: {
+      type: Boolean,
+    },
+    moviesErrorMessage: {
+      type: String,
+    },
+    moviesComingSoon: {
+      type: Array,
+    },
   },
 });
 </script>
@@ -19,9 +32,18 @@ export default defineComponent({
         <h3 class="soon__title-primary">
           Soon <span class="soon__title-secondary">in the cinema</span>
         </h3>
-        <a href="#" class="soon__link">See all</a>
+        <BaseButton
+          class="soon__link"
+          :to="{ name: 'AllMovies' }"
+          colorTheme="accent-text"
+          >See all</BaseButton
+        >
       </div>
-      <ComingSoonMovies />
+      <ComingSoonMovies
+        :moviesIsLoading="moviesIsLoading"
+        :moviesErrorMessage="moviesErrorMessage"
+        :moviesComingSoon="moviesComingSoon"
+      />
     </SectionContainer>
   </section>
 </template>
@@ -31,10 +53,9 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 60px 0 24px 0;
+  padding: 60px 0 34px 0;
 }
-.soon__title-primary,
-.soon__link {
+.soon__title-primary {
   margin: 0;
   text-transform: uppercase;
   font-family: $fontSecondary;
@@ -43,9 +64,14 @@ export default defineComponent({
   letter-spacing: 0.015em;
 }
 .soon__link {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
   color: $colorRedCherry;
   &:hover {
     color: $colorRedTotemPole;
+    border: 2px solid $colorWhiteSnow;
   }
 }
 .soon__title-secondary {

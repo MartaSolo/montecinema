@@ -11,7 +11,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <a class="header__logo" href="#"><LogoMonte /></a>
+  <router-link class="header__logo" :to="{ name: 'HomePage' }"
+    ><LogoMonte
+  /></router-link>
 </template>
 
 <style lang="scss" scoped>

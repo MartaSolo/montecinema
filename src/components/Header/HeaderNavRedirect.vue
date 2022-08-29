@@ -1,11 +1,11 @@
 <script>
 import { defineComponent } from "vue";
-import BaseLink from "@/components/global/BaseLink.vue";
+import BaseButton from "@/components/global/BaseButton.vue";
 
 export default defineComponent({
   name: "HeaderNavRedirect",
   components: {
-    BaseLink,
+    BaseButton,
   },
   data() {
     return {
@@ -18,56 +18,65 @@ export default defineComponent({
 
 <template>
   <div class="nav__links">
-    <BaseLink
+    <BaseButton
       v-if="userLogged"
-      class="account"
-      href="#"
+      class="account__link"
+      :to="{ name: 'UserAccount' }"
+      size="large"
       colorTheme="light-filled"
-      >My Account</BaseLink
+      >My Account</BaseButton
     >
-    <BaseLink
+    <BaseButton
       v-if="!userLogged"
-      class="register"
-      href="#"
-      text="Register"
+      class="register__link"
+      :to="{ name: 'UserRegister' }"
+      size="large"
       colorTheme="accent-text"
-      >Register</BaseLink
+      >Register</BaseButton
     >
-    <BaseLink
+    <BaseButton
       v-if="!userLogged"
-      class="login"
-      href="#"
+      class="login__link"
+      :to="{ name: 'UserLogIn' }"
+      size="large"
       colorTheme="accent-filled"
-      >Login</BaseLink
+      >Login</BaseButton
     >
   </div>
 </template>
 
 <style lang="scss" scoped>
 .nav__links {
-  @include flexColumnCenterCenter;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   @include mediumScreen {
     flex-direction: row;
   }
 }
-.link.register,
-.link.login,
-.link.account {
-  @include buttonLarge;
-  width: 310px;
+.account__link,
+.register__link,
+.login__link {
+  width: 331px;
   @include mediumScreen {
-    @include buttonMedium;
+    height: 40px;
+    width: 114px;
+    height: 40px;
+    font-size: 1rem;
+    padding: 12px 32px;
+  }
+}
+.account__link {
+  @include mediumScreen {
+    width: 145px;
+    padding: 12px 22px;
   }
 }
 
-.link.login {
+.login__link {
   @include mediumScreen {
-    margin-left: 1rem;
-  }
-}
-.link.account {
-  @include mediumScreen {
-    width: 165px;
+    margin-left: 16px;
   }
 }
 </style>
