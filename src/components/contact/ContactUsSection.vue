@@ -7,9 +7,6 @@ import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue
 export default defineComponent({
   name: "ContactUsSection",
   components: { SectionContainer, ContactUs, SectionTitleSecondary },
-  data() {
-    return {};
-  },
 });
 </script>
 

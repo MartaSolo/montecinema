@@ -115,6 +115,7 @@ export default defineComponent({
   font-size: 1.5rem;
   margin: 0;
   margin-bottom: 8px;
+  display: inline-block;
 }
 .screening__movie-info {
   display: flex;

@@ -21,7 +21,7 @@ export default defineComponent({
     };
   },
   computed: {
-    routeName() {
+    bookingRoute() {
       return this.userLogged ? { name: "BookTicket" } : { name: "UserLogIn" };
     },
   },
@@ -43,7 +43,7 @@ export default defineComponent({
         <BaseButton
           class="welcome__link"
           size="large"
-          :to="routeName"
+          :to="bookingRoute"
           colorTheme="accent-filled"
           >Book a ticket</BaseButton
         >
@@ -124,7 +124,6 @@ export default defineComponent({
   display: none;
   @include largeScreen {
     display: block;
-    height: 100%;
   }
 }
 </style>
