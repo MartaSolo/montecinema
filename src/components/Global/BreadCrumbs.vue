@@ -84,9 +84,7 @@ export default defineComponent({
 }
 .breadcrumbs__parent,
 .breadcrumbs__current {
-  @include mediumScreen {
-    padding: 12px 16px;
-  }
+  padding: 12px 16px;
 }
 
 .breadcrumbs__back {
