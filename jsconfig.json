@@ -9,8 +9,8 @@
     "node_modules",
     "dist",
   ],
-  "vueCompilerOptions": {
-    "experimentalDisableTemplateSupport": true,
-    "jsx": "preserve"
-  }
+    "vueCompilerOptions": {
+      "experimentalDisableTemplateSupport": true,
+      "jsx":"preserve"
+    }
 }

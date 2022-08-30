@@ -1,15 +1,19 @@
 <script>
 import { defineComponent } from "vue";
+import SectionContainer from "@/components/global/SectionContainer.vue";
+import BreadCrumbs from "@/components/global/BreadCrumbs.vue";
 
 export default defineComponent({
   name: "AllMovies",
+  components: { SectionContainer, BreadCrumbs },
 });
 </script>
 
 <template>
-  <div>
+  <BreadCrumbs currentPageName="Movies" />
+  <SectionContainer>
     <h1>All Movies page</h1>
-  </div>
+  </SectionContainer>
 </template>
 
 <style lang="scss" scoped></style>
