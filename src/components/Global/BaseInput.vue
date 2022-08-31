@@ -30,7 +30,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="input__wrapper" :class="$attrs.class">
+  <div class="input__wrapper">
     <label class="input__label" :class="$attrs.class" for="name">{{
       label
     }}</label>
@@ -50,7 +50,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .input__wrapper {
-  border: 1px solid blue;
   display: flex;
   flex-direction: column;
   width: 327px;
@@ -76,6 +75,6 @@ export default defineComponent({
   font-size: 1.1rem;
   line-height: 21px;
   color: $colorGreyJumbo;
-  padding: 24px 16px 24px 24px;
+  padding: 16px;
 }
 </style>
