@@ -1,12 +1,12 @@
 <script>
 import { defineComponent } from "vue";
 import SectionContainer from "@/components/global/SectionContainer.vue";
-import ContactUs from "@/components/contact/ContactUs.vue";
+import ContactDetails from "@/components/contact/ContactDetails.vue";
 import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue";
 
 export default defineComponent({
   name: "ContactUsSection",
-  components: { SectionContainer, ContactUs, SectionTitleSecondary },
+  components: { SectionContainer, ContactDetails, SectionTitleSecondary },
 });
 </script>
 
@@ -14,7 +14,7 @@ export default defineComponent({
   <section class="contact">
     <SectionContainer class="contact__container">
       <SectionTitleSecondary title="Contact us" class="contact__title" />
-      <ContactUs />
+      <ContactDetails />
     </SectionContainer>
   </section>
 </template>
