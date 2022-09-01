@@ -5,13 +5,7 @@ import SectionContainer from "@/components/global/SectionContainer.vue";
 import SectionTitlePrimary from "@/components/global/SectionTitlePrimary.vue";
 import LocationMap from "@/components/contact/LocationMap.vue";
 import ContactDetails from "@/components/contact/ContactDetails.vue";
-import TwitterIcon from "@/assets/images/twitter.svg";
-import FacebookIcon from "@/assets/images/facebook.svg";
-import LinkedInIcon from "@/assets/images/linkedin.svg";
-import InstagramIcon from "@/assets/images/instagram.svg";
-import GithubIcon from "@/assets/images/github.svg";
-import BeIcon from "@/assets/images/be.svg";
-import BallIcon from "@/assets/images/ball.svg";
+import ContactSocialMedia from "@/components/contact/ContactSocialMedia.vue";
 
 export default defineComponent({
   name: "ContactUs",
@@ -21,13 +15,7 @@ export default defineComponent({
     SectionTitlePrimary,
     LocationMap,
     ContactDetails,
-    TwitterIcon,
-    FacebookIcon,
-    LinkedInIcon,
-    InstagramIcon,
-    GithubIcon,
-    BeIcon,
-    BallIcon,
+    ContactSocialMedia,
   },
 });
 </script>
@@ -45,27 +33,7 @@ export default defineComponent({
           <ContactDetails />
         </div>
         <div class="contact__page-social">
-          <a href="#" target="blank" rel="noopener" class="contact__page-icon"
-            ><TwitterIcon
-          /></a>
-          <a href="#" target="blank" rel="noopener" class="contact__page-icon">
-            <FacebookIcon
-          /></a>
-          <a href="#" target="blank" rel="noopener" class="contact__page-icon">
-            <LinkedInIcon
-          /></a>
-          <a href="#" target="blank" rel="noopener" class="contact__page-icon"
-            ><InstagramIcon
-          /></a>
-          <a href="#" target="blank" rel="noopener" class="contact__page-icon"
-            ><GithubIcon
-          /></a>
-          <a href="#" target="blank" rel="noopener" class="contact__page-icon"
-            ><BeIcon
-          /></a>
-          <a href="#" target="blank" rel="noopener" class="contact__page-icon"
-            ><BallIcon
-          /></a>
+          <ContactSocialMedia />
         </div>
       </div>
     </SectionContainer>
@@ -73,15 +41,6 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
-.contact__page-container {
-  width: 375px;
-  @include mediumScreen {
-    width: 976px;
-  }
-  @include largeScreen {
-    width: 1392px;
-  }
-}
 .contact__page-title {
   text-align: left;
   margin: 40px 0px 24px 0px;
@@ -96,13 +55,10 @@ export default defineComponent({
   align-items: center;
   padding-bottom: 104px;
   @include mediumScreen {
-    width: 928px;
     flex-direction: row;
   }
-  @include largeScreen {
-    width: 1344px;
-  }
 }
+
 .contact__page-map {
   width: 327px;
   height: 284px;
@@ -134,7 +90,7 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
   @include mediumScreen {
     width: 80px;
     height: 412px;
