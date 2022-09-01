@@ -9,7 +9,7 @@ export const useMoviesStore = defineStore({
     moviesError: null,
   }),
   getters: {
-    getErrorMessage(state) {
+    getMoviesErrorMessage(state) {
       return (
         state.moviesError?.message ||
         "We are sorry, but movies cannot be displayed."
