@@ -53,6 +53,7 @@ export default defineComponent({
       return this.movie.poster_url;
     },
     getBackgroudStyle() {
+      // https://stackoverflow.com/questions/54513103/is-it-possible-to-bind-the-inline-style-with-vue-js
       return { background: "url(" + this.getImagePath + ")" };
       // return { background: "url(" + this.getImagePath + ")" };
     },
