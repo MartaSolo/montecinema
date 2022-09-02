@@ -64,7 +64,7 @@ export default defineComponent({
     getImagePath() {
       return this.movie.poster_url;
     },
-    getBackgroudStyle() {
+    getStyledImage() {
       return { background: "url(" + this.getImagePath + ") center / cover" };
     },
     getFormattedWeekdayAndDate() {
@@ -129,7 +129,12 @@ export default defineComponent({
           </div>
           <div class="movie__description">{{ movie.description }}</div>
         </div>
-        <div class="movie__image" :style="getBackgroudStyle">
+        <div
+          class="movie__image"
+          role="img"
+          :aria-label="movie.title"
+          :style="getStyledImage"
+        >
           <span class="visually-hidden">{{ movie.title }}</span>
         </div>
       </div>
