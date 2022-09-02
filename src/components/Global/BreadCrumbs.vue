@@ -78,18 +78,22 @@ export default defineComponent({
   background-color: $colorRedWispPink;
   @include mediumScreen {
     height: 40px;
-    padding: 12px 32px;
     font-size: 1rem;
   }
 }
 .breadcrumbs__parent,
 .breadcrumbs__current {
-  padding: 12px 16px;
+  padding: 12px 5px;
+  @include mediumScreen {
+    padding: 12px 16px;
+  }
 }
 
 .breadcrumbs__back {
+  padding: 0;
   border: 2px solid $colorRedWispPink;
   @include mediumScreen {
+    padding: 12px 32px;
     border: 2px solid $colorGreyTuna;
     &:hover {
       border: 2px solid $colorGreyBombay;

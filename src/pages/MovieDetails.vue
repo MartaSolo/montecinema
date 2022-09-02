@@ -1,6 +1,8 @@
 <script>
 import { defineComponent } from "vue";
 import { getMovieById } from "@/api/services/Movies";
+import { mapState, mapActions } from "pinia";
+import { useSeancesStore } from "@/stores/seances";
 import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import SectionContainer from "@/components/global/SectionContainer.vue";
@@ -8,8 +10,9 @@ import BreadCrumbs from "@/components/global/BreadCrumbs.vue";
 import SectionTitlePrimary from "@/components/global/SectionTitlePrimary.vue";
 import MovieCategory from "@/components/global/MovieCategory.vue";
 import MovieLength from "@/components/global/MovieLength.vue";
-import BaseImage from "@/components/global/BaseImage.vue";
-import { urlGenerate } from "source-map/lib/util";
+import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue";
+import ScreeningsCalendar from "@/components/screenings/ScreeningsCalendar.vue";
+import ScreeningMovieCard from "@/components/screenings/ScreeningMovieCard.vue";
 
 export default defineComponent({
   name: "MovieDetails",
@@ -21,7 +24,9 @@ export default defineComponent({
     SectionTitlePrimary,
     MovieCategory,
     MovieLength,
-    BaseImage,
+    SectionTitleSecondary,
+    ScreeningsCalendar,
+    ScreeningMovieCard,
   },
   props: {
     movieId: {
@@ -34,9 +39,16 @@ export default defineComponent({
       movie: null,
       movieIsLoading: true,
       movieError: null,
+      date: new Date(),
     };
   },
   computed: {
+    ...mapState(useSeancesStore, [
+      "seances",
+      "seancesIsLoading",
+      "seancesError",
+      "getSeancesErrorMessage",
+    ]),
     getMovieErrorMessage() {
       return (
         this.movieError?.message ||
@@ -53,9 +65,24 @@ export default defineComponent({
       return this.movie.poster_url;
     },
     getBackgroudStyle() {
-      // https://stackoverflow.com/questions/54513103/is-it-possible-to-bind-the-inline-style-with-vue-js
-      return { background: "url(" + this.getImagePath + ")" };
-      // return { background: "url(" + this.getImagePath + ")" };
+      return { background: "url(" + this.getImagePath + ") center / cover" };
+    },
+    getFormattedWeekdayAndDate() {
+      const weekday = this.date.toLocaleDateString("en-US", {
+        weekday: "long",
+      });
+      const formattedDate = this.date.toLocaleDateString("en-GB");
+      return `${weekday} ${formattedDate}`;
+    },
+    formattedDate() {
+      return this.date.toISOString().substring(0, 10);
+    },
+  },
+  watch: {
+    date(newDate, oldDate) {
+      if (newDate !== oldDate) {
+        this.getSeances(this.formattedDate);
+      }
     },
   },
   methods: {
@@ -70,9 +97,14 @@ export default defineComponent({
         this.movieIsLoading = false;
       }
     },
+    ...mapActions(useSeancesStore, ["getSeances"]),
+    movieSeances(movieId) {
+      return this.seances.filter((seance) => seance.movie === movieId);
+    },
   },
   mounted() {
     this.getMovie();
+    this.getSeances(this.formattedDate);
   },
 });
 </script>
@@ -98,36 +130,43 @@ export default defineComponent({
           <div class="movie__description">{{ movie.description }}</div>
         </div>
         <div class="movie__image" :style="getBackgroudStyle">
-          <!-- <BaseImage
-            :src="movie.poster_url"
-            :alt="movie.title"
-            class="movie__image-image"
-          /> -->
+          <span class="visually-hidden">{{ movie.title }}</span>
         </div>
       </div>
-      <div>Screenings</div>
-      <div>Screenings</div>
-      <div>Screenings</div>
-      <div>Screenings</div>
-      <div>Screenings</div>
-      <div>Screenings</div>
-      <div>Screenings</div>
+      <div class="movie_screenings">
+        <SectionTitleSecondary
+          title="Screenings:"
+          :subtitle="getFormattedWeekdayAndDate"
+          class="movie_screenings-title"
+        ></SectionTitleSecondary>
+        <ScreeningsCalendar v-model="date" />
+        <LoadingData v-if="seancesIsLoading" />
+        <ErrorMessage v-else-if="seancesError">{{
+          getSeancesErrorMessage
+        }}</ErrorMessage>
+        <div v-else class="movie_screenings-screening">
+          <ScreeningMovieCard
+            :movie="movie"
+            :key="movie.id"
+            :movieSeances="movieSeances(movie.id)"
+          />
+        </div>
+      </div>
     </SectionContainer>
   </section>
 </template>
 
 <style lang="scss" scoped>
 .movie__details {
-  border: 1px solid blue;
+  margin-bottom: 40px;
   @include mediumScreen {
     display: flex;
     align-items: stretch;
     gap: 32px;
-    margin-top: 64px;
+    margin: 64px 0 64px 0;
   }
 }
 .movie__info {
-  background-color: palegoldenrod;
   @include mediumScreen {
     width: 60%;
   }
@@ -142,7 +181,6 @@ export default defineComponent({
   }
 }
 .movie__parameters {
-  // border: 1px solid red;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -176,27 +214,28 @@ export default defineComponent({
   }
 }
 .movie__image {
-  // background-color: palegreen;
   width: 100%;
   height: 300px;
-  border: 1px solid red;
   @include mediumScreen {
     width: 40%;
     height: inherit;
-    // height: 300px;
     overflow: hidden;
   }
   @include largeScreen {
     width: 50%;
   }
 }
-.movie__image-image {
-  // height: 350px;
-  max-width: 100%;
-  max-height: 100%;
-  // height: auto;
-  height: inherit;
-  object-fit: cover;
-  display: block;
+.visually-hidden {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 </style>
