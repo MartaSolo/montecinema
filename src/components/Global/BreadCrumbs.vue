@@ -21,7 +21,7 @@ export default defineComponent({
   },
   methods: {
     goBack() {
-      return this.$router.go(-1);
+      return this.$router.go(-1) || this.$router.push({ name: "HomePage" });
     },
   },
 });
