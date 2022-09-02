@@ -61,7 +61,7 @@ export default defineComponent({
   font-family: $fontSecondary;
   font-weight: 700;
   font-size: 0.9rem;
-  line-height: 18px;
+  line-height: 1.1rem;
   text-transform: uppercase;
   color: $colorRedBittersweet;
   padding-bottom: 12px;
@@ -73,7 +73,7 @@ export default defineComponent({
   font-family: $fontPrimary;
   font-weight: 400;
   font-size: 1.1rem;
-  line-height: 21px;
+  line-height: 1.3rem;
   color: $colorGreyJumbo;
   padding: 16px;
 }
