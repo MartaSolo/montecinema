@@ -16,6 +16,5 @@ export default defineComponent({
   width: 100%;
   max-width: 1440px;
   padding: 0 1.5rem;
-  border: 1px solid green;
 }
 </style>

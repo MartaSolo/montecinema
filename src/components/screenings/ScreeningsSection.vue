@@ -1,6 +1,8 @@
 <script>
 import { defineComponent } from "vue";
-import { getAllSeances } from "@/api/services/Seances";
+import { mapState, mapActions } from "pinia";
+import { useMoviesStore } from "@/stores/movies";
+import { useSeancesStore } from "@/stores/seances";
 import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue";
 import SectionContainer from "@/components/global/SectionContainer.vue";
 import BaseSelect from "@/components/global/BaseSelect.vue";
@@ -20,27 +22,25 @@ export default defineComponent({
     LoadingData,
     ErrorMessage,
   },
-  props: {
-    moviesIsLoading: {
-      type: Boolean,
-    },
-    moviesErrorMessage: {
-      type: String,
-    },
-    movies: {
-      type: Array,
-    },
-  },
   data() {
     return {
       date: new Date(),
       selected: null,
-      seancesIsLoading: true,
-      seancesErrorMessage: null,
-      seances: [],
     };
   },
   computed: {
+    ...mapState(useMoviesStore, [
+      "movies",
+      "moviesIsLoading",
+      "moviesError",
+      "getMoviesErrorMessage",
+    ]),
+    ...mapState(useSeancesStore, [
+      "seances",
+      "seancesIsLoading",
+      "seancesError",
+      "getSeancesErrorMessage",
+    ]),
     movieTitles() {
       return this.movies.map((movie) => movie.title);
     },
@@ -64,28 +64,18 @@ export default defineComponent({
   watch: {
     date(newDate, oldDate) {
       if (newDate !== oldDate) {
-        this.getSeances();
+        this.getSeances(this.formattedDate);
       }
     },
   },
   methods: {
-    async getSeances() {
-      this.seancesIsLoading = true;
-      try {
-        const respData = await getAllSeances(this.formattedDate);
-        this.seances = respData.data;
-      } catch (error) {
-        this.seancesErrorMessage = error.message;
-      } finally {
-        this.seancesIsLoading = false;
-      }
-    },
+    ...mapActions(useSeancesStore, ["getSeances"]),
     movieSeances(movieId) {
       return this.seances.filter((seance) => seance.movie === movieId);
     },
   },
   mounted() {
-    this.getSeances();
+    this.getSeances(this.formattedDate);
   },
 });
 </script>
@@ -107,9 +97,9 @@ export default defineComponent({
         ></BaseSelect>
       </div>
       <div class="screenings__movies">
-        <LoadingData v-if="moviesIsLoading" />
-        <ErrorMessage v-else-if="moviesErrorMessage">{{
-          error.message
+        <LoadingData v-if="moviesIsLoading || seancesIsLoading" />
+        <ErrorMessage v-else-if="moviesError || seancesError">{{
+          getMoviesErrorMessage
         }}</ErrorMessage>
         <div v-else class="screenings__movies-cards">
           <ScreeningMovieCard

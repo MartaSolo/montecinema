@@ -5,7 +5,7 @@ import Email from "@/assets/images/email.svg";
 import Phone from "@/assets/images/phone.svg";
 
 export default defineComponent({
-  name: "ContactUs",
+  name: "ContactDetails",
   components: { Location, Email, Phone },
   data() {
     return {};
@@ -52,6 +52,7 @@ export default defineComponent({
   padding: 24px;
   border-radius: 8px;
   background-color: $colorGreyAthens;
+  width: 327px;
   @include mediumScreen {
     width: 600px;
     height: 400px;
