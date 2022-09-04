@@ -75,6 +75,33 @@ export default defineComponent({
   font-size: 1.1rem;
   line-height: 1.3rem;
   color: $colorGreyJumbo;
-  padding: 16px;
+  padding: 17px;
+  margin-bottom: 8px;
+  &:focus {
+    background-color: $colorInputActiveBg;
+    outline: none;
+    border: 1px solid $colorInputActiveBorder;
+  }
+  &:hover {
+    background-color: $colorInputBgHover;
+  }
+  &::placeholder {
+    font-family: $fontPrimary;
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.3rem;
+    color: $colorGreyJumbo;
+  }
+}
+.input__input.error {
+  border: 1px solid $colorRedCherry;
+}
+
+.input__wrapper.register__password {
+  position: relative;
+}
+
+.input__label.register__password {
+  margin-top: 8px;
 }
 </style>

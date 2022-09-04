@@ -44,4 +44,19 @@ export default defineComponent({
 .contact__title {
   padding-bottom: 48px;
 }
+
+.section__title-secondary.register__title {
+  padding-top: 64px;
+  @include mediumScreen {
+    padding-top: 124px;
+    align-self: flex-start;
+  }
+}
+.section__subtitle-secondary.register__title {
+  padding-bottom: 24px;
+  @include mediumScreen {
+    padding-bottom: 40px;
+    align-self: flex-start;
+  }
+}
 </style>
