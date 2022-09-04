@@ -20,7 +20,7 @@ export default defineComponent({
       type: String,
     },
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "blur"],
   methods: {
     updateValue(event) {
       this.$emit("update:modelValue", event.target.value);
@@ -43,6 +43,7 @@ export default defineComponent({
       :placeholder="placeholder"
       :value="modelValue"
       @input="updateValue"
+      @blur="$emit('blur', $event)"
     />
     <slot />
   </div>

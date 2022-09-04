@@ -1,5 +1,6 @@
 <script>
 import { defineComponent } from "vue";
+import regex from "@/assets/utils/regex.js";
 import BaseInput from "@/components/global/BaseInput.vue";
 import BaseButton from "@/components/global/BaseButton.vue";
 import EyeIcon from "@/assets/images/eye.svg";
@@ -11,15 +12,53 @@ export default defineComponent({
   data() {
     return {
       email: "",
+      emailTouched: false,
       password: "",
       passwordInputType: "password",
     };
+  },
+  computed: {
+    passwordErrorCharacters() {
+      return this.password.length < 8 && this.password.length > 0
+        ? true
+        : false;
+    },
+    passwordErrorLetter() {
+      return regex.oneLetter.test(this.password) ? false : true;
+    },
+    passwordErrorDigit() {
+      return regex.oneDigit.test(this.password) ? false : true;
+    },
+    getPasswordErrorClass() {
+      if (!this.password) {
+        return "";
+      } else if (
+        this.passwordErrorCharacters ||
+        this.passwordErrorLetter ||
+        this.passwordErrorDigit
+      ) {
+        return "error";
+      } else {
+        return "";
+      }
+    },
   },
   methods: {
     togglePasswordInputType() {
       return this.passwordInputType === "password"
         ? (this.passwordInputType = "text")
         : (this.passwordInputType = "password");
+    },
+    getValidationClass(state, value) {
+      if (!state) {
+        return "";
+      }
+      if (state && value) {
+        return "error";
+      }
+      if (state && !value) {
+        return "correct";
+      }
     },
   },
 });
@@ -35,14 +74,16 @@ export default defineComponent({
         label="email"
         placeholder="name.surname@monterail.com"
         v-model="email"
+        @blur="emailTouched = true"
       ></BaseInput>
       <InputErrorMessage
-        class="register__email"
+        class="register__email error"
         inputError="Please enter correct email"
       />
 
       <BaseInput
         class="register__password"
+        :class="getPasswordErrorClass"
         :inputType="passwordInputType"
         name="password"
         label="password"
@@ -59,20 +100,23 @@ export default defineComponent({
       </BaseInput>
       <InputErrorMessage
         class="register__password characters"
+        :class="getValidationClass(password, passwordErrorCharacters)"
         inputError="At least 8 characters"
       />
       <InputErrorMessage
         class="register__password letter"
+        :class="getValidationClass(password, passwordErrorLetter)"
         inputError="At least one letter"
       />
       <InputErrorMessage
         class="register__password digit"
+        :class="getValidationClass(password, passwordErrorDigit)"
         inputError="At least one digit"
       />
     </div>
     <div class="register__step-buttons">
       <BaseButton
-        :to="{ name: UserLogIn }"
+        :to="{ name: 'UserLogIn' }"
         size="large"
         colorTheme="accent-text"
         class="login"
@@ -114,6 +158,7 @@ export default defineComponent({
     flex-direction: row;
   }
 }
+
 .button.login,
 .button.step {
   width: 327px;

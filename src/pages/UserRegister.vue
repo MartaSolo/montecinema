@@ -34,7 +34,7 @@ export default defineComponent({
         :subtitle="stepTitles.second.subtitle"
         class="register__title"
       />
-      <form class="register__form">
+      <form class="register__form" novalidate>
         <RegisterFirstStep v-if="step === 1" />
       </form>
     </SectionContainer>
