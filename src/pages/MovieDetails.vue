@@ -55,9 +55,6 @@ export default defineComponent({
         "We are sorry, but the movie cannot be displayed"
       );
     },
-    getMovieTitle() {
-      return this.movie.title;
-    },
     getMovieReleaseYear() {
       return this.movie.release_date.substring(0, 4);
     },
@@ -134,9 +131,7 @@ export default defineComponent({
           role="img"
           :aria-label="movie.title"
           :style="getStyledImage"
-        >
-          <span class="visually-hidden">{{ movie.title }}</span>
-        </div>
+        ></div>
       </div>
       <div class="movie_screenings">
         <SectionTitleSecondary
@@ -229,18 +224,5 @@ export default defineComponent({
   @include largeScreen {
     width: 50%;
   }
-}
-.visually-hidden {
-  border: 0;
-  padding: 0;
-  margin: 0;
-  position: absolute !important;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(50%);
-  white-space: nowrap;
 }
 </style>

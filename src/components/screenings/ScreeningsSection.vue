@@ -122,12 +122,9 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
-  .screenings__container {
-    padding-top: 40px;
-    @include mediumScreen{
-      padding-top: 40px;
-    }
-  }
+.screenings__container {
+  padding-top: 40px;
+}
 .screenings__filters {
   margin-bottom: 48px;
   @include mediumScreen {
