@@ -83,9 +83,6 @@ export default defineComponent({
     outline: none;
     border: 1px solid $colorInputActiveBorder;
   }
-  &:hover {
-    background-color: $colorInputBgHover;
-  }
   &::placeholder {
     font-family: $fontPrimary;
     font-weight: 400;
@@ -94,8 +91,16 @@ export default defineComponent({
     color: $colorGreyJumbo;
   }
 }
+
 .input__input.error {
   border: 1px solid $colorRedCherry;
+}
+
+.input__input.register__email {
+  margin-bottom: 32px;
+  &.error {
+    margin-bottom: 8px;
+  }
 }
 
 .input__wrapper.register__password {

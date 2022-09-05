@@ -35,7 +35,7 @@ export default defineComponent({
         class="register__title"
       />
       <form class="register__form" novalidate>
-        <RegisterFirstStep v-if="step === 1" />
+        <RegisterFirstStep v-if="step === 1" :step="step" />
       </form>
     </SectionContainer>
   </section>

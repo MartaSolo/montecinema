@@ -14,14 +14,26 @@ export default defineComponent({
       email: "",
       emailTouched: false,
       password: "",
+      passwordTouched: false,
       passwordInputType: "password",
+      // step: null,
     };
   },
   computed: {
+    emailError() {
+      if (!this.email && !this.emailTouched) {
+        return "";
+      }
+      if (!this.email && this.emailTouched) {
+        return "Please enter your email";
+      }
+      if (!regex.email.test(this.email)) {
+        return "Please enter correct email";
+      }
+      return "";
+    },
     passwordErrorCharacters() {
-      return this.password.length < 8 && this.password.length > 0
-        ? true
-        : false;
+      return this.password.length < 7 ? true : false;
     },
     passwordErrorLetter() {
       return regex.oneLetter.test(this.password) ? false : true;
@@ -30,16 +42,31 @@ export default defineComponent({
       return regex.oneDigit.test(this.password) ? false : true;
     },
     getPasswordErrorClass() {
-      if (!this.password) {
+      if (!this.password && !this.passwordTouched) {
         return "";
-      } else if (
+      }
+      if (!this.password && this.passwordTouched) {
+        return "error";
+      }
+      if (
         this.passwordErrorCharacters ||
         this.passwordErrorLetter ||
         this.passwordErrorDigit
       ) {
         return "error";
+      }
+      return "";
+    },
+    disableButton() {
+      if (
+        !this.email ||
+        !this.password ||
+        this.emailError ||
+        this.getPasswordErrorClass
+      ) {
+        return true;
       } else {
-        return "";
+        return false;
       }
     },
   },
@@ -49,9 +76,12 @@ export default defineComponent({
         ? (this.passwordInputType = "text")
         : (this.passwordInputType = "password");
     },
-    getValidationClass(state, value) {
-      if (!state) {
+    getValidationClass(state, stateTouched, value) {
+      if (!state && !stateTouched) {
         return "";
+      }
+      if (!state && stateTouched) {
+        return "error";
       }
       if (state && value) {
         return "error";
@@ -69,6 +99,7 @@ export default defineComponent({
     <div class="register__step-inputs">
       <BaseInput
         class="register__email"
+        :class="{ error: emailError }"
         inputType="email"
         name="email"
         label="email"
@@ -77,8 +108,9 @@ export default defineComponent({
         @blur="emailTouched = true"
       ></BaseInput>
       <InputErrorMessage
+        v-if="emailError"
         class="register__email error"
-        inputError="Please enter correct email"
+        :inputError="emailError"
       />
 
       <BaseInput
@@ -89,6 +121,7 @@ export default defineComponent({
         label="password"
         placeholder="Enter your password"
         v-model="password"
+        @blur="passwordTouched = true"
       >
         <BaseButton
           type="button"
@@ -100,17 +133,23 @@ export default defineComponent({
       </BaseInput>
       <InputErrorMessage
         class="register__password characters"
-        :class="getValidationClass(password, passwordErrorCharacters)"
+        :class="
+          getValidationClass(password, passwordTouched, passwordErrorCharacters)
+        "
         inputError="At least 8 characters"
       />
       <InputErrorMessage
         class="register__password letter"
-        :class="getValidationClass(password, passwordErrorLetter)"
+        :class="
+          getValidationClass(password, passwordTouched, passwordErrorLetter)
+        "
         inputError="At least one letter"
       />
       <InputErrorMessage
         class="register__password digit"
-        :class="getValidationClass(password, passwordErrorDigit)"
+        :class="
+          getValidationClass(password, passwordTouched, passwordErrorDigit)
+        "
         inputError="At least one digit"
       />
     </div>
@@ -122,7 +161,11 @@ export default defineComponent({
         class="login"
         >Log in instead</BaseButton
       >
-      <BaseButton size="large" colorTheme="accent-filled" class="step"
+      <BaseButton
+        size="large"
+        colorTheme="accent-filled"
+        class="step"
+        :disabled="disableButton"
         >Next Step</BaseButton
       >
     </div>
