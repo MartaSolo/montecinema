@@ -1,12 +1,33 @@
 <script>
 import { defineComponent } from "vue";
 import { getMovieById } from "@/api/services/Movies";
+import { mapState, mapActions } from "pinia";
+import { useSeancesStore } from "@/stores/seances";
 import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
+import SectionContainer from "@/components/global/SectionContainer.vue";
+import BreadCrumbs from "@/components/global/BreadCrumbs.vue";
+import SectionTitlePrimary from "@/components/global/SectionTitlePrimary.vue";
+import MovieCategory from "@/components/global/MovieCategory.vue";
+import MovieLength from "@/components/global/MovieLength.vue";
+import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue";
+import ScreeningsCalendar from "@/components/screenings/ScreeningsCalendar.vue";
+import ScreeningMovieCard from "@/components/screenings/ScreeningMovieCard.vue";
 
 export default defineComponent({
   name: "MovieDetails",
-  components: { LoadingData, ErrorMessage },
+  components: {
+    LoadingData,
+    ErrorMessage,
+    SectionContainer,
+    BreadCrumbs,
+    SectionTitlePrimary,
+    MovieCategory,
+    MovieLength,
+    SectionTitleSecondary,
+    ScreeningsCalendar,
+    ScreeningMovieCard,
+  },
   props: {
     movieId: {
       type: String,
@@ -15,44 +36,193 @@ export default defineComponent({
   },
   data() {
     return {
-      movieDetails: null,
-      isLoading: true,
-      errorMessage: null,
+      movie: null,
+      movieIsLoading: true,
+      movieError: null,
+      date: new Date(),
     };
   },
   computed: {
-    getMovieTitle() {
-      return this.movieDetails.title;
+    ...mapState(useSeancesStore, [
+      "seances",
+      "seancesIsLoading",
+      "seancesError",
+      "getSeancesErrorMessage",
+    ]),
+    getMovieErrorMessage() {
+      return (
+        this.movieError?.message ||
+        "We are sorry, but the movie cannot be displayed"
+      );
+    },
+    getMovieReleaseYear() {
+      return this.movie.release_date.substring(0, 4);
+    },
+    getImagePath() {
+      return this.movie.poster_url;
+    },
+    getStyledImage() {
+      return { background: "url(" + this.getImagePath + ") center / cover" };
+    },
+    getFormattedWeekdayAndDate() {
+      const weekday = this.date.toLocaleDateString("en-US", {
+        weekday: "long",
+      });
+      const formattedDate = this.date.toLocaleDateString("en-GB");
+      return `${weekday} ${formattedDate}`;
+    },
+    formattedDate() {
+      return this.date.toISOString().substring(0, 10);
     },
   },
-  methods: {
-    async getMovieDetails() {
-      this.isLoading = true;
-      try {
-        const respData = await getMovieById(this.movieId);
-        this.movieDetails = respData.data;
-      } catch (error) {
-        this.errorMessage = error.message;
-      } finally {
-        this.isLoading = false;
+  watch: {
+    date(newDate, oldDate) {
+      if (newDate !== oldDate) {
+        this.getSeances(this.formattedDate);
       }
     },
   },
+  methods: {
+    async getMovie() {
+      this.movieIsLoading = true;
+      try {
+        const respData = await getMovieById(this.movieId);
+        this.movie = respData.data;
+      } catch (error) {
+        this.movieError = error;
+      } finally {
+        this.movieIsLoading = false;
+      }
+    },
+    ...mapActions(useSeancesStore, ["getSeances"]),
+    movieSeances(movieId) {
+      return this.seances.filter((seance) => seance.movie === movieId);
+    },
+  },
   mounted() {
-    this.getMovieDetails();
+    this.getMovie();
+    this.getSeances(this.formattedDate);
   },
 });
 </script>
 
 <template>
-  <div>
-    <h1>Movie details page</h1>
-    <LoadingData v-if="isLoading" />
-    <ErrorMessage v-else-if="errorMessage">{{ error.message }}</ErrorMessage>
-    <div v-else class="movie__details">
-      <div>{{ getMovieTitle }}</div>
-    </div>
-  </div>
+  <LoadingData v-if="movieIsLoading" />
+  <ErrorMessage v-else-if="movieError">{{ getMovieErrorMessage }}</ErrorMessage>
+  <section v-else class="movie">
+    <BreadCrumbs
+      :currentPageName="this.movie.title"
+      parentPageName="Movies"
+      :parentRouteName="{ name: 'AllMovies' }"
+    />
+    <SectionContainer class="movie__conrainer">
+      <div class="movie__details">
+        <div class="movie__info">
+          <SectionTitlePrimary :title="this.movie.title" class="movie__title" />
+          <div class="movie__parameters">
+            <MovieCategory :category="movie.genre.name" />
+            <div class="movie__year">{{ getMovieReleaseYear }}</div>
+            <MovieLength :length="movie.length" />
+          </div>
+          <div class="movie__description">{{ movie.description }}</div>
+        </div>
+        <div
+          class="movie__image"
+          role="img"
+          :aria-label="movie.title"
+          :style="getStyledImage"
+        ></div>
+      </div>
+      <div class="movie_screenings">
+        <SectionTitleSecondary
+          title="Screenings:"
+          :subtitle="getFormattedWeekdayAndDate"
+          class="movie_screenings-title"
+        ></SectionTitleSecondary>
+        <ScreeningsCalendar v-model="date" />
+        <LoadingData v-if="seancesIsLoading" />
+        <ErrorMessage v-else-if="seancesError">{{
+          getSeancesErrorMessage
+        }}</ErrorMessage>
+        <div v-else class="movie_screenings-screening">
+          <ScreeningMovieCard
+            :movie="movie"
+            :key="movie.id"
+            :movieSeances="movieSeances(movie.id)"
+          />
+        </div>
+      </div>
+    </SectionContainer>
+  </section>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.movie__details {
+  margin-bottom: 40px;
+  @include mediumScreen {
+    display: flex;
+    align-items: stretch;
+    gap: 32px;
+    margin: 64px 0 64px 0;
+  }
+}
+.movie__info {
+  @include mediumScreen {
+    width: 60%;
+  }
+  @include largeScreen {
+    width: 50%;
+  }
+}
+.movie__title {
+  margin: 40px 0 32px 0;
+  @include mediumScreen {
+    margin: 0 0 32px 0;
+  }
+}
+.movie__parameters {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 20px;
+  @include mediumScreen {
+    padding-bottom: 32px;
+  }
+}
+.movie__year {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: $colorGreyJumbo;
+  padding: 16px 0;
+  position: relative;
+  &::after {
+    content: ".";
+    position: absolute;
+    top: 25%;
+    right: -28%;
+  }
+}
+.movie__description {
+  font-family: $fontSecondary;
+  font-weight: 400;
+  font-size: 1.1rem;
+  padding-bottom: 20px;
+  letter-spacing: 0.015em;
+  line-height: 170%;
+  @include mediumScreen {
+    font-size: 1.4rem;
+  }
+}
+.movie__image {
+  width: 100%;
+  height: 300px;
+  @include mediumScreen {
+    width: 40%;
+    height: inherit;
+    overflow: hidden;
+  }
+  @include largeScreen {
+    width: 50%;
+  }
+}
+</style>

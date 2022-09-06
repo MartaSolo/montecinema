@@ -59,4 +59,13 @@ export default defineComponent({
     align-self: flex-start;
   }
 }
+.section__title-secondary.movie_screenings-title,
+.section__subtitle-secondary.movie_screenings-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  @include mediumScreen {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+}
 </style>

@@ -46,12 +46,10 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 64px;
   @include mediumScreen {
     flex-direction: row;
     align-items: stretch;
     justify-content: space-around;
-    margin-bottom: 40px;
   }
   @include largeScreen {
     gap: 62px;
