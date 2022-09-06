@@ -60,6 +60,13 @@ export default defineComponent({
     formattedDate() {
       return this.date.toISOString().substring(0, 10);
     },
+    getFormattedWeekdayAndDate() {
+      const weekday = this.date.toLocaleDateString("en-US", {
+        weekday: "long",
+      });
+      const formattedDate = this.date.toLocaleDateString("en-GB");
+      return `${weekday} ${formattedDate}`;
+    },
   },
   watch: {
     date(newDate, oldDate) {
@@ -85,7 +92,7 @@ export default defineComponent({
     <SectionContainer class="screenings__container">
       <SectionTitleSecondary
         title="Screenings:"
-        subtitle="Friday 19/08/2022"
+        :subtitle="getFormattedWeekdayAndDate"
       ></SectionTitleSecondary>
       <div class="screenings__filters">
         <ScreeningsCalendar v-model="date" />
@@ -115,6 +122,9 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
+.screenings__container {
+  padding-top: 40px;
+}
 .screenings__filters {
   margin-bottom: 48px;
   @include mediumScreen {
