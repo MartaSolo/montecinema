@@ -96,7 +96,9 @@ export default defineComponent({
   border: 1px solid $colorRedCherry;
 }
 
-.input__input.register__email {
+.input__input.register__email,
+.input__input.register__name,
+.input__input.register__surname {
   margin-bottom: 32px;
   &.error {
     margin-bottom: 8px;
@@ -110,4 +112,7 @@ export default defineComponent({
 .input__label.register__password {
   margin-top: 8px;
 }
+// .input__label.register__privacy {
+//   display: none;
+// }
 </style>
