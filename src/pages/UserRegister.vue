@@ -8,6 +8,7 @@ import BaseInput from "@/components/global/BaseInput.vue";
 import BaseButton from "@/components/global/BaseButton.vue";
 import EyeIcon from "@/assets/images/eye.svg";
 import InputErrorMessage from "@/components/authentication/InputErrorMessage.vue";
+import BaseCheckbox from "@/components/global/BaseCheckbox.vue";
 
 export default defineComponent({
   name: "UserRegister",
@@ -18,10 +19,11 @@ export default defineComponent({
     BaseButton,
     EyeIcon,
     InputErrorMessage,
+    BaseCheckbox,
   },
   data() {
     return {
-      step: 2,
+      step: 1,
       email: "",
       emailTouched: false,
       password: "",
@@ -33,7 +35,7 @@ export default defineComponent({
       lastNameTouched: false,
       birthDay: "",
       birthDayTouched: false,
-      privacyPolicy: true,
+      privacyPolicy: false,
     };
   },
   computed: {
@@ -68,7 +70,7 @@ export default defineComponent({
         !this.email ||
         !this.password ||
         this.emailError ||
-        this.getPasswordErrorClass
+        this.passwordError
       )
         return true;
       return false;
@@ -95,6 +97,23 @@ export default defineComponent({
       if (!isAdult(this.birthDay)) return "error";
       return "";
     },
+    isFormValid() {
+      if (
+        this.email &&
+        !this.emailError &&
+        this.password &&
+        !this.passwordError &&
+        this.firstName &&
+        !this.firstNameError &&
+        this.lastName &&
+        !this.lastNameError &&
+        this.birthDay &&
+        !this.birthDayError &&
+        this.privacyPolicy
+      )
+        return true;
+      return false;
+    },
   },
   methods: {
     togglePasswordInputType() {
@@ -107,6 +126,28 @@ export default defineComponent({
       if (!state && stateTouched) return "error";
       if (state && error) return "error";
       if (state && !error) return "correct";
+    },
+    resetState() {
+      this.email = "";
+      this.emailTouched = false;
+      this.password = "";
+      this.passwordTouched = false;
+      this.firstName = "";
+      this.firstNameTouched = false;
+      this.lastName = "";
+      this.lastNameTouched = false;
+      this.birthDay = "";
+      this.birthDayTouched = false;
+      this.privacyPolicy = false;
+    },
+    onSubmit() {
+      if (this.isFormValid) {
+        // send data to api
+        this.resetState();
+        this.$router.back();
+      } else {
+        return;
+      }
     },
   },
 });
@@ -128,7 +169,7 @@ export default defineComponent({
         class="register__title"
       />
 
-      <form class="register__form" novalidate>
+      <form class="register__form" novalidate @submit.prevent="onSubmit">
         <div class="register__step">
           <div v-if="step === 1" class="register__step-inputs">
             <BaseInput
@@ -212,6 +253,7 @@ export default defineComponent({
               class="register__name error"
               :inputError="firstNameError"
             />
+
             <BaseInput
               class="register__surname"
               :class="{ error: lastNameError }"
@@ -227,6 +269,7 @@ export default defineComponent({
               class="register__surname error"
               :inputError="lastNameError"
             />
+
             <BaseInput
               class="register__birthday"
               :class="birthDayError"
@@ -243,13 +286,17 @@ export default defineComponent({
               "
               inputError="You should be minium 18 years old"
             />
-            <BaseInput
+
+            <BaseCheckbox
               class="register__privacy"
+              :class="{ checked: privacyPolicy }"
               inputType="checkbox"
               name="privacy"
-              label="Privacy policy"
+              label="I accept"
               v-model="privacyPolicy"
-              >I accept <a href="#">Privacy policy</a></BaseInput
+              ><a href="#" class="privacy__link"
+                >Privacy Policy</a
+              ></BaseCheckbox
             >
           </div>
 
@@ -273,12 +320,11 @@ export default defineComponent({
             >
             <BaseButton
               v-if="step === 2"
-              type="button"
+              type="submit"
               size="large"
               colorTheme="accent-filled"
               class="register"
-              :disabled="disableNextStepButton"
-              @click="step++"
+              :disabled="!isFormValid"
               >Register</BaseButton
             >
           </div>
@@ -295,11 +341,9 @@ export default defineComponent({
   align-items: center;
   max-width: 600px;
   padding: 0 0 124px 0;
-  border: 1px solid blue;
 }
 
 .register__form {
-  border: 1px solid green;
   max-width: 600px;
   padding: 16px 0 48px 0;
   @include mediumScreen {
@@ -329,7 +373,6 @@ export default defineComponent({
 }
 
 .register__step-buttons {
-  border: 1px solid blue;
   margin-top: 48px;
   display: flex;
   flex-direction: column-reverse;
@@ -351,5 +394,14 @@ export default defineComponent({
 }
 .button.login {
   padding: 19px 30px;
+}
+
+.privacy__link {
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.1rem;
+  color: $colorGreyCharade;
+  cursor: pointer;
+  text-decoration: underline;
 }
 </style>

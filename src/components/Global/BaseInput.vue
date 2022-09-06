@@ -31,7 +31,7 @@ export default defineComponent({
 
 <template>
   <div class="input__wrapper">
-    <label class="input__label" :class="$attrs.class" for="name">{{
+    <label class="input__label" :class="$attrs.class" :for="name">{{
       label
     }}</label>
     <input
@@ -112,7 +112,4 @@ export default defineComponent({
 .input__label.register__password {
   margin-top: 8px;
 }
-// .input__label.register__privacy {
-//   display: none;
-// }
 </style>
