@@ -1,9 +1,7 @@
 const isAdult = (inputDate) => {
   const today = new Date();
   const eighteenYearsAgo = new Date(
-    today.getUTCFullYear() - 18,
-    today.getMonth(),
-    today.getUTCDate()
+    Date.UTC(today.getFullYear() - 18, today.getMonth(), today.getDate())
   );
   const birthday = new Date(inputDate);
 

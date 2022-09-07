@@ -26,7 +26,6 @@ export default defineComponent({
 <template>
   <div class="input__wrapper">
     <label class="input__label" :class="$attrs.class" :for="name">
-      <span class="input__icon" :class="$attrs.class"></span>
       <input
         class="input__checkbox"
         :class="$attrs.class"
@@ -57,23 +56,27 @@ export default defineComponent({
   align-items: center;
   gap: 12px;
 }
-.input__icon {
+.input__checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: $colorWhiteSnow;
+  margin: 0;
+  color: currentColor;
   width: 24px;
   height: 24px;
   border: 1px solid $colorGreyBombay;
   border-radius: 9px;
+  position: relative;
   cursor: pointer;
-  &.checked {
+  &.checked::before {
+    content: "";
+    position: absolute;
+    top: -3%;
+    left: -4%;
+    width: 24px;
+    height: 24px;
     background-image: url("@/assets/images/checked.svg");
     background-size: contain;
-    border: 1px solid $colorRedBittersweet;
   }
-}
-.input__checkbox {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
 }
 </style>
