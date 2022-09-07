@@ -7,7 +7,7 @@ const isAdult = (inputDate) => {
   );
   const birthday = new Date(inputDate);
 
-  return birthday > eighteenYearsAgo ? false : true;
+  return birthday < eighteenYearsAgo;
 };
 
 export default isAdult;
