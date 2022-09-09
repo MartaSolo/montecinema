@@ -45,6 +45,20 @@ export default defineComponent({
   padding-bottom: 48px;
 }
 
+.section__title-secondary.register__title {
+  padding-top: 64px;
+  @include mediumScreen {
+    padding-top: 124px;
+    align-self: flex-start;
+  }
+}
+.section__subtitle-secondary.register__title {
+  padding-bottom: 24px;
+  @include mediumScreen {
+    padding-bottom: 40px;
+    align-self: flex-start;
+  }
+}
 .section__title-secondary.movie_screenings-title,
 .section__subtitle-secondary.movie_screenings-title {
   font-size: 1.5rem;

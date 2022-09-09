@@ -68,6 +68,9 @@ export default defineComponent({
   font-weight: 500;
   line-height: 1.1rem;
   border-radius: 64px;
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 .button__large {
   height: 56px;
@@ -97,6 +100,9 @@ export default defineComponent({
   border: 2px solid $colorRedCherry;
   &:hover {
     border: 2px solid $colorRedTotemPole;
+    &:disabled {
+      border: 2px solid $colorRedCherry;
+    }
   }
 }
 

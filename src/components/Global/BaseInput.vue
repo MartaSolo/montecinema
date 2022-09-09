@@ -20,7 +20,7 @@ export default defineComponent({
       type: String,
     },
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "blur"],
   methods: {
     updateValue(event) {
       this.$emit("update:modelValue", event.target.value);
@@ -31,7 +31,7 @@ export default defineComponent({
 
 <template>
   <div class="input__wrapper">
-    <label class="input__label" :class="$attrs.class" for="name">{{
+    <label class="input__label" :class="$attrs.class" :for="name">{{
       label
     }}</label>
     <input
@@ -43,6 +43,7 @@ export default defineComponent({
       :placeholder="placeholder"
       :value="modelValue"
       @input="updateValue"
+      @blur="$emit('blur', $event)"
     />
     <slot />
   </div>
@@ -75,6 +76,40 @@ export default defineComponent({
   font-size: 1.1rem;
   line-height: 1.3rem;
   color: $colorGreyJumbo;
-  padding: 16px;
+  padding: 17px;
+  margin-bottom: 8px;
+  &:focus {
+    background-color: $colorInputActiveBg;
+    outline: none;
+    border: 1px solid $colorInputActiveBorder;
+  }
+  &::placeholder {
+    font-family: $fontPrimary;
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.3rem;
+    color: $colorGreyJumbo;
+  }
+}
+
+.input__input.error {
+  border: 1px solid $colorRedCherry;
+}
+
+.input__input.register__email,
+.input__input.register__name,
+.input__input.register__surname {
+  margin-bottom: 32px;
+  &.error {
+    margin-bottom: 8px;
+  }
+}
+
+.input__wrapper.register__password {
+  position: relative;
+}
+
+.input__label.register__password {
+  margin-top: 8px;
 }
 </style>
