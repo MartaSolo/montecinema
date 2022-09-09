@@ -98,14 +98,17 @@ export default defineComponent({
 
 .input__input.register__email,
 .input__input.register__name,
-.input__input.register__surname {
+.input__input.register__surname,
+.input__input.login__email,
+.input__input.login__password {
   margin-bottom: 32px;
   &.error {
     margin-bottom: 8px;
   }
 }
 
-.input__wrapper.register__password {
+.input__wrapper.register__password,
+.input__wrapper.login__password {
   position: relative;
 }
 

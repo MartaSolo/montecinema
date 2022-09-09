@@ -45,14 +45,16 @@ export default defineComponent({
   padding-bottom: 48px;
 }
 
-.section__title-secondary.register__title {
+.section__title-secondary.register__title,
+.section__title-secondary.login__title {
   padding-top: 64px;
   @include mediumScreen {
     padding-top: 124px;
     align-self: flex-start;
   }
 }
-.section__subtitle-secondary.register__title {
+.section__subtitle-secondary.register__title,
+.section__subtitle-secondary.login__title {
   padding-bottom: 24px;
   @include mediumScreen {
     padding-bottom: 40px;
