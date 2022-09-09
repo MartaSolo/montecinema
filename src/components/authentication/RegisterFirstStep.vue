@@ -28,7 +28,8 @@ export default defineComponent({
     emailError() {
       if (!this.email && !this.emailTouched) return "";
       if (!this.email && this.emailTouched) return "Please enter your email";
-      if (!regex.email.test(this.email)) return "Please enter correct email";
+      if (this.emailTouched && !regex.email.test(this.email))
+        return "Please enter correct email";
       return "";
     },
     passwordErrorCharacters() {
