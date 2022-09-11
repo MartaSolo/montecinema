@@ -1,6 +1,8 @@
 <script>
 import { defineComponent } from "vue";
 import regex from "@/assets/utils/regex.js";
+import { mapActions } from "pinia";
+import { useAuthStore } from "@/stores/auth.js";
 import SectionContainer from "@/components/global/SectionContainer.vue";
 import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue";
 import BaseInput from "@/components/global/BaseInput.vue";
@@ -25,6 +27,7 @@ export default defineComponent({
       password: "",
       passwordTouched: false,
       passwordInputType: "password",
+      loginError: null,
     };
   },
   computed: {
@@ -39,12 +42,6 @@ export default defineComponent({
       if (!this.password && !this.passwordTouched) return "";
       if (!this.password && this.passwordTouched)
         return "Please enter your password";
-      if (
-        (this.passwordTouched && !regex.oneLetter.test(this.password)) ||
-        (this.passwordTouched && !regex.oneDigit.test(this.password)) ||
-        (this.passwordTouched && this.password.length < 8)
-      )
-        return "Please enter correct password";
       return "";
     },
     isFormValid() {
@@ -59,6 +56,7 @@ export default defineComponent({
     },
   },
   methods: {
+    ...mapActions(useAuthStore, ["login"]),
     togglePasswordInputType() {
       return this.passwordInputType === "password"
         ? (this.passwordInputType = "text")
@@ -70,11 +68,15 @@ export default defineComponent({
       this.password = "";
       this.passwordTouched = false;
     },
-    onSubmit() {
+    async onSubmit() {
       if (this.isFormValid) {
-        // send data to api
+        try {
+          await this.login({ email: this.email, password: this.password });
+        } catch (error) {
+          this.loginError = error;
+        }
         this.resetState();
-        this.$router.back();
+        // this.$router.back();
       } else {
         return;
       }

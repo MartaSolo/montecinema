@@ -4,6 +4,8 @@ import SectionContainer from "@/components/global/SectionContainer.vue";
 import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue";
 import RegisterFirstStep from "@/components/authentication/RegisterFirstStep.vue";
 import RegisterSecondStep from "@/components/authentication/RegisterSecondStep.vue";
+import { useAuthStore } from "@/stores/auth";
+import { mapState, mapActions } from "pinia";
 
 export default defineComponent({
   name: "UserRegister",
@@ -24,21 +26,31 @@ export default defineComponent({
         birthDay: "",
         privacyPolicy: "",
       },
+      registerError: null,
     };
   },
+  computed: {
+    ...mapState(useAuthStore, ["isLoggedIn"]),
+  },
   methods: {
+    ...mapActions(useAuthStore, ["register"]),
     onFirstStepForm(data) {
       this.form.email = data.email;
       this.form.password = data.password;
       this.step++;
     },
-    onSecondStepForm(data) {
+    async onSecondStepForm(data) {
       this.form.firstName = data.firstName;
       this.form.lastName = data.lastName;
       this.form.birthDay = data.birthDay;
       this.form.privacyPolicy = data.privacyPolicy;
-      // send data to api
-      this.$router.back();
+      try {
+        await this.register(this.form);
+      } catch (error) {
+        console.log(error);
+        this.registerError = error;
+      }
+      // this.$router.back();
     },
   },
 });

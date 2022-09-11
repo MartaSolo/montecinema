@@ -1,17 +1,16 @@
 <script>
 import { defineComponent } from "vue";
 import BaseButton from "@/components/global/BaseButton.vue";
+import { useAuthStore } from "@/stores/auth";
+import { mapState } from "pinia";
 
 export default defineComponent({
   name: "HeaderNavRedirect",
   components: {
     BaseButton,
   },
-  data() {
-    return {
-      // userLogged: true,
-      userLogged: false,
-    };
+  computed: {
+    ...mapState(useAuthStore, ["isLoggedIn"]),
   },
 });
 </script>
@@ -19,7 +18,7 @@ export default defineComponent({
 <template>
   <div class="nav__links">
     <BaseButton
-      v-if="userLogged"
+      v-if="isLoggedIn"
       class="account__link"
       :to="{ name: 'UserAccount' }"
       size="large"
@@ -27,7 +26,7 @@ export default defineComponent({
       >My Account</BaseButton
     >
     <BaseButton
-      v-if="!userLogged"
+      v-if="!isLoggedIn"
       class="register__link"
       :to="{ name: 'UserRegister' }"
       size="large"
@@ -35,7 +34,7 @@ export default defineComponent({
       >Register</BaseButton
     >
     <BaseButton
-      v-if="!userLogged"
+      v-if="!isLoggedIn"
       class="login__link"
       :to="{ name: 'UserLogIn' }"
       size="large"
