@@ -5,7 +5,7 @@ import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue
 import RegisterFirstStep from "@/components/authentication/RegisterFirstStep.vue";
 import RegisterSecondStep from "@/components/authentication/RegisterSecondStep.vue";
 import { useAuthStore } from "@/stores/auth";
-import { mapState, mapActions } from "pinia";
+import { mapActions } from "pinia";
 
 export default defineComponent({
   name: "UserRegister",
@@ -29,9 +29,6 @@ export default defineComponent({
       registerError: null,
     };
   },
-  computed: {
-    ...mapState(useAuthStore, ["isLoggedIn"]),
-  },
   methods: {
     ...mapActions(useAuthStore, ["register"]),
     onFirstStepForm(data) {
@@ -50,7 +47,7 @@ export default defineComponent({
         console.log(error);
         this.registerError = error;
       }
-      // this.$router.back();
+      this.$router.back();
     },
   },
 });

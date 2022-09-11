@@ -11,7 +11,7 @@ export default defineComponent({
   },
   computed: {
     errorMessage() {
-      return this.error?.message || "We are sorry, but some error occured.";
+      return this.error?.message || "We are sorry, but some error occurred.";
     },
   },
   errorCaptured(error, instance, info) {

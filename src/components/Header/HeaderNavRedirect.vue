@@ -10,7 +10,16 @@ export default defineComponent({
     BaseButton,
   },
   computed: {
-    ...mapState(useAuthStore, ["isLoggedIn"]),
+    ...mapState(useAuthStore, [
+      "isLoggedIn",
+      "isUserLoggedIn",
+      "isEmployeeLoggedIn",
+    ]),
+    routeName() {
+      return this.isUserLoggedIn
+        ? { name: "UserAccount" }
+        : { name: "EmployeeAccount" };
+    },
   },
 });
 </script>
@@ -20,7 +29,7 @@ export default defineComponent({
     <BaseButton
       v-if="isLoggedIn"
       class="account__link"
-      :to="{ name: 'UserAccount' }"
+      :to="routeName"
       size="large"
       colorTheme="light-filled"
       >My Account</BaseButton

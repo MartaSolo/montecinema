@@ -76,7 +76,7 @@ export default defineComponent({
           this.loginError = error;
         }
         this.resetState();
-        // this.$router.back();
+        this.$router.back();
       } else {
         return;
       }

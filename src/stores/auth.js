@@ -8,11 +8,17 @@ const USER_STORAGE_KEY = "user";
 export const useAuthStore = defineStore({
   id: "auth",
   state: () => ({
-    user: null,
+    userData: null,
     authToken: null,
   }),
   getters: {
     isLoggedIn: (state) => !!state.authToken,
+    isUserLoggedIn: (state) => {
+      return state.authToken ? state.userData.role === "user" : "";
+    },
+    isEmployeeLoggedIn: (state) => {
+      return state.authToken ? state.userData.role === "employee" : "";
+    },
   },
   actions: {
     setUserData({ authToken, user }) {
