@@ -16,9 +16,7 @@ export default defineComponent({
       "isEmployeeLoggedIn",
     ]),
     routeName() {
-      return this.isUserLoggedIn
-        ? { name: "UserAccount" }
-        : { name: "EmployeeAccount" };
+      return this.isUserLoggedIn ? "UserAccount" : "EmployeeAccount";
     },
   },
 });
@@ -29,7 +27,7 @@ export default defineComponent({
     <BaseButton
       v-if="isLoggedIn"
       class="account__link"
-      :to="routeName"
+      :to="{ name: routeName }"
       size="large"
       colorTheme="light-filled"
       >My Account</BaseButton

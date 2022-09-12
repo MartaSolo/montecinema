@@ -105,7 +105,7 @@ export default defineComponent({
             placeholder="name.surname@monterail.com"
             v-model="email"
             @blur="emailTouched = true"
-          ></BaseInput>
+          />
           <InputErrorMessage
             v-if="emailError"
             class="login__email error"

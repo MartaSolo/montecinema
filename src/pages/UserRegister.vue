@@ -44,7 +44,6 @@ export default defineComponent({
       try {
         await this.register(this.form);
       } catch (error) {
-        console.log(error);
         this.registerError = error;
       }
       this.$router.back();
