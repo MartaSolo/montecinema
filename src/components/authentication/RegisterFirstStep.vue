@@ -14,7 +14,7 @@ export default defineComponent({
     EyeIcon,
     InputErrorMessage,
   },
-  emits: ["firstStepComplited"],
+  emits: ["firstStepCompleted"],
   data() {
     return {
       email: "",
@@ -83,7 +83,7 @@ export default defineComponent({
     },
     onSubmit() {
       if (this.isFormValid) {
-        this.$emit("firstStepComplited", {
+        this.$emit("firstStepCompleted", {
           email: this.email,
           password: this.password,
         });

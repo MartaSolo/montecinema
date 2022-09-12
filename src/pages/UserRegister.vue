@@ -70,10 +70,10 @@ export default defineComponent({
       />
       <div class="register__step">
         <div v-if="step === 1" class="register__step-inputs">
-          <RegisterFirstStep @firstStepComplited="onFirstStepForm" />
+          <RegisterFirstStep @firstStepCompleted="onFirstStepForm" />
         </div>
         <div v-if="step === 2" class="register__step-inputs">
-          <RegisterSecondStep @secondStepComplited="onSecondStepForm" />
+          <RegisterSecondStep @secondStepCompleted="onSecondStepForm" />
         </div>
       </div>
     </SectionContainer>

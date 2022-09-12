@@ -15,7 +15,7 @@ export default defineComponent({
     InputErrorMessage,
     BaseCheckbox,
   },
-  emits: ["secondStepComplited"],
+  emits: ["secondStepCompleted"],
   data() {
     return {
       firstName: "",
@@ -77,7 +77,7 @@ export default defineComponent({
     },
     onSubmit() {
       if (this.isFormValid) {
-        this.$emit("secondStepComplited", {
+        this.$emit("secondStepCompleted", {
           firstName: this.firstName,
           lastName: this.lastName,
           birthDay: this.birthDay,
