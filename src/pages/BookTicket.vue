@@ -7,6 +7,12 @@ import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue
 export default defineComponent({
   name: "BookTicket",
   components: { SectionContainer, BookTicketsSteps, SectionTitleSecondary },
+  props: {
+    movieSeanceId: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       step: 1,

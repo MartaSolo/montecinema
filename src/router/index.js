@@ -68,12 +68,13 @@ const routes = [
     meta: { requiresUserRole: true },
   },
   {
-    path: "/book-ticket",
+    path: "/book-ticket/:movieSeanceId",
     name: "BookTicket",
     components: {
       default: () => import("@/pages/BookTicket.vue"),
       Header: () => import("@/components/header/HeaderPrimary.vue"),
     },
+    props: true,
   },
   {
     path: "/employee",

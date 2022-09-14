@@ -53,7 +53,7 @@ export default defineComponent({
         v-for="movieSeance in movieSeances"
         :key="movieSeance.id"
         class="screening__movie-hour"
-        :to="{ name: 'BookTicket' }"
+        :to="{ name: 'BookTicket', params: { movieSeanceId: movieSeance.id } }"
         size="tiny"
         colorTheme="accent-empty"
         >{{ getSeanceHour(movieSeance) }}</BaseButton
