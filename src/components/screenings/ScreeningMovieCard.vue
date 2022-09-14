@@ -18,16 +18,6 @@ export default defineComponent({
       required: true,
     },
   },
-  data() {
-    return {
-      userLogged: false,
-    };
-  },
-  computed: {
-    routeName() {
-      return this.userLogged ? { name: "BookTicket" } : { name: "UserLogIn" };
-    },
-  },
   methods: {
     getSeanceHour(seance) {
       return seance.datetime.substring(11, 16);
@@ -63,7 +53,7 @@ export default defineComponent({
         v-for="movieSeance in movieSeances"
         :key="movieSeance.id"
         class="screening__movie-hour"
-        :to="routeName"
+        :to="{ name: 'BookTicket' }"
         size="tiny"
         colorTheme="accent-empty"
         >{{ getSeanceHour(movieSeance) }}</BaseButton
