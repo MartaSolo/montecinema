@@ -4,6 +4,8 @@ import SectionContainer from "@/components/global/SectionContainer.vue";
 import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue";
 import RegisterFirstStep from "@/components/authentication/RegisterFirstStep.vue";
 import RegisterSecondStep from "@/components/authentication/RegisterSecondStep.vue";
+import { useAuthStore } from "@/stores/auth";
+import { mapActions } from "pinia";
 
 export default defineComponent({
   name: "UserRegister",
@@ -24,20 +26,26 @@ export default defineComponent({
         birthDay: "",
         privacyPolicy: "",
       },
+      registerError: null,
     };
   },
   methods: {
+    ...mapActions(useAuthStore, ["register"]),
     onFirstStepForm(data) {
       this.form.email = data.email;
       this.form.password = data.password;
       this.step++;
     },
-    onSecondStepForm(data) {
+    async onSecondStepForm(data) {
       this.form.firstName = data.firstName;
       this.form.lastName = data.lastName;
       this.form.birthDay = data.birthDay;
       this.form.privacyPolicy = data.privacyPolicy;
-      // send data to api
+      try {
+        await this.register(this.form);
+      } catch (error) {
+        this.registerError = error;
+      }
       this.$router.back();
     },
   },
@@ -61,10 +69,10 @@ export default defineComponent({
       />
       <div class="register__step">
         <div v-if="step === 1" class="register__step-inputs">
-          <RegisterFirstStep @firstStepComplited="onFirstStepForm" />
+          <RegisterFirstStep @firstStepCompleted="onFirstStepForm" />
         </div>
         <div v-if="step === 2" class="register__step-inputs">
-          <RegisterSecondStep @secondStepComplited="onSecondStepForm" />
+          <RegisterSecondStep @secondStepCompleted="onSecondStepForm" />
         </div>
       </div>
     </SectionContainer>

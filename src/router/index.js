@@ -59,12 +59,13 @@ const routes = [
     },
   },
   {
-    path: "/account",
+    path: "/user",
     name: "UserAccount",
     components: {
       default: () => import("@/pages/UserAccount.vue"),
       Header: () => import("@/components/header/HeaderPrimary.vue"),
     },
+    meta: { requiresUserRole: true },
   },
   {
     path: "/book-ticket",
@@ -73,6 +74,15 @@ const routes = [
       default: () => import("@/pages/BookTicket.vue"),
       Header: () => import("@/components/header/HeaderPrimary.vue"),
     },
+  },
+  {
+    path: "/employee",
+    name: "EmployeeAccount",
+    components: {
+      default: () => import("@/pages/EmployeeAccount.vue"),
+      Header: () => import("@/components/header/HeaderPrimary.vue"),
+    },
+    meta: { requiresEmployeeRole: true },
   },
   {
     path: "/404",
@@ -89,5 +99,18 @@ const routes = [
 ];
 
 const router = createRouter({ history: createWebHistory(), routes });
+
+router.beforeEach((to, from, next) => {
+  const userData = JSON.parse(localStorage.getItem("user"));
+  const userRole = userData.role;
+  if (
+    (to.meta.requiresUserRole && userRole === "employee") ||
+    (to.meta.requiresEmployeeRole && userRole === "user")
+  ) {
+    router.push({ name: "HomePage" });
+  } else {
+    next();
+  }
+});
 
 export default router;

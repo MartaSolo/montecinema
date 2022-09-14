@@ -15,7 +15,7 @@ export default defineComponent({
     InputErrorMessage,
     BaseCheckbox,
   },
-  emits: ["secondStepComplited"],
+  emits: ["secondStepCompleted"],
   data() {
     return {
       firstName: "",
@@ -32,7 +32,7 @@ export default defineComponent({
       if (!this.firstName && !this.firstNameTouched) return "";
       if (!this.firstName && this.firstNameTouched)
         return "Please enter your first name";
-      if (!regex.name.test(this.firstName))
+      if (this.firstNameTouched && !regex.name.test(this.firstName))
         return "Please enter correct first name";
       return "";
     },
@@ -40,7 +40,7 @@ export default defineComponent({
       if (!this.lastName && !this.lastNameTouched) return "";
       if (!this.lastName && this.lastNameTouched)
         return "Please enter your last name";
-      if (!regex.name.test(this.lastName))
+      if (this.lastNameTouched && !regex.name.test(this.lastName))
         return "Please enter correct last name";
       return "";
     },
@@ -77,7 +77,7 @@ export default defineComponent({
     },
     onSubmit() {
       if (this.isFormValid) {
-        this.$emit("secondStepComplited", {
+        this.$emit("secondStepCompleted", {
           firstName: this.firstName,
           lastName: this.lastName,
           birthDay: this.birthDay,

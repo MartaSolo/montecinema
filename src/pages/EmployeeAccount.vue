@@ -4,7 +4,7 @@ import { mapActions } from "pinia";
 import { useAuthStore } from "@/stores/auth";
 
 export default defineComponent({
-  name: "UserAccount",
+  name: "EmployeeAccount",
   methods: {
     ...mapActions(useAuthStore, ["restoreUserData"]),
   },
@@ -16,7 +16,7 @@ export default defineComponent({
 
 <template>
   <div>
-    <h1>User account page</h1>
+    <h1>Employee account page</h1>
   </div>
 </template>
 

@@ -8,7 +8,7 @@ export default defineComponent({
 
 <template>
   <div>
-    <h1>The pgae was not found</h1>
+    <h1>The page was not found</h1>
   </div>
 </template>
 

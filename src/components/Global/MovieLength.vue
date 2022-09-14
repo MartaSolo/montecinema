@@ -22,7 +22,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="movie__length">{{ movieLength }}</div>
+  <div class="movie__length" data-spec="length">{{ movieLength }}</div>
 </template>
 
 <style lang="scss" scoped>

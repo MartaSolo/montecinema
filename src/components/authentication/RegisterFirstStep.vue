@@ -14,7 +14,7 @@ export default defineComponent({
     EyeIcon,
     InputErrorMessage,
   },
-  emits: ["firstStepComplited"],
+  emits: ["firstStepCompleted"],
   data() {
     return {
       email: "",
@@ -28,7 +28,8 @@ export default defineComponent({
     emailError() {
       if (!this.email && !this.emailTouched) return "";
       if (!this.email && this.emailTouched) return "Please enter your email";
-      if (!regex.email.test(this.email)) return "Please enter correct email";
+      if (this.emailTouched && !regex.email.test(this.email))
+        return "Please enter correct email";
       return "";
     },
     passwordErrorCharacters() {
@@ -82,7 +83,7 @@ export default defineComponent({
     },
     onSubmit() {
       if (this.isFormValid) {
-        this.$emit("firstStepComplited", {
+        this.$emit("firstStepCompleted", {
           email: this.email,
           password: this.password,
         });
