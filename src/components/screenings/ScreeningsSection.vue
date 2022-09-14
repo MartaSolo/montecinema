@@ -10,6 +10,7 @@ import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import ScreeningsCalendar from "@/components/screenings/ScreeningsCalendar.vue";
 import ScreeningMovieCard from "@/components/screenings/ScreeningMovieCard.vue";
+import { formattedWeekdayAndDate } from "@/assets/utils/formattedDate.js";
 
 export default defineComponent({
   name: "ScreeningsSection",
@@ -61,11 +62,7 @@ export default defineComponent({
       return this.date.toISOString().substring(0, 10);
     },
     getFormattedWeekdayAndDate() {
-      const weekday = this.date.toLocaleDateString("en-US", {
-        weekday: "long",
-      });
-      const formattedDate = this.date.toLocaleDateString("en-GB");
-      return `${weekday} ${formattedDate}`;
+      return formattedWeekdayAndDate(this.date);
     },
   },
   watch: {
