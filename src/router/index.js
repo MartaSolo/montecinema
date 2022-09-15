@@ -103,7 +103,7 @@ const router = createRouter({ history: createWebHistory(), routes });
 
 router.beforeEach((to, from, next) => {
   const userData = JSON.parse(localStorage.getItem("user"));
-  const userRole = userData.role;
+  const userRole = userData?.role;
   if (
     (to.meta.requiresUserRole && userRole === "employee") ||
     (to.meta.requiresEmployeeRole && userRole === "user")

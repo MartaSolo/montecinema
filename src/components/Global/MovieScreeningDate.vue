@@ -1,6 +1,6 @@
 <script>
 import { defineComponent, ref } from "vue";
-import { formattedWeekdayAndDate } from "@/assets/utils/formattedDate.js";
+import { formattedDateAndTime } from "@/assets/utils/formattedDate.js";
 
 export default defineComponent({
   name: "MovieScreeningDate",
@@ -11,15 +11,14 @@ export default defineComponent({
   },
 
   setup(props) {
-    const date = ref(formattedWeekdayAndDate(new Date(props.datetime)));
-    const hour = ref(props.datetime.substring(11, 16));
-    return { date, hour };
+    const formattedDatetime = ref(formattedDateAndTime(props.datetime));
+    return { formattedDatetime };
   },
 });
 </script>
 
 <template>
-  <div class="movie__datetime">{{ date }} - {{ hour }}</div>
+  <div class="movie__datetime">{{ formattedDatetime }}</div>
 </template>
 
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
-<script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+<script setup lang="ts">
+import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useReservationStore } from "@/stores/reservation.js";
 import SectionContainer from "@/components/global/SectionContainer.vue";
@@ -9,57 +9,29 @@ import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import ScreeningMovieCard from "@/components/screenings/ScreeningMovieCard.vue";
 
-export default defineComponent({
-  name: "BookTicket",
-  components: {
-    SectionContainer,
-    BookTicketsSteps,
-    SectionTitleSecondary,
-    LoadingData,
-    ErrorMessage,
-    ScreeningMovieCard,
-  },
-  props: {
-    movieSeanceId: {
-      type: String,
-      required: true,
-    },
-  },
+const props = defineProps<{
+  movieSeanceId: String;
+}>();
 
-  setup(props) {
-    const step = ref(1);
-    const handleStep = (stepNumber: number) => {
-      step.value = stepNumber;
-    };
+const step = ref(1);
 
-    const reservationStore = useReservationStore();
-    const {
-      seance,
-      seanceIsLoading,
-      seanceError,
-      getReservationErrorMessage,
-      movie,
-      movieIsLoading,
-      movieError,
-    } = storeToRefs(reservationStore);
+const handleStep = (stepNumber: number) => {
+  step.value = stepNumber;
+};
 
-    onMounted(() => {
-      reservationStore.getSeance(props.movieSeanceId);
-    });
+const reservationStore = useReservationStore();
+const {
+  seance,
+  seanceIsLoading,
+  seanceError,
+  getReservationErrorMessage,
+  movie,
+  movieIsLoading,
+  movieError,
+} = storeToRefs(reservationStore);
 
-    return {
-      step,
-      handleStep,
-      reservationStore,
-      seance,
-      seanceIsLoading,
-      seanceError,
-      getReservationErrorMessage,
-      movie,
-      movieIsLoading,
-      movieError,
-    };
-  },
+onMounted(() => {
+  reservationStore.getSeance(props.movieSeanceId);
 });
 </script>
 
@@ -74,7 +46,7 @@ export default defineComponent({
       }}</ErrorMessage>
       <div v-else class="booking__movie-card">
         <ScreeningMovieCard
-          :key="seance.id"
+          :key="seance?.id"
           :movie="movie"
           :movieSeance="seance"
         />
