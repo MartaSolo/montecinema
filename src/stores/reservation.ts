@@ -3,6 +3,48 @@ import { getSeanceById } from "@/api/services/Seances";
 import { getMovieById } from "@/api/services/Movies";
 import { getHall } from "@/api/services/Halls.js";
 
+interface Store {
+  seance: SeanceInfo | null;
+  seanceIsLoading: boolean;
+  seanceError: any;
+  movie: MovieInfo | null;
+  movieIsLoading: boolean;
+  movieError: any;
+  hall: HallInfo | null;
+  hallIsLoading: boolean;
+  hallError: any;
+}
+
+interface SeanceInfo {
+  available_seats: string[];
+  datetime: string;
+  hall: number;
+  id: number;
+  movie: number;
+  taken_seats: string[];
+}
+
+interface MovieInfo {
+  description: string;
+  genre: Genre;
+  id: number;
+  length: number;
+  poster_url: string;
+  release_date: string;
+  title: string;
+}
+
+interface Genre {
+  id: number;
+  name: string;
+}
+
+interface HallInfo {
+  id: number;
+  name: string;
+  seats: number;
+}
+
 export const useReservationStore = defineStore({
   id: "reservation",
   state: (): Store => ({
@@ -59,40 +101,3 @@ export const useReservationStore = defineStore({
     },
   },
 });
-
-interface Store {
-  seance: SeanceInfo | null;
-  seanceIsLoading: Boolean;
-  seanceError: null;
-  movie: MovieInfo | null;
-  movieIsLoading: Boolean;
-  movieError: null;
-  hall: HallInfo | null;
-  hallIsLoading: Boolean;
-  hallError: null;
-}
-
-interface SeanceInfo {
-  available_seats: [];
-  datetime: String;
-  hall: Number;
-  id: Number;
-  movie: Number;
-  taken_seats: [];
-}
-
-interface MovieInfo {
-  description: String;
-  genre: {};
-  id: Number;
-  length: Number;
-  poster_url: String;
-  release_date: String;
-  title: String;
-}
-
-interface HallInfo {
-  id: Number;
-  name: String;
-  seats: Number;
-}

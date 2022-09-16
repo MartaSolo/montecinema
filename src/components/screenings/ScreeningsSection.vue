@@ -10,7 +10,7 @@ import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import ScreeningsCalendar from "@/components/screenings/ScreeningsCalendar.vue";
 import ScreeningMovieCard from "@/components/screenings/ScreeningMovieCard.vue";
-import { formattedWeekdayAndDate } from "@/assets/utils/formattedDate.js";
+import { formattedWeekdayAndDate } from "@/utils/formattedDate.js";
 
 export default defineComponent({
   name: "ScreeningsSection",

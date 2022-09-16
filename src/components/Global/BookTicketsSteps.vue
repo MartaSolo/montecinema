@@ -11,7 +11,7 @@ export default defineComponent({
       type: Number,
     },
   },
-  emits: ["clickFirstStep", "clickSecondStep"],
+  emits: ["onStepChange"],
   data() {
     return {
       activeStep: 1,

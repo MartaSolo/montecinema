@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import regex from "@/assets/utils/regex.js";
+import regex from "@/utils/regex.js";
 import BaseInput from "@/components/global/BaseInput.vue";
 import BaseButton from "@/components/global/BaseButton.vue";
 import EyeIcon from "@/assets/images/eye.svg";

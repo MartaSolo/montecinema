@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import regex from "@/assets/utils/regex.js";
+import regex from "@/utils/regex.js";
 import isAdult from "@/assets/utils/birthDayValidation.js";
 import BaseInput from "@/components/global/BaseInput.vue";
 import BaseButton from "@/components/global/BaseButton.vue";

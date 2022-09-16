@@ -1,6 +1,6 @@
 <script>
 import { defineComponent, ref } from "vue";
-import { formattedDateAndTime } from "@/assets/utils/formattedDate.js";
+import { formattedDateAndTime } from "@/utils/formattedDate.js";
 
 export default defineComponent({
   name: "MovieScreeningDate",
