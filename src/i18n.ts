@@ -12,17 +12,27 @@ export default createI18n({
     en,
     pl,
   },
-  numberFormats: {
+  datetimeFormats: {
     en: {
-      currency: {
-        style: "currency",
-        currency: "USD",
+      long: {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        weekday: "long",
+      },
+      weekdayShort: {
+        weekday: "short",
       },
     },
     pl: {
-      currency: {
-        style: "currency",
-        currency: "PLN",
+      long: {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        weekday: "long",
+      },
+      weekdayShort: {
+        weekday: "short",
       },
     },
   },

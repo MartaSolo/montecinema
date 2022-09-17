@@ -16,17 +16,17 @@ export default defineComponent({
     <HeaderNavLink
       active-class="nav__link-active"
       :to="{ name: 'AllMovies' }"
-      text="Movies"
+      :text="$t('menu.movies')"
     />
     <HeaderNavLink
       active-class="nav__link-active"
       :to="{ name: 'AllScreenings' }"
-      text="Screenings"
+      :text="$t('menu.screenings')"
     />
     <HeaderNavLink
       active-class="nav__link-active"
       :to="{ name: 'ContactUs' }"
-      text="Contact us"
+      :text="$t('menu.contact')"
     />
   </div>
 </template>

@@ -33,11 +33,11 @@ export default defineComponent({
     <SectionContainer class="welcome__container">
       <div class="welcome__text">
         <SectionTitlePrimary
-          title="Welcome to the best cinema in Monterail"
+          :title="$t('welcome.title')"
           class="welcome__title"
         />
         <SectionDescription
-          description="Best movies, best experiences, best people. And all that doesn’t exist. Yikes."
+          :description="$t('welcome.description')"
           class="welcome__description"
         />
         <BaseButton
@@ -45,7 +45,7 @@ export default defineComponent({
           size="large"
           :to="bookingRoute"
           colorTheme="accent-filled"
-          >Book a ticket</BaseButton
+          >{{ $t("welcome.booking") }}</BaseButton
         >
       </div>
       <div class="welcome__image">
@@ -61,7 +61,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .welcome {
-  width: 100%;
   height: 562px;
   @include mediumScreen {
     height: 618px;
@@ -69,7 +68,6 @@ export default defineComponent({
 }
 .welcome__container {
   height: 100%;
-  width: 100%;
   background-color: $colorRedWispPink;
   @include mediumScreen {
     background-color: $colorWhiteSnow;
@@ -102,7 +100,7 @@ export default defineComponent({
 
 .welcome__title {
   @include mediumScreen {
-    width: 600px;
+    width: 650px;
     align-self: flex-start;
   }
 }
@@ -110,7 +108,7 @@ export default defineComponent({
 .welcome__description {
   align-self: flex-start;
   @include mediumScreen {
-    width: 600px;
+    width: 680px;
   }
 }
 .welcome__link {
@@ -118,6 +116,7 @@ export default defineComponent({
   @include mediumScreen {
     width: 224px;
     align-self: flex-start;
+    padding: 19px 20px;
   }
 }
 .welcome__image {

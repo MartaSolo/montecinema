@@ -1,24 +1,33 @@
 export default {
-  header: {
-    menu: {
-      movies: "Filmy",
-      screenings: "Seanse",
-      contact: "Kontakt",
-    },
-    redirect: {
-      register: "Rejestracja",
-      login: "Logowanie",
-      account: "Moje Konto",
-      logout: "Wyloguj",
-    },
+  menu: {
+    movies: "Filmy",
+    screenings: "Seanse",
+    contact: "Kontakt",
+  },
+  redirect: {
+    register: "Rejestracja",
+    login: "Logowanie",
+    account: "Moje Konto",
+  },
+  welcome: {
+    title: "Witamy w najlepszym kinie w Monterail",
+    description:
+      "Najlepsze filmy, najlepsze doświadczenia, najlepsi ludzie. A wszystko to nie istnieje. Uff.",
+    booking: "Zarezerwuj bilet",
   },
   soon: {
-    coming: "Wkrótce w kinie",
+    title: "Wkrótce",
+    subtitle: "w kinie",
     all: "Zobacz wszystkie",
   },
   screenings: {
     title: "Seanse:",
     date: "Data",
     movies: "Filmy",
+    today: "Dzisiaj",
+  },
+  contact: {
+    title: "Kontakt",
+    country: "Polska",
   },
 };

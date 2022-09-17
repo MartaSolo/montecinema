@@ -10,7 +10,6 @@ import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import ScreeningsCalendar from "@/components/screenings/ScreeningsCalendar.vue";
 import ScreeningMovieCard from "@/components/screenings/ScreeningMovieCard.vue";
-import { formattedWeekdayAndDate } from "@/utils/formattedDate.js";
 
 export default defineComponent({
   name: "ScreeningsSection",
@@ -61,9 +60,6 @@ export default defineComponent({
     formattedDate() {
       return this.date.toISOString().substring(0, 10);
     },
-    getFormattedWeekdayAndDate() {
-      return formattedWeekdayAndDate(this.date);
-    },
   },
   watch: {
     date(newDate, oldDate) {
@@ -88,14 +84,14 @@ export default defineComponent({
   <section class="screenings">
     <SectionContainer class="screenings__container">
       <SectionTitleSecondary
-        title="Screenings:"
-        :subtitle="getFormattedWeekdayAndDate"
+        :title="$t('screenings.title')"
+        :subtitle="$d(this.date, 'long')"
       ></SectionTitleSecondary>
       <div class="screenings__filters">
         <ScreeningsCalendar v-model="date" />
         <BaseSelect
           v-model="selected"
-          label="Movies"
+          :label="$t('screenings.movies')"
           placeholder="All movies"
           :options="movieTitles"
         ></BaseSelect>

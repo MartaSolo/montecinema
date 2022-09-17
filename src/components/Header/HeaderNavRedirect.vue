@@ -30,7 +30,7 @@ export default defineComponent({
       :to="{ name: routeName }"
       size="large"
       colorTheme="light-filled"
-      >My Account</BaseButton
+      >{{ $t("redirect.account") }}</BaseButton
     >
     <BaseButton
       v-if="!isLoggedIn"
@@ -38,7 +38,7 @@ export default defineComponent({
       :to="{ name: 'UserRegister' }"
       size="large"
       colorTheme="accent-text"
-      >Register</BaseButton
+      >{{ $t("redirect.register") }}</BaseButton
     >
     <BaseButton
       v-if="!isLoggedIn"
@@ -46,7 +46,7 @@ export default defineComponent({
       :to="{ name: 'UserLogIn' }"
       size="large"
       colorTheme="accent-filled"
-      >Login</BaseButton
+      >{{ $t("redirect.login") }}</BaseButton
     >
   </div>
 </template>

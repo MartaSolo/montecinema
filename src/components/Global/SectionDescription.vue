@@ -6,7 +6,7 @@ export default defineComponent({
   props: {
     description: {
       type: String,
-      reqiured: true,
+      required: true,
     },
   },
 });
@@ -26,6 +26,7 @@ export default defineComponent({
   text-align: center;
   color: $colorGreyTuna;
   margin: 0;
+  white-space: pre-line;
   @include mediumScreen {
     text-align: left;
   }

@@ -1,30 +1,23 @@
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
 import BaseButton from "@/components/global/BaseButton.vue";
-
-const activeLang = ref("EN");
-
-const changeLang = (lang) => {
-  activeLang.value = lang;
-};
 </script>
 
 <template>
   <div class="language__wrapper">
     <BaseButton
-      v-if="activeLang === 'PL'"
+      v-if="$i18n.locale === 'pl'"
       class="language"
       size="tiny"
       colorTheme="dark-empty"
-      @click="changeLang('EN')"
+      @click="$i18n.locale = 'en'"
       >EN</BaseButton
     >
     <BaseButton
-      v-if="activeLang === 'EN'"
+      v-if="$i18n.locale === 'en'"
       class="language"
       size="tiny"
       colorTheme="dark-empty"
-      @click="changeLang('PL')"
+      @click="$i18n.locale = 'pl'"
       >PL</BaseButton
     >
   </div>
