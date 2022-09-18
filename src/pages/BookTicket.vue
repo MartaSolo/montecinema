@@ -8,6 +8,7 @@ import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue
 import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import ScreeningMovieCard from "@/components/screenings/ScreeningMovieCard.vue";
+import HallPlan from "../components/booking/HallPlan.vue";
 
 const props = defineProps<{
   movieSeanceId: String;
@@ -51,6 +52,7 @@ onMounted(() => {
           :movieSeance="seance"
         />
       </div>
+      <HallPlan />
     </SectionContainer>
   </section>
 </template>

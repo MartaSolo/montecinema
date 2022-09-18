@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { getSeanceById } from "@/api/services/Seances";
 import { getMovieById } from "@/api/services/Movies";
 import { getHall } from "@/api/services/Halls.js";
+import { allSeats, hallPlan } from "@/utils/hall.js";
 
 interface Store {
   seance: SeanceInfo | null;
@@ -64,6 +65,16 @@ export const useReservationStore = defineStore({
         state.seanceError?.message ||
         "We are sorry, but the seance cannot be displayed."
       );
+    },
+    getAllSeats(state) {
+      if (state.seance) {
+        return allSeats(state.seance.available_seats, state.seance.taken_seats);
+      }
+    },
+    getHallPlan() {
+      if (this.getAllSeats) {
+        return hallPlan(this.getAllSeats);
+      }
     },
   },
   actions: {
