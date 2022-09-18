@@ -5,6 +5,8 @@ import SectionTitlePrimary from "@/components/global/SectionTitlePrimary.vue";
 import SectionDescription from "@/components/global/SectionDescription.vue";
 import BaseButton from "@/components/global/BaseButton.vue";
 import BaseImage from "@/components/global/BaseImage.vue";
+import { useAuthStore } from "@/stores/auth";
+import { mapState } from "pinia";
 
 export default defineComponent({
   name: "WelcomeSection",
@@ -15,14 +17,12 @@ export default defineComponent({
     BaseButton,
     BaseImage,
   },
-  data() {
-    return {
-      userLogged: false,
-    };
-  },
   computed: {
+    ...mapState(useAuthStore, ["isUserLoggedIn"]),
     bookingRoute() {
-      return this.userLogged ? { name: "BookTicket" } : { name: "UserLogIn" };
+      return this.isUserLoggedIn
+        ? { name: "AllScreenings" }
+        : { name: "UserLogIn" };
     },
   },
 });

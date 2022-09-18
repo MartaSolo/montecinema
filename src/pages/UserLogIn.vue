@@ -1,7 +1,7 @@
 <script>
 import { defineComponent } from "vue";
 import regex from "@/utils/regex.js";
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { useAuthStore } from "@/stores/auth.js";
 import SectionContainer from "@/components/global/SectionContainer.vue";
 import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue";
@@ -54,6 +54,7 @@ export default defineComponent({
         return true;
       return false;
     },
+    ...mapState(useAuthStore, ["isUserLoggedIn", "isEmployeeLoggedIn"]),
   },
   methods: {
     ...mapActions(useAuthStore, ["login"]),
@@ -76,7 +77,9 @@ export default defineComponent({
           this.loginError = error;
         }
         this.resetState();
-        this.$router.back();
+        this.isUserLoggedIn
+          ? this.$router.back()
+          : this.$router.push({ name: "EmployeeAccount" });
       } else {
         return;
       }

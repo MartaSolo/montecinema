@@ -54,7 +54,7 @@ export default defineComponent({
   /></BaseButton>
   <nav v-if="menuOpen" class="nav">
     <HeaderNavMenu @click="closeMenu" />
-    <HeaderNavRedirect />
+    <HeaderNavRedirect @click="closeMenu" />
   </nav>
 </template>
 
@@ -65,7 +65,7 @@ export default defineComponent({
   position: absolute;
   top: 90%;
   left: 0;
-  border: 1px solid red;
+  z-index: 999;
 }
 .menu__open,
 .menu__close {
