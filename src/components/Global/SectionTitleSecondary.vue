@@ -70,4 +70,10 @@ export default defineComponent({
     line-height: 2.5rem;
   }
 }
+.section__title-secondary.booking__title {
+  padding: 64px 0 12px 0;
+  @include mediumScreen {
+    padding: 64px 0 64px 0;
+  }
+}
 </style>

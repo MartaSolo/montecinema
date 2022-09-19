@@ -15,22 +15,22 @@ export default defineComponent({
 
 <template>
   <div class="contact__details">
-    <div class="contact__adress">
-      <div class="contact__adress-icon">
+    <div class="contact__address">
+      <div class="contact__address-icon">
         <Location />
       </div>
-      <div class="contact__adress-details">
-        <div class="contact__adress-name">Monterail Sp. z o.o.</div>
-        <div class="contact__adress-street">ul. Oławska 27-29</div>
-        <div class="contact__adress-city">50-123 Wrocław</div>
-        <div class="contact__adress-country">Poland</div>
+      <div class="contact__address-details">
+        <div class="contact__address-name">Monterail Sp. z o.o.</div>
+        <div class="contact__address-street">ul. Oławska 27-29</div>
+        <div class="contact__address-city">50-123 Wrocław</div>
+        <div class="contact__address-country">{{ $t("contact.country") }}</div>
       </div>
     </div>
     <div class="contact__email">
       <div class="contact__email-icon">
         <Email />
       </div>
-      <div class="contact__email-adress">hello@monterail.com</div>
+      <div class="contact__email-address">hello@monterail.com</div>
     </div>
 
     <div class="contact__phone">
@@ -60,13 +60,13 @@ export default defineComponent({
     border-radius: 24px;
   }
 }
-.contact__adress,
+.contact__address,
 .contact__email,
 .contact__phone {
   display: flex;
   gap: 16px;
 }
-.contact__adress,
+.contact__address,
 .contact__email {
   padding-bottom: 40px;
 }

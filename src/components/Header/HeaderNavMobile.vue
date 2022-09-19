@@ -6,6 +6,7 @@ import HeaderNavMenu from "@/components/header/HeaderNavMenu.vue";
 import HeaderNavRedirect from "@/components/header/HeaderNavRedirect.vue";
 import MenuIconOpen from "@/assets/images/navigation-menu.svg";
 import MenuIconClose from "@/assets/images/close.svg";
+import HeaderLanguage from "@/components/header/HeaderLanguage.vue";
 
 export default defineComponent({
   name: "HeaderNavMobile",
@@ -16,6 +17,7 @@ export default defineComponent({
     HeaderLogo,
     MenuIconOpen,
     MenuIconClose,
+    HeaderLanguage,
   },
   data() {
     return {
@@ -35,6 +37,7 @@ export default defineComponent({
 
 <template>
   <HeaderLogo />
+  <HeaderLanguage />
   <BaseButton
     v-if="!menuOpen"
     type="button"
@@ -62,6 +65,7 @@ export default defineComponent({
   position: absolute;
   top: 90%;
   left: 0;
+  border: 1px solid red;
 }
 .menu__open,
 .menu__close {

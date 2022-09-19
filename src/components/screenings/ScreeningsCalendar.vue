@@ -31,10 +31,10 @@ export default defineComponent({
     },
     setWeekDay(number) {
       if (number === 1) {
-        return "Today";
+        return this.$t("screenings.today");
       } else {
         const nextDay = this.setDate(number);
-        const weekDay = nextDay.toDateString().substring(0, 3);
+        const weekDay = this.$d(nextDay, "weekdayShort");
         return weekDay;
       }
     },
@@ -65,7 +65,9 @@ export default defineComponent({
 
 <template>
   <div class="screenings__datepicker">
-    <label class="screenings__datepicker-label" for="datepicker">Date</label>
+    <label class="screenings__datepicker-label" for="datepicker">{{
+      $t("screenings.date")
+    }}</label>
     <div class="screenings__datepicker-buttons">
       <BaseButton
         v-for="n in 6"

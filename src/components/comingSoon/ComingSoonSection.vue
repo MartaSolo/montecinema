@@ -19,13 +19,14 @@ export default defineComponent({
     <SectionContainer class="soon__container">
       <div class="soon__text">
         <h3 class="soon__title-primary">
-          Soon <span class="soon__title-secondary">in the cinema</span>
+          {{ $t("soon.title")
+          }}<span class="soon__title-secondary">{{ $t("soon.subtitle") }}</span>
         </h3>
         <BaseButton
           class="soon__link"
           :to="{ name: 'AllMovies' }"
           colorTheme="accent-text"
-          >See all</BaseButton
+          >{{ $t("soon.all") }}</BaseButton
         >
       </div>
       <ComingSoonMovies />

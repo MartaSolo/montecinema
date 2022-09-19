@@ -14,10 +14,10 @@ export const useAuthStore = defineStore({
   getters: {
     isLoggedIn: (state) => !!state.authToken,
     isUserLoggedIn: (state) => {
-      return state.authToken && state.userData.role === "user";
+      return state.authToken && state.userData?.role === "user";
     },
     isEmployeeLoggedIn: (state) => {
-      return state.authToken && state.userData.role === "employee";
+      return state.authToken && state.userData?.role === "employee";
     },
   },
   actions: {

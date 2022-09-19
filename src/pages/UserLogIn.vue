@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import regex from "@/assets/utils/regex.js";
+import regex from "@/utils/regex.js";
 import { mapActions } from "pinia";
 import { useAuthStore } from "@/stores/auth.js";
 import SectionContainer from "@/components/global/SectionContainer.vue";

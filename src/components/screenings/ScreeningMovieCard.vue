@@ -4,10 +4,17 @@ import BaseImage from "@/components/global/BaseImage.vue";
 import MovieCategory from "@/components/global/MovieCategory.vue";
 import MovieLength from "@/components/global/MovieLength.vue";
 import BaseButton from "@/components/global/BaseButton.vue";
+import MovieScreeningDate from "@/components/global/MovieScreeningDate.vue";
 
 export default defineComponent({
   name: "ScreeningMovieCard",
-  components: { MovieLength, BaseImage, MovieCategory, BaseButton },
+  components: {
+    MovieLength,
+    BaseImage,
+    MovieCategory,
+    BaseButton,
+    MovieScreeningDate,
+  },
   props: {
     movie: {
       type: Object,
@@ -15,17 +22,9 @@ export default defineComponent({
     },
     movieSeances: {
       type: Array,
-      required: true,
     },
-  },
-  data() {
-    return {
-      userLogged: false,
-    };
-  },
-  computed: {
-    routeName() {
-      return this.userLogged ? { name: "BookTicket" } : { name: "UserLogIn" };
+    movieSeance: {
+      type: Object,
     },
   },
   methods: {
@@ -58,16 +57,19 @@ export default defineComponent({
         <MovieLength class="screening__movie-length" :length="movie.length" />
       </div>
     </div>
-    <div class="screening__movie-hours">
+    <div v-if="movieSeances" class="screening__movie-hours">
       <BaseButton
         v-for="movieSeance in movieSeances"
         :key="movieSeance.id"
         class="screening__movie-hour"
-        :to="routeName"
+        :to="{ name: 'BookTicket', params: { movieSeanceId: movieSeance.id } }"
         size="tiny"
         colorTheme="accent-empty"
         >{{ getSeanceHour(movieSeance) }}</BaseButton
       >
+    </div>
+    <div v-if="movieSeance" class="screening__movie-date">
+      <MovieScreeningDate :datetime="movieSeance.datetime" />
     </div>
   </div>
 </template>
@@ -90,6 +92,7 @@ export default defineComponent({
     box-shadow: 0px 24px 78px rgba(0, 0, 0, 0.08),
       0px 5.36071px 17.4223px rgba(0, 0, 0, 0.0238443),
       0px 1.59602px 5.18708px rgba(0, 0, 0, 0.0161557);
+    border-radius: 8px;
   }
 }
 
@@ -140,6 +143,16 @@ export default defineComponent({
     height: 40px;
     padding: 12px 32px;
     font-size: 1rem;
+  }
+}
+.screening__movie-date {
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  @include mediumScreen {
+    grid-column: 2;
+    height: 40px;
   }
 }
 </style>

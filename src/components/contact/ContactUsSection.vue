@@ -13,7 +13,10 @@ export default defineComponent({
 <template>
   <section class="contact">
     <SectionContainer class="contact__container">
-      <SectionTitleSecondary title="Contact us" class="contact__title" />
+      <SectionTitleSecondary
+        :title="$t('contact.title')"
+        class="contact__title"
+      />
       <ContactDetails />
     </SectionContainer>
   </section>
