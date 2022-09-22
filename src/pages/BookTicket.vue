@@ -1,20 +1,21 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, Ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useReservationStore } from "@/stores/reservation.js";
 import SectionContainer from "@/components/global/SectionContainer.vue";
-import BookTicketsSteps from "@/components/global/BookTicketsSteps.vue";
+import BookTicketsSteps from "@/components/booking/BookTicketsSteps.vue";
 import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue";
 import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import ScreeningMovieCard from "@/components/screenings/ScreeningMovieCard.vue";
-import HallPlan from "../components/booking/HallPlan.vue";
+import ChooseSeats from "@/components/booking/ChooseSeats.vue";
+import ChooseTickets from "@/components/booking/ChooseTickets.vue";
 
 const props = defineProps<{
   movieSeanceId: String;
 }>();
 
-const step = ref(1);
+const step: Ref<number> = ref(1);
 
 const handleStep = (stepNumber: number) => {
   step.value = stepNumber;
@@ -52,7 +53,10 @@ onMounted(() => {
           :movieSeance="seance"
         />
       </div>
-      <HallPlan />
+      <div class="booking__step">
+        <ChooseSeats v-if="step === 1" @onStepChange="handleStep" />
+        <ChooseTickets v-if="step === 2" />
+      </div>
     </SectionContainer>
   </section>
 </template>

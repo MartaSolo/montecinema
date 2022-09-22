@@ -14,6 +14,7 @@ interface Store {
   hall: HallInfo | null;
   hallIsLoading: boolean;
   hallError: any;
+  reservedSeats: string[];
 }
 
 interface SeanceInfo {
@@ -58,6 +59,7 @@ export const useReservationStore = defineStore({
     hall: null,
     hallIsLoading: false,
     hallError: null,
+    reservedSeats: [],
   }),
   getters: {
     getReservationErrorMessage(state) {
@@ -109,6 +111,10 @@ export const useReservationStore = defineStore({
       } finally {
         this.hallIsLoading = false;
       }
+    },
+    setReservedSeats(seats: string[]) {
+      seats.sort((a, b) => a.localeCompare(b));
+      this.reservedSeats = seats;
     },
   },
 });
