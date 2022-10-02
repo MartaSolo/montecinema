@@ -15,7 +15,9 @@ export const allSeats = (arr1, arr2) => {
       seatNumber: seat.slice(1),
     };
   });
-  return [...available, ...taken];
+  const seats = [...available, ...taken];
+  seats.sort((a, b) => a.seat.localeCompare(b.seat));
+  return seats;
 };
 
 export const numberOfSeatsInRow = (array) => {
@@ -32,5 +34,10 @@ export const hallPlan = (array) => {
   for (let i = 0; i < array.length; i + seatsInRow) {
     array2D.push(array.slice(i, (i += seatsInRow)));
   }
+  array2D.map((array) =>
+    array.sort((a, b) =>
+      a.seatNumber.localeCompare(b.seatNumber, undefined, { numeric: true })
+    )
+  );
   return array2D;
 };

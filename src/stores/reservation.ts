@@ -3,6 +3,11 @@ import { getSeanceById } from "@/api/services/Seances";
 import { getMovieById } from "@/api/services/Movies";
 import { getHall } from "@/api/services/Halls.js";
 import { allSeats, hallPlan } from "@/utils/hall.js";
+import {
+  makeReservation,
+  getReservation,
+} from "@/api/services/Reservations.js";
+import { ReservedSeatTicket } from "@/components/booking/ChooseTickets.vue";
 
 interface Store {
   seance: SeanceInfo | null;
@@ -15,6 +20,11 @@ interface Store {
   hallIsLoading: boolean;
   hallError: any;
   reservedSeats: string[];
+  reservedSeance: ReservedSeance | null;
+  reservedSeanceError: any;
+  reservation: Reservation | null;
+  reservationIsLoading: boolean;
+  reservationError: any;
 }
 
 interface SeanceInfo {
@@ -47,6 +57,38 @@ interface HallInfo {
   seats: number;
 }
 
+interface ReservedSeance {
+  id: number;
+  seance_id: number;
+  created_at: string;
+  updated_at: string;
+  ticket_desk_id: number;
+  user_id: number;
+}
+
+interface Status {
+  id: number;
+  name: string;
+}
+
+interface Ticket {
+  id: number;
+  price: string;
+  seat: string;
+  type: string;
+}
+
+interface Reservation {
+  id: number;
+  movie_title: string;
+  seance_datetime: string;
+  seance_id: number;
+  status: Status;
+  tickets: Ticket[];
+  user_email: string;
+  user_id: number;
+}
+
 export const useReservationStore = defineStore({
   id: "reservation",
   state: (): Store => ({
@@ -60,9 +102,14 @@ export const useReservationStore = defineStore({
     hallIsLoading: false,
     hallError: null,
     reservedSeats: [],
+    reservedSeance: null,
+    reservedSeanceError: null,
+    reservation: null,
+    reservationIsLoading: true,
+    reservationError: null,
   }),
   getters: {
-    getReservationErrorMessage(state) {
+    getSeanceErrorMessage(state) {
       return (
         state.seanceError?.message ||
         "We are sorry, but the seance cannot be displayed."
@@ -77,6 +124,12 @@ export const useReservationStore = defineStore({
       if (this.getAllSeats) {
         return hallPlan(this.getAllSeats);
       }
+    },
+    getReservationErrorMessage(state) {
+      return (
+        state.reservationError?.message ||
+        "We are sorry, but the reservation cannot be displayed."
+      );
     },
   },
   actions: {
@@ -112,9 +165,41 @@ export const useReservationStore = defineStore({
         this.hallIsLoading = false;
       }
     },
-    setReservedSeats(seats: string[]) {
+    sortReservedSeats(seats: string[]) {
       seats.sort((a, b) => a.localeCompare(b));
       this.reservedSeats = seats;
+    },
+    removeSelectedSeat(selectedSeat: string) {
+      const filteredSeats = this.reservedSeats.filter((seat) => {
+        return seat !== selectedSeat;
+      });
+      this.reservedSeats = filteredSeats;
+    },
+    async reserveSeance(reservedSeatsTickets: ReservedSeatTicket[]) {
+      this.reservedSeats = [];
+      this.reservedSeance = null;
+      this.reservedSeanceError = null;
+      try {
+        const respData = await makeReservation({
+          seance_id: this.seance?.id,
+          tickets: reservedSeatsTickets,
+        });
+        this.reservedSeance = respData.data;
+      } catch (error) {
+        this.reservedSeanceError = error;
+      }
+    },
+    async retrieveReservation() {
+      this.reservation = null;
+      this.reservationIsLoading = true;
+      try {
+        const respData = await getReservation(this.reservedSeance?.id);
+        this.reservation = respData.data;
+      } catch (error) {
+        this.reservationError = error;
+      } finally {
+        this.reservationIsLoading = false;
+      }
     },
   },
 });

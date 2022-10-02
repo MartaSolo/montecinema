@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, Ref, ref } from "vue";
+import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useReservationStore } from "@/stores/reservation.js";
 import BaseButton from "@/components/global/BaseButton.vue";
@@ -11,39 +11,37 @@ interface chosenSeat {
   available: boolean;
 }
 
-const chosenSeats: Ref<string[]> = ref([]);
-
 const emit = defineEmits<{ (e: "onStepChange", step: number): void }>();
 
 const reservationStore = useReservationStore();
-const { getHallPlan } = storeToRefs(reservationStore);
+const { getHallPlan, reservedSeats } = storeToRefs(reservationStore);
 
-const toggleChosenSeat = (chosenSeat: chosenSeat) => {
+const toggleReservedSeat = (chosenSeat: chosenSeat) => {
   if (!chosenSeat.available) return;
-  if (!chosenSeats.value.includes(chosenSeat.seat)) {
-    chosenSeats.value.push(chosenSeat.seat);
+  if (!reservedSeats.value.includes(chosenSeat.seat)) {
+    reservedSeats.value.push(chosenSeat.seat);
   } else {
-    const filteredSeats = chosenSeats.value.filter(
+    const filteredSeats = reservedSeats.value.filter(
       (seat) => seat !== chosenSeat.seat
     );
-    chosenSeats.value = filteredSeats;
+    reservedSeats.value = filteredSeats;
   }
 };
 
 const getSeatClasses = (seat: chosenSeat) => {
   return {
     taken: !seat.available,
-    reserved: chosenSeats.value.includes(seat.seat),
+    reserved: reservedSeats.value.includes(seat.seat),
   };
 };
 
 const isButtonDisabled = computed(() => {
-  return chosenSeats.value.length === 0;
+  return reservedSeats.value.length === 0;
 });
 
 const changeStep = (step: number) => {
   emit("onStepChange", step);
-  reservationStore.setReservedSeats(chosenSeats.value);
+  reservationStore.sortReservedSeats(reservedSeats.value);
 };
 </script>
 
@@ -57,7 +55,7 @@ const changeStep = (step: number) => {
           :key="seat.seat"
           class="hall__seat"
           :class="getSeatClasses(seat)"
-          @click="toggleChosenSeat(seat)"
+          @click="toggleReservedSeat(seat)"
         >
           {{ seat.seatNumber }}
         </div>

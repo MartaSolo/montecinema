@@ -5,8 +5,6 @@ import SectionTitlePrimary from "@/components/global/SectionTitlePrimary.vue";
 import SectionDescription from "@/components/global/SectionDescription.vue";
 import BaseButton from "@/components/global/BaseButton.vue";
 import BaseImage from "@/components/global/BaseImage.vue";
-import { useAuthStore } from "@/stores/auth";
-import { mapState } from "pinia";
 
 export default defineComponent({
   name: "WelcomeSection",
@@ -16,14 +14,6 @@ export default defineComponent({
     SectionDescription,
     BaseButton,
     BaseImage,
-  },
-  computed: {
-    ...mapState(useAuthStore, ["isUserLoggedIn"]),
-    bookingRoute() {
-      return this.isUserLoggedIn
-        ? { name: "AllScreenings" }
-        : { name: "UserLogIn" };
-    },
   },
 });
 </script>
@@ -43,7 +33,7 @@ export default defineComponent({
         <BaseButton
           class="welcome__link"
           size="large"
-          :to="bookingRoute"
+          :to="{ name: 'AllScreenings' }"
           colorTheme="accent-filled"
           >{{ $t("welcome.booking") }}</BaseButton
         >

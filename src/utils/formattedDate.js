@@ -9,9 +9,6 @@ export const formattedWeekdayAndDate = (date) => {
 export const formattedDateAndTime = (datetime) => {
   const date = new Date(datetime);
   const weekdayAndDate = formattedWeekdayAndDate(date);
-  const time = date.toLocaleTimeString("en-GB", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  const time = datetime.substring(11, 16);
   return `${weekdayAndDate} - ${time}`;
 };
