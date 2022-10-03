@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, Ref } from "vue";
+import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useReservationStore } from "@/stores/reservation.js";
 import SectionContainer from "@/components/global/SectionContainer.vue";
@@ -16,7 +16,7 @@ const props = defineProps<{
   movieSeanceId: String;
 }>();
 
-const step: Ref<number> = ref(1);
+const step = ref(1);
 
 const handleStep = (stepNumber: number) => {
   step.value = stepNumber;

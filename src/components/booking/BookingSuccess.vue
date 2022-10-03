@@ -6,8 +6,7 @@ import { useReservationStore } from "@/stores/reservation.js";
 import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/LoadingData.vue";
 import BookingSuccessTitle from "@/components/booking/BookingSuccessTitle.vue";
-
-import BaseButton from "../global/BaseButton.vue";
+import BaseButton from "@/components/global/BaseButton.vue";
 
 const reservationStore = useReservationStore();
 const {
@@ -18,27 +17,27 @@ const {
   getReservationErrorMessage,
 } = storeToRefs(reservationStore);
 
-const getReservationId = computed(() => {
+const reservationId = computed(() => {
   return reservedSeance.value?.id;
 });
 
-const getReservationData = () => {
+const reservationData = () => {
   reservationStore.retrieveReservation();
 };
 
-watch(getReservationId, (newValue, oldValue) => {
-  getReservationData();
+watch(reservationId, (newValue, oldValue) => {
+  reservationData();
 });
 
-const getTicketsNumber = computed(() => {
+const ticketsNumber = computed(() => {
   return reservation.value?.tickets.length;
 });
 
-const getSubtitle = () => {
-  if (getTicketsNumber.value === 1) {
-    return `You have booked ${getTicketsNumber.value} ticket`;
+const subtitle = () => {
+  if (ticketsNumber.value === 1) {
+    return `You have booked ${ticketsNumber.value} ticket`;
   } else {
-    return `You have booked ${getTicketsNumber.value} tickets`;
+    return `You have booked ${ticketsNumber.value} tickets`;
   }
 };
 </script>
@@ -50,7 +49,7 @@ const getSubtitle = () => {
       getReservationErrorMessage
     }}</ErrorMessage>
     <div v-else class="success__reservation">
-      <BookingSuccessTitle :subtitle="getSubtitle()" />
+      <BookingSuccessTitle :subtitle="subtitle()" />
       <div
         v-for="ticket in reservation?.tickets"
         :key="ticket.id"

@@ -4,7 +4,7 @@ import { storeToRefs } from "pinia";
 import { useReservationStore } from "@/stores/reservation.js";
 import BaseButton from "@/components/global/BaseButton.vue";
 
-interface chosenSeat {
+interface ChosenSeat {
   seat: string;
   row: string;
   seatNumber: string;
@@ -16,7 +16,7 @@ const emit = defineEmits<{ (e: "onStepChange", step: number): void }>();
 const reservationStore = useReservationStore();
 const { getHallPlan, reservedSeats } = storeToRefs(reservationStore);
 
-const toggleReservedSeat = (chosenSeat: chosenSeat) => {
+const toggleReservedSeat = (chosenSeat: ChosenSeat) => {
   if (!chosenSeat.available) return;
   if (!reservedSeats.value.includes(chosenSeat.seat)) {
     reservedSeats.value.push(chosenSeat.seat);
@@ -28,7 +28,7 @@ const toggleReservedSeat = (chosenSeat: chosenSeat) => {
   }
 };
 
-const getSeatClasses = (seat: chosenSeat) => {
+const getSeatClasses = (seat: ChosenSeat) => {
   return {
     taken: !seat.available,
     reserved: reservedSeats.value.includes(seat.seat),

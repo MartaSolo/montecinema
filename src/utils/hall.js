@@ -1,5 +1,5 @@
-export const allSeats = (arr1, arr2) => {
-  const available = arr1.map((seat) => {
+export const allSeats = (availableSeatsArray, takenSeatsArray) => {
+  const available = availableSeatsArray.map((seat) => {
     return {
       seat,
       available: true,
@@ -7,7 +7,7 @@ export const allSeats = (arr1, arr2) => {
       seatNumber: seat.slice(1),
     };
   });
-  const taken = arr2.map((seat) => {
+  const taken = takenSeatsArray.map((seat) => {
     return {
       seat,
       available: false,
@@ -20,19 +20,19 @@ export const allSeats = (arr1, arr2) => {
   return seats;
 };
 
-export const numberOfSeatsInRow = (array) => {
-  const listOfSeats = array.map((el) => el.seatNumber);
+export const numberOfSeatsInRow = (allSeatsArray) => {
+  const listOfSeats = allSeatsArray.map((el) => el.seatNumber);
   const uniqueSeats = listOfSeats.filter(
     (seat, i, arr) => arr.indexOf(seat) === i
   );
   return uniqueSeats.length;
 };
 
-export const hallPlan = (array) => {
-  const seatsInRow = numberOfSeatsInRow(array);
+export const hallPlan = (allSeatsArray) => {
+  const seatsInRow = numberOfSeatsInRow(allSeatsArray);
   const array2D = [];
-  for (let i = 0; i < array.length; i + seatsInRow) {
-    array2D.push(array.slice(i, (i += seatsInRow)));
+  for (let i = 0; i < allSeatsArray.length; i + seatsInRow) {
+    array2D.push(allSeatsArray.slice(i, (i += seatsInRow)));
   }
   array2D.map((array) =>
     array.sort((a, b) =>

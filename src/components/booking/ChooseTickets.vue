@@ -33,7 +33,7 @@ const reservedSeatsTickets: Ref<ReservedSeatTicket[]> = ref(
   })
 );
 
-const terms: Ref<boolean> = ref(false);
+const terms = ref(false);
 
 const emit = defineEmits<{ (e: "onStepChange", step: number): void }>();
 
@@ -64,8 +64,7 @@ const bookTickets = () => {
   if (isUserLoggedIn.value) {
     reservationStore.reserveSeance(reservedSeatsTickets.value);
     changeStep(3);
-  }
-  if (!isUserLoggedIn.value) {
+  } else {
     router.push({ name: "UserLogIn" });
   }
 };
