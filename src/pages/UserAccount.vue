@@ -1,23 +1,21 @@
-<script>
-import { defineComponent } from "vue";
-import { mapActions } from "pinia";
-import { useAuthStore } from "@/stores/auth";
+<script setup lang="ts">
+import { ref } from "vue";
+import SectionContainer from "@/components/global/SectionContainer.vue";
+import AccountTabs from "@/components/user/AccountTabs.vue";
 
-export default defineComponent({
-  name: "UserAccount",
-  methods: {
-    ...mapActions(useAuthStore, ["restoreUserData"]),
-  },
-  created() {
-    this.restoreUserData();
-  },
-});
+const activeTab = ref("personalDetails");
+
+const changeTab = (tab: string) => {
+  activeTab.value = tab;
+};
 </script>
 
 <template>
-  <div>
-    <h1>User account page</h1>
-  </div>
+  <section class="account">
+    <SectionContainer class="account__container">
+      <AccountTabs :activeTab="activeTab" @setActiveTab="changeTab" />
+    </SectionContainer>
+  </section>
 </template>
 
 <style lang="scss" scoped></style>
