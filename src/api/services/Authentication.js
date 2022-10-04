@@ -1,7 +1,5 @@
 import { axiosApi } from "@/api/axiosConfig.js";
-import { LOGIN } from "@/api/apiEndpoints.js";
-import { REGISTER } from "@/api/apiEndpoints.js";
-import { USER } from "@/api/apiEndpoints.js";
+import { LOGIN, REGISTER, USER, LOGOUT } from "@/api/apiEndpoints.js";
 
 export const login = async (credentials) => {
   return axiosApi.post(`${LOGIN}`, {
@@ -25,3 +23,7 @@ export const register = async (credentials) => {
 };
 
 export const getUser = async () => axiosApi.get(`${USER}`);
+
+export const logout = async () => {
+  return axiosApi.delete(`${LOGOUT}`);
+};

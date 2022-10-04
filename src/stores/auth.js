@@ -64,10 +64,9 @@ export const useAuthStore = defineStore({
     },
     async logout() {
       if (!this.isLoggedIn) return;
-      // TODO: logout from API
+      await authApi.logout();
       this.resetUserData();
       removeAuthHeader();
-      // TODO: redirect to some page
     },
   },
 });

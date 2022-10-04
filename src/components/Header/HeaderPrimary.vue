@@ -29,9 +29,6 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @include largeScreen {
-    height: 112px;
-  }
 }
 .header__container {
   height: 100%;

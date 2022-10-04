@@ -137,6 +137,7 @@ export default defineComponent({
   border: 2px solid $colorRedSweetPink;
   &:hover {
     border: 2px solid $colorRedCherry;
+    color: $colorRedCherry;
   }
 }
 .dark-filled {

@@ -4,20 +4,20 @@ import en from "@/locales/en";
 import pl from "@/locales/pl";
 
 export default createI18n({
-  locale: "en",
-  fallbackLocale: "en",
+  locale: "en-GB",
+  fallbackLocale: "en-GB",
   legacy: true,
   allowComposition: true,
   messages: {
-    en,
-    pl,
+    'en-GB': en,
+    pl: pl,
   },
   datetimeFormats: {
-    en: {
+    'en-GB': {
       long: {
         year: "numeric",
-        month: "numeric",
-        day: "numeric",
+        month: "2-digit",
+        day: "2-digit",
         weekday: "long",
       },
       weekdayShort: {

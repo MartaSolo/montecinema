@@ -19,8 +19,8 @@ export default defineComponent({
     <SectionContainer class="soon__container">
       <div class="soon__text">
         <h3 class="soon__title-primary">
-          {{ $t("soon.title")
-          }}<span class="soon__title-secondary">{{ $t("soon.subtitle") }}</span>
+          {{ $t("soon.title") }}
+          <span class="soon__title-secondary">{{ $t("soon.subtitle") }}</span>
         </h3>
         <BaseButton
           class="soon__link"

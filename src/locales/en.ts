@@ -8,6 +8,7 @@ export default {
     register: "Register",
     login: "Login",
     account: "My Account",
+    logout: "Logout",
   },
   welcome: {
     title: "Welcome to the best cinema in Monterail",

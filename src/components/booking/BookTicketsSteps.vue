@@ -11,18 +11,6 @@ export default defineComponent({
       type: Number,
     },
   },
-  emits: ["onStepChange"],
-  data() {
-    return {
-      activeStep: 1,
-    };
-  },
-  methods: {
-    changeStep(step) {
-      this.activeStep = step;
-      this.$emit("onStepChange", this.activeStep);
-    },
-  },
 });
 </script>
 
@@ -34,7 +22,6 @@ export default defineComponent({
         :class="{ active: this.step === 1 }"
         size="tiny"
         colorTheme="light-empty"
-        @click="changeStep(1)"
         ><div class="booking__step-number">1</div>
         <div class="booking__step-text">Choose seats</div>
       </BaseButton>
@@ -43,7 +30,6 @@ export default defineComponent({
         :class="{ active: this.step === 2 }"
         size="tiny"
         colorTheme="light-empty"
-        @click="changeStep(2)"
       >
         <div class="booking__step-number">2</div>
         <div class="booking__step-text">Book tickets</div>

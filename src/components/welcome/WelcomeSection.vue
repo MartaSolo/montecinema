@@ -15,16 +15,6 @@ export default defineComponent({
     BaseButton,
     BaseImage,
   },
-  data() {
-    return {
-      userLogged: false,
-    };
-  },
-  computed: {
-    bookingRoute() {
-      return this.userLogged ? { name: "BookTicket" } : { name: "UserLogIn" };
-    },
-  },
 });
 </script>
 
@@ -43,7 +33,7 @@ export default defineComponent({
         <BaseButton
           class="welcome__link"
           size="large"
-          :to="bookingRoute"
+          :to="{ name: 'AllScreenings' }"
           colorTheme="accent-filled"
           >{{ $t("welcome.booking") }}</BaseButton
         >

@@ -1,33 +1,36 @@
-<script>
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import BaseButton from "@/components/global/BaseButton.vue";
 import { useAuthStore } from "@/stores/auth";
-import { mapState } from "pinia";
+import { storeToRefs } from "pinia";
+import router from "@/router";
 
-export default defineComponent({
-  name: "HeaderNavRedirect",
-  components: {
-    BaseButton,
-  },
-  computed: {
-    ...mapState(useAuthStore, [
-      "isLoggedIn",
-      "isUserLoggedIn",
-      "isEmployeeLoggedIn",
-    ]),
-    routeName() {
-      return this.isUserLoggedIn ? "UserAccount" : "EmployeeAccount";
-    },
-  },
-});
+const authStore = useAuthStore();
+const { isLoggedIn, isUserLoggedIn } = storeToRefs(authStore);
+
+const emit = defineEmits<{
+  (e: "click"): void;
+}>();
+
+const onLogout = () => {
+  authStore.logout();
+  router.push({ name: "HomePage" });
+};
 </script>
 
 <template>
-  <div class="nav__links">
+  <div class="nav__links" @click="$emit('click', $event)">
     <BaseButton
       v-if="isLoggedIn"
+      class="logout__btn"
+      size="large"
+      colorTheme="light-empty"
+      @click="onLogout"
+      >{{ $t("redirect.logout") }}</BaseButton
+    >
+    <BaseButton
+      v-if="isUserLoggedIn"
       class="account__link"
-      :to="{ name: routeName }"
+      :to="{ name: 'UserAccount' }"
       size="large"
       colorTheme="light-filled"
       >{{ $t("redirect.account") }}</BaseButton
@@ -63,9 +66,13 @@ export default defineComponent({
 }
 .account__link,
 .register__link,
-.login__link {
-  width: 331px;
+.login__link,
+.logout__btn {
+  width: 100%;
+  border-radius: 0;
+  border: none;
   @include mediumScreen {
+    border-radius: 64px;
     height: 40px;
     width: 114px;
     height: 40px;
@@ -74,15 +81,29 @@ export default defineComponent({
   }
 }
 .account__link {
+  border: 2px solid $colorRedFairPink;
   @include mediumScreen {
     width: 145px;
     padding: 12px 22px;
   }
 }
 
-.login__link {
+.login__link,
+.account__link {
   @include mediumScreen {
     margin-left: 16px;
+  }
+}
+
+.login__link {
+  @include mediumScreen {
+    border: 2px solid $colorRedCherry;
+  }
+}
+.logout__btn,
+.register__link {
+  @include mediumScreen {
+    border: 2px solid $colorWhiteSnow;
   }
 }
 </style>
