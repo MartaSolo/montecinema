@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/stores/auth.js";
 import { useRouter } from "vue-router";
@@ -56,23 +56,23 @@ const toggleNewPassword = () => {
   return (showNewPassword.value = !showNewPassword.value);
 };
 
-const emailError = () => {
+const emailError = computed(() => {
   if (!updatedUser.value.email) return "Please enter your email";
   if (!regex.email.test(updatedUser.value.email))
     return "Please enter correct email";
   return "";
-};
+});
 
-const passwordError = () => {
+const passwordError = computed(() => {
   if (!updatedUser.value.password && !passwordTouched.value) return "";
   if (!updatedUser.value.password && passwordTouched.value)
     return "Please enter your password";
   if (updatedUser.value.password.length < 8 && passwordTouched.value)
     return "At least 8 characters";
   return "";
-};
+});
 
-const newPasswordError = () => {
+const newPasswordError = computed(() => {
   if (!updatedUser.value.newPassword && !newPasswordTouched.value) return "";
   if (!updatedUser.value.newPassword && newPasswordTouched.value)
     return "Please enter your password";
@@ -83,49 +83,49 @@ const newPasswordError = () => {
   )
     return "At least 8 characters, one letter and one digit";
   return "";
-};
+});
 
-const firstNameError = () => {
+const firstNameError = computed(() => {
   if (!updatedUser.value.firstName) return "Please enter your first name";
   if (!regex.name.test(updatedUser.value.firstName))
     return "Please enter correct first name";
   return "";
-};
+});
 
-const lastNameError = () => {
+const lastNameError = computed(() => {
   if (!updatedUser.value.lastName) return "Please enter your last name";
   if (!regex.name.test(updatedUser.value.lastName))
     return "Please enter correct last name";
   return "";
-};
+});
 
-const birthdayError = () => {
+const birthdayError = computed(() => {
   if (!updatedUser.value.birthday) return "error";
   if (!isAdult(updatedUser.value.birthday) && birthdayTouched.value)
     return "error";
   if (isAdult(updatedUser.value.birthday) && birthdayTouched.value)
     return "correct";
   return "";
-};
+});
 
 const isFormValid = () => {
   let isValid = false;
   if (
     updatedUser.value.email &&
-    !emailError() &&
+    !emailError.value &&
     updatedUser.value.password &&
-    !passwordError() &&
+    !passwordError.value &&
     updatedUser.value.firstName &&
-    !firstNameError() &&
+    !firstNameError.value &&
     updatedUser.value.lastName &&
-    !lastNameError() &&
+    !lastNameError.value &&
     updatedUser.value.birthday
   )
     isValid = true;
-  if (birthdayTouched.value && birthdayError() === "error") isValid = false;
+  if (birthdayTouched.value && birthdayError.value === "error") isValid = false;
   if (
     (showNewPassword.value && !updatedUser.value.newPassword) ||
-    (showNewPassword.value && newPasswordError())
+    (showNewPassword.value && newPasswordError.value)
   )
     isValid = false;
   return isValid;
@@ -149,21 +149,21 @@ router.afterEach((to, from) => {
     <form class="user__form" @submit.prevent="onSubmit">
       <BaseInput
         class="account__email"
-        :class="{ error: emailError() }"
+        :class="{ error: emailError }"
         inputType="email"
         name="email"
         label="email"
         v-model="updatedUser.email"
       ></BaseInput>
       <InputErrorMessage
-        v-if="emailError()"
+        v-if="emailError"
         class="account__email error"
-        :inputError="emailError()"
+        :inputError="emailError"
       />
 
       <BaseInput
         class="account__password"
-        :class="{ error: passwordError() }"
+        :class="{ error: passwordError }"
         :inputType="passwordInputType"
         name="password"
         label="password"
@@ -180,15 +180,15 @@ router.afterEach((to, from) => {
         /></BaseButton>
       </BaseInput>
       <InputErrorMessage
-        v-if="passwordError()"
+        v-if="passwordError"
         class="account__password error"
-        :inputError="passwordError()"
+        :inputError="passwordError"
       />
 
       <BaseInput
         v-if="showNewPassword"
         class="account__password-new"
-        :class="{ error: newPasswordError() }"
+        :class="{ error: newPasswordError }"
         inputType="password"
         name="new_password"
         label="new password"
@@ -205,9 +205,9 @@ router.afterEach((to, from) => {
         /></BaseButton>
       </BaseInput>
       <InputErrorMessage
-        v-if="newPasswordError() && showNewPassword"
+        v-if="newPasswordError && showNewPassword"
         class="account__password-new error"
-        :inputError="newPasswordError()"
+        :inputError="newPasswordError"
       />
 
       <BaseButton
@@ -222,35 +222,35 @@ router.afterEach((to, from) => {
 
       <BaseInput
         class="account__name"
-        :class="{ error: firstNameError() }"
+        :class="{ error: firstNameError }"
         inputType="text"
         name="name"
         label="First name"
         v-model="updatedUser.firstName"
       ></BaseInput>
       <InputErrorMessage
-        v-if="firstNameError()"
+        v-if="firstNameError"
         class="account__name error"
-        :inputError="firstNameError()"
+        :inputError="firstNameError"
       />
 
       <BaseInput
         class="account__surname"
-        :class="{ error: lastNameError() }"
+        :class="{ error: lastNameError }"
         inputType="text"
         name="surname"
         label="Last name"
         v-model="updatedUser.lastName"
       ></BaseInput>
       <InputErrorMessage
-        v-if="lastNameError()"
+        v-if="lastNameError"
         class="account__name error"
-        :inputError="lastNameError()"
+        :inputError="lastNameError"
       />
 
       <BaseInput
         class="account__birthday"
-        :class="birthdayError()"
+        :class="birthdayError"
         inputType="date"
         name="birthday"
         label="Date of birth"
@@ -258,7 +258,7 @@ router.afterEach((to, from) => {
         @blur="birthdayTouched = true"
       ></BaseInput>
       <InputErrorMessage
-        :class="birthdayError()"
+        :class="birthdayError"
         inputError="You should be minium 18 years old"
       />
 
