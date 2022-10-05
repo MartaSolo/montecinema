@@ -3,7 +3,7 @@ import BaseButton from "@/components/global/BaseButton.vue";
 
 const props = withDefaults(
   defineProps<{
-    activeTab: string;
+    activeTab: "personalDetails" | "reservations";
   }>(),
   {
     activeTab: "personalDetails",
@@ -20,7 +20,7 @@ const changeTab = (tab: string) => {
 </script>
 
 <template>
-  <section class="account_tabs">
+  <section class="account-tabs">
     <BaseButton
       class="account__tab"
       :class="{ active: activeTab === 'personalDetails' }"
@@ -37,7 +37,7 @@ const changeTab = (tab: string) => {
 </template>
 
 <style lang="scss" scoped>
-.account_tabs {
+.account-tabs {
   display: flex;
   justify-content: center;
   @include mediumScreen {
