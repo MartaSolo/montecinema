@@ -27,3 +27,16 @@ export const getUser = async () => axiosApi.get(`${USER}`);
 export const logout = async () => {
   return axiosApi.delete(`${LOGOUT}`);
 };
+
+export const updateUser = async (credentials) => {
+  return axiosApi.patch(`${USER}`, {
+    user: {
+      email: credentials.email,
+      password: credentials.newPassword,
+      first_name: credentials.firstName,
+      last_name: credentials.lastName,
+      date_of_birth: credentials.birthday,
+      current_password: credentials.password,
+    },
+  });
+};

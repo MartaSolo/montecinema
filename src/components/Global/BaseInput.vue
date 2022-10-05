@@ -100,7 +100,12 @@ export default defineComponent({
 .input__input.register__name,
 .input__input.register__surname,
 .input__input.login__email,
-.input__input.login__password {
+.input__input.login__password,
+.input__input.account__email,
+.input__input.account__name,
+.input__input.account__surname,
+.input__input.account__password,
+.input__input.account__password-new {
   margin-bottom: 32px;
   &.error {
     margin-bottom: 8px;
@@ -108,7 +113,9 @@ export default defineComponent({
 }
 
 .input__wrapper.register__password,
-.input__wrapper.login__password {
+.input__wrapper.login__password,
+.input__wrapper.account__password,
+.input__wrapper.account__password-new {
   position: relative;
 }
 
