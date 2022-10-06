@@ -82,6 +82,11 @@ export default defineComponent({
     this.getMovies();
     this.getGenres();
   },
+  metaInfo() {
+    return {
+      title: "Montecinema | All the movies",
+    };
+  },
 });
 </script>
 

@@ -19,10 +19,18 @@ export default defineComponent({
     this.instance = instance;
     this.info = info;
   },
+  metaInfo() {
+    return {
+      title: "Montecinema - the best cinema in Monterail",
+    };
+  },
 });
 </script>
 
 <template>
+  <metainfo>
+    <template v-slot:title="{ content }">{{ content }}</template>
+  </metainfo>
   <router-view name="Header"></router-view>
   <router-view></router-view>
   <div v-if="error" class="error__wrapper">

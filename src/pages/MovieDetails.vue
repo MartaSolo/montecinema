@@ -55,6 +55,9 @@ export default defineComponent({
         "We are sorry, but the movie cannot be displayed"
       );
     },
+    movieTitle() {
+      return this.movie.title;
+    },
     getMovieReleaseYear() {
       return this.movie.release_date.substring(0, 4);
     },
@@ -103,6 +106,11 @@ export default defineComponent({
     this.getMovie();
     this.getSeances(this.formattedDate);
   },
+  metaInfo() {
+    return {
+      title: this.movieIsLoading ? "" : this.movieTitle,
+    };
+  },
 });
 </script>
 
@@ -118,7 +126,7 @@ export default defineComponent({
     <SectionContainer class="movie__conrainer">
       <div class="movie__details">
         <div class="movie__info">
-          <SectionTitlePrimary :title="this.movie.title" class="movie__title" />
+          <SectionTitlePrimary :title="movieTitle" class="movie__title" />
           <div class="movie__parameters">
             <MovieCategory :category="movie.genre.name" />
             <div class="movie__year">{{ getMovieReleaseYear }}</div>

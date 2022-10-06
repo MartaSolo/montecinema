@@ -14,6 +14,11 @@ export default defineComponent({
   mounted() {
     this.getMovies();
   },
+  metaInfo() {
+    return {
+      title: "Montecinema | All the screenings",
+    };
+  },
 });
 </script>
 

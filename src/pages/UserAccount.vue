@@ -8,6 +8,7 @@ import PersonalDetails from "@/components/user/PersonalDetails.vue";
 import Reservations from "@/components/user/Reservations.vue";
 import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
+import { useMeta } from "vue-meta";
 
 const authStore = useAuthStore();
 const { currentUserIsLoading, currentUserError, currentUserErrorMessage } =
@@ -18,6 +19,7 @@ const activeTab = ref("personalDetails");
 const changeTab = (tab: string) => {
   activeTab.value = tab;
 };
+const { meta } = useMeta({ title: "Montecinema | User account" });
 
 onBeforeMount(() => {
   authStore.getCurrentUser();
