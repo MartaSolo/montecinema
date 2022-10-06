@@ -77,7 +77,7 @@ export default defineComponent({
   line-height: 1.3rem;
   color: $colorGreyJumbo;
   padding: 17px;
-  margin-bottom: 8px;
+  margin-bottom: 32px;
   &:focus {
     background-color: $colorInputActiveBg;
     outline: none;
@@ -94,21 +94,19 @@ export default defineComponent({
 
 .input__input.error {
   border: 1px solid $colorRedCherry;
+  margin-bottom: 8px;
 }
 
-.input__input.register__email,
-.input__input.register__name,
-.input__input.register__surname,
-.input__input.login__email,
-.input__input.login__password {
-  margin-bottom: 32px;
-  &.error {
-    margin-bottom: 8px;
-  }
+.input__input.register__password,
+.input__input.register__birthday,
+.input__input.account__birthday {
+  margin-bottom: 8px;
 }
 
 .input__wrapper.register__password,
-.input__wrapper.login__password {
+.input__wrapper.login__password,
+.input__wrapper.account__password,
+.input__wrapper.account__password-new {
   position: relative;
 }
 

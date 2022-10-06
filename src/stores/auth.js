@@ -10,6 +10,10 @@ export const useAuthStore = defineStore({
   state: () => ({
     userData: null,
     authToken: null,
+    currentUser: null,
+    currentUserIsLoading: true,
+    currentUserError: null,
+    updateUserStatus: null,
   }),
   getters: {
     isLoggedIn: (state) => !!state.authToken,
@@ -18,6 +22,12 @@ export const useAuthStore = defineStore({
     },
     isEmployeeLoggedIn: (state) => {
       return state.authToken && state.userData?.role === "employee";
+    },
+    currentUserErrorMessage(state) {
+      return (
+        state.currentUserError?.message ||
+        "We are sorry, but the personal details cannot be displayed."
+      );
     },
   },
   actions: {
@@ -67,6 +77,30 @@ export const useAuthStore = defineStore({
       await authApi.logout();
       this.resetUserData();
       removeAuthHeader();
+    },
+    async getCurrentUser() {
+      this.currentUser = null;
+      this.currentUserIsLoading = true;
+      this.currentUserError = null;
+      try {
+        const response = await authApi.getUser();
+        this.currentUser = response.data;
+      } catch (error) {
+        this.currentUserError = error;
+      } finally {
+        this.currentUserIsLoading = false;
+      }
+    },
+    async updateUserData(credentials) {
+      try {
+        const response = await authApi.updateUser(credentials);
+        this.updateUserStatus = response.status;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    clearUpdateStatus() {
+      this.updateUserStatus = null;
     },
   },
 });
