@@ -11,6 +11,7 @@ import ScreeningMovieCard from "@/components/screenings/ScreeningMovieCard.vue";
 import ChooseSeats from "@/components/booking/ChooseSeats.vue";
 import ChooseTickets from "@/components/booking/ChooseTickets.vue";
 import BookingSuccess from "@/components/booking/BookingSuccess.vue";
+import { useMeta } from "vue-meta";
 
 const props = defineProps<{
   movieSeanceId: String;
@@ -32,6 +33,8 @@ const {
   movieIsLoading,
   movieError,
 } = storeToRefs(reservationStore);
+
+const { meta } = useMeta({ title: "Montecinema | Book tickets" });
 
 onMounted(() => {
   reservationStore.getSeance(props.movieSeanceId);

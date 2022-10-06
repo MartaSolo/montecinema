@@ -49,6 +49,11 @@ export default defineComponent({
       this.$router.back();
     },
   },
+  metaInfo() {
+    return {
+      title: "Montecinema | Register",
+    };
+  },
 });
 </script>
 

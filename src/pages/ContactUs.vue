@@ -17,6 +17,11 @@ export default defineComponent({
     ContactDetails,
     ContactSocialMedia,
   },
+  metaInfo() {
+    return {
+      title: "Montecinema | Contact us",
+    };
+  },
 });
 </script>
 

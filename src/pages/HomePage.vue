@@ -26,6 +26,11 @@ export default defineComponent({
   created() {
     this.restoreUserData();
   },
+  metaInfo() {
+    return {
+      title: "Montecinema | Welcome to the best cinema in Monterail",
+    };
+  },
 });
 </script>
 

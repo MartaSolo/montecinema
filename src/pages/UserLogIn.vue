@@ -85,6 +85,11 @@ export default defineComponent({
       }
     },
   },
+  metaInfo() {
+    return {
+      title: "Montecinema | Login",
+    };
+  },
 });
 </script>
 
