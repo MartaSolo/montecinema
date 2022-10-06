@@ -8,3 +8,9 @@ export const makeReservation = (reservation) => {
 export const getReservation = (reservationId) => {
   return axiosApi.get(`${RESERVATIONS}/${reservationId}`);
 };
+
+export const listReservations = (userEmail) => {
+  return axiosApi.get(
+    `${RESERVATIONS}?user_email=${userEmail}&page=1&per_page=1000`
+  );
+};

@@ -6,8 +6,10 @@ import { allSeats, hallPlan } from "@/utils/hall.js";
 import {
   makeReservation,
   getReservation,
+  listReservations,
 } from "@/api/services/Reservations.js";
 import { ReservedSeatTicket } from "@/components/booking/ChooseTickets.vue";
+import { useAuthStore } from "@/stores/auth.js";
 
 interface Store {
   seance: SeanceInfo | null;
@@ -25,6 +27,9 @@ interface Store {
   reservation: Reservation | null;
   reservationIsLoading: boolean;
   reservationError: any;
+  userReservations: UserReservation[] | null;
+  userReservationsIsLoading: boolean;
+  userReservationsError: any;
 }
 
 interface SeanceInfo {
@@ -89,6 +94,17 @@ interface Reservation {
   user_id: number;
 }
 
+interface UserReservation {
+  id: string;
+  user_id: number;
+  user_email: string;
+  movie_title: string;
+  seance_id: number;
+  seance_datetime: string;
+  status: Status;
+  tickets: Ticket[];
+}
+
 export const useReservationStore = defineStore({
   id: "reservation",
   state: (): Store => ({
@@ -107,6 +123,9 @@ export const useReservationStore = defineStore({
     reservation: null,
     reservationIsLoading: true,
     reservationError: null,
+    userReservations: null,
+    userReservationsIsLoading: true,
+    userReservationsError: null,
   }),
   getters: {
     getSeanceErrorMessage(state) {
@@ -199,6 +218,23 @@ export const useReservationStore = defineStore({
         this.reservationError = error;
       } finally {
         this.reservationIsLoading = false;
+      }
+    },
+    async getUserReservations() {
+      this.userReservations = null;
+      this.userReservationsIsLoading = true;
+      const authStore = useAuthStore();
+      if (authStore.currentUser) {
+        try {
+          const respData = await listReservations(authStore.currentUser.email);
+          this.userReservations = respData.data;
+        } catch (error) {
+          this.userReservationsError = error;
+        } finally {
+          this.userReservationsIsLoading = false;
+        }
+      } else {
+        throw new Error("User must be authenticated");
       }
     },
   },
