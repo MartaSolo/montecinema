@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, onBeforeMount } from "vue";
+import { ref, onBeforeMount, onMounted, computed, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/stores/auth.js";
+import { useReservationStore } from "@/stores/reservation.js";
 import SectionContainer from "@/components/global/SectionContainer.vue";
 import AccountTabs from "@/components/user/AccountTabs.vue";
 import PersonalDetails from "@/components/user/PersonalDetails.vue";
@@ -11,15 +12,29 @@ import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import { useMeta } from "vue-meta";
 
 const authStore = useAuthStore();
-const { currentUserIsLoading, currentUserError, currentUserErrorMessage } =
-  storeToRefs(authStore);
+const {
+  currentUser,
+  currentUserIsLoading,
+  currentUserError,
+  currentUserErrorMessage,
+} = storeToRefs(authStore);
+
+const reservationStore = useReservationStore();
 
 const activeTab = ref("personalDetails");
+
+const userEmail = computed(() => {
+  return currentUser.value?.email;
+});
 
 const changeTab = (tab: string) => {
   activeTab.value = tab;
 };
 const { meta } = useMeta({ title: "Montecinema | User account" });
+
+watch(userEmail, (newValue, oldValue) => {
+  reservationStore.getUserReservations();
+});
 
 onBeforeMount(() => {
   authStore.getCurrentUser();
