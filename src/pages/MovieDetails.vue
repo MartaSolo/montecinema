@@ -2,7 +2,7 @@
 import { defineComponent } from "vue";
 import { getMovieById } from "@/api/services/Movies";
 import { mapState, mapActions } from "pinia";
-import { useSeancesStore } from "@/stores/seances";
+import { useMovieSeancesStore } from "@/stores/movieSeances";
 import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import SectionContainer from "@/components/global/SectionContainer.vue";
@@ -43,13 +43,13 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState(useSeancesStore, [
-      "seances",
-      "seancesIsLoading",
-      "seancesError",
-      "getSeancesErrorMessage",
+    ...mapState(useMovieSeancesStore, [
+      "movieSeances",
+      "movieSeancesIsLoading",
+      "movieSeancesError",
+      "movieSeancesErrorMessage",
     ]),
-    getMovieErrorMessage() {
+    movieErrorMessage() {
       return (
         this.movieError?.message ||
         "We are sorry, but the movie cannot be displayed"
@@ -58,16 +58,16 @@ export default defineComponent({
     movieTitle() {
       return this.movie.title;
     },
-    getMovieReleaseYear() {
+    movieReleaseYear() {
       return this.movie.release_date.substring(0, 4);
     },
-    getImagePath() {
+    movieImagePath() {
       return this.movie.poster_url;
     },
-    getStyledImage() {
-      return { background: "url(" + this.getImagePath + ") center / cover" };
+    movieStyledImage() {
+      return { background: "url(" + this.movieImagePath + ") center / cover" };
     },
-    getFormattedWeekdayAndDate() {
+    formattedWeekdayAndDate() {
       const weekday = this.date.toLocaleDateString("en-US", {
         weekday: "long",
       });
@@ -81,7 +81,7 @@ export default defineComponent({
   watch: {
     date(newDate, oldDate) {
       if (newDate !== oldDate) {
-        this.getSeances(this.formattedDate);
+        this.getMovieSeances(this.movieId, this.formattedDate);
       }
     },
   },
@@ -97,14 +97,11 @@ export default defineComponent({
         this.movieIsLoading = false;
       }
     },
-    ...mapActions(useSeancesStore, ["getSeances"]),
-    movieSeances(movieId) {
-      return this.seances.filter((seance) => seance.movie === movieId);
-    },
+    ...mapActions(useMovieSeancesStore, ["getMovieSeances"]),
   },
   mounted() {
     this.getMovie();
-    this.getSeances(this.formattedDate);
+    this.getMovieSeances(this.movieId, this.formattedDate);
   },
   metaInfo() {
     return {
@@ -116,20 +113,20 @@ export default defineComponent({
 
 <template>
   <LoadingData v-if="movieIsLoading" />
-  <ErrorMessage v-else-if="movieError">{{ getMovieErrorMessage }}</ErrorMessage>
+  <ErrorMessage v-else-if="movieError">{{ movieErrorMessage }}</ErrorMessage>
   <section v-else class="movie">
     <BreadCrumbs
       :currentPageName="this.movie.title"
       parentPageName="Movies"
       :parentRouteName="{ name: 'AllMovies' }"
     />
-    <SectionContainer class="movie__conrainer">
+    <SectionContainer class="movie__container">
       <div class="movie__details">
         <div class="movie__info">
           <SectionTitlePrimary :title="movieTitle" class="movie__title" />
           <div class="movie__parameters">
             <MovieCategory :category="movie.genre.name" />
-            <div class="movie__year">{{ getMovieReleaseYear }}</div>
+            <div class="movie__year">{{ movieReleaseYear }}</div>
             <MovieLength :length="movie.length" />
           </div>
           <div class="movie__description">{{ movie.description }}</div>
@@ -138,25 +135,25 @@ export default defineComponent({
           class="movie__image"
           role="img"
           :aria-label="movie.title"
-          :style="getStyledImage"
+          :style="movieStyledImage"
         ></div>
       </div>
       <div class="movie_screenings">
         <SectionTitleSecondary
           title="Screenings:"
-          :subtitle="getFormattedWeekdayAndDate"
+          :subtitle="formattedWeekdayAndDate"
           class="movie_screenings-title"
         ></SectionTitleSecondary>
         <ScreeningsCalendar v-model="date" />
-        <LoadingData v-if="seancesIsLoading" />
-        <ErrorMessage v-else-if="seancesError">{{
-          getSeancesErrorMessage
+        <LoadingData v-if="movieSeancesIsLoading" />
+        <ErrorMessage v-else-if="movieSeancesError">{{
+          movieSeancesErrorMessage
         }}</ErrorMessage>
         <div v-else class="movie_screenings-screening">
           <ScreeningMovieCard
             :movie="movie"
             :key="movie.id"
-            :movieSeances="movieSeances(movie.id)"
+            :movieSeances="movieSeances"
           />
         </div>
       </div>
