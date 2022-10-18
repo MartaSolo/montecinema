@@ -86,16 +86,12 @@ const routes = [
     meta: { requiresEmployeeRole: true },
   },
   {
-    path: "/404",
+    path: "/:pathMatch(.*)*",
     name: "NotFound",
     components: {
       default: () => import("@/pages/NotFound.vue"),
       Header: () => import("@/components/header/HeaderSecondary.vue"),
     },
-  },
-  {
-    path: "/*",
-    redirect: "/404",
   },
 ];
 
