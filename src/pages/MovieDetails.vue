@@ -49,7 +49,7 @@ export default defineComponent({
       "seancesError",
       "getSeancesErrorMessage",
     ]),
-    getMovieErrorMessage() {
+    movieErrorMessage() {
       return (
         this.movieError?.message ||
         "We are sorry, but the movie cannot be displayed"
@@ -58,16 +58,16 @@ export default defineComponent({
     movieTitle() {
       return this.movie.title;
     },
-    getMovieReleaseYear() {
+    movieReleaseYear() {
       return this.movie.release_date.substring(0, 4);
     },
-    getImagePath() {
+    movieImagePath() {
       return this.movie.poster_url;
     },
-    getStyledImage() {
-      return { background: "url(" + this.getImagePath + ") center / cover" };
+    movieStyledImage() {
+      return { background: "url(" + this.movieImagePath + ") center / cover" };
     },
-    getFormattedWeekdayAndDate() {
+    formattedWeekdayAndDate() {
       const weekday = this.date.toLocaleDateString("en-US", {
         weekday: "long",
       });
@@ -116,7 +116,7 @@ export default defineComponent({
 
 <template>
   <LoadingData v-if="movieIsLoading" />
-  <ErrorMessage v-else-if="movieError">{{ getMovieErrorMessage }}</ErrorMessage>
+  <ErrorMessage v-else-if="movieError">{{ movieErrorMessage }}</ErrorMessage>
   <section v-else class="movie">
     <BreadCrumbs
       :currentPageName="this.movie.title"
@@ -129,7 +129,7 @@ export default defineComponent({
           <SectionTitlePrimary :title="movieTitle" class="movie__title" />
           <div class="movie__parameters">
             <MovieCategory :category="movie.genre.name" />
-            <div class="movie__year">{{ getMovieReleaseYear }}</div>
+            <div class="movie__year">{{ movieReleaseYear }}</div>
             <MovieLength :length="movie.length" />
           </div>
           <div class="movie__description">{{ movie.description }}</div>
@@ -138,13 +138,13 @@ export default defineComponent({
           class="movie__image"
           role="img"
           :aria-label="movie.title"
-          :style="getStyledImage"
+          :style="movieStyledImage"
         ></div>
       </div>
       <div class="movie_screenings">
         <SectionTitleSecondary
           title="Screenings:"
-          :subtitle="getFormattedWeekdayAndDate"
+          :subtitle="formattedWeekdayAndDate"
           class="movie_screenings-title"
         ></SectionTitleSecondary>
         <ScreeningsCalendar v-model="date" />
