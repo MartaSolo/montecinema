@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import isAdult from "@/assets/utils/birthDayValidation.js";
+import isAdult from "@/utils/birthDayValidation.js";
 
 describe("isAdult", () => {
   it("returns true if a person is at least 18 years old", () => {
