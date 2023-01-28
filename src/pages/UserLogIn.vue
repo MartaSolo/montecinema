@@ -79,7 +79,7 @@ export default defineComponent({
         this.resetState();
         this.isUserLoggedIn
           ? this.$router.back()
-          : this.$router.push({ name: "EmployeeAccount" });
+          : this.$router.push({ name: "UserLogIn" });
       } else {
         return;
       }
