@@ -11,6 +11,10 @@ interface ChosenSeat {
   available: boolean;
 }
 
+const props = defineProps<{
+  movieSeanceId: String;
+}>();
+
 const emit = defineEmits<{ (e: "onStepChange", step: number): void }>();
 
 const reservationStore = useReservationStore();
@@ -68,9 +72,14 @@ const changeStep = (step: number) => {
         color-theme="light-empty"
         class="hall__action-btn"
         :disabled="isButtonDisabled"
+        :to="{
+          name: 'ChooseTickets',
+          params: { movieSeanceId: movieSeanceId },
+        }"
         @click="changeStep(2)"
-        >Choose seats</BaseButton
       >
+        Choose seats
+      </BaseButton>
     </div>
   </section>
 </template>
