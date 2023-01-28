@@ -144,6 +144,9 @@ export default defineComponent({
             :inputError="passwordError"
           />
         </div>
+        <p v-if="this.loginError" class="login__error-credentials">
+          Your email or password are incorrect.
+        </p>
         <div class="login__step-buttons">
           <BaseButton
             :to="{ name: 'UserRegister' }"
@@ -216,6 +219,11 @@ export default defineComponent({
   .button__icon {
     top: 40%;
   }
+}
+
+.login__error-credentials {
+  text-align: center;
+  color: $colorRedCherry;
 }
 
 .login__step-buttons {
