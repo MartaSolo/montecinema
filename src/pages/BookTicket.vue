@@ -8,9 +8,9 @@ import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue
 import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import ScreeningMovieCard from "@/components/screenings/ScreeningMovieCard.vue";
-import ChooseSeats from "@/components/booking/ChooseSeats.vue";
-import ChooseTickets from "@/components/booking/ChooseTickets.vue";
-import BookingSuccess from "@/components/booking/BookingSuccess.vue";
+// import ChooseSeats from "@/components/booking/ChooseSeats.vue";
+// import ChooseTickets from "@/components/booking/ChooseTickets.vue";
+// import BookingSuccess from "@/components/booking/BookingSuccess.vue";
 import { useMeta } from "vue-meta";
 
 const props = defineProps<{
@@ -18,6 +18,10 @@ const props = defineProps<{
 }>();
 
 const step = ref(1);
+
+const onStepChange = (step: number) => {
+  handleStep(step);
+};
 
 const handleStep = (stepNumber: number) => {
   step.value = stepNumber;
@@ -63,9 +67,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="booking__step">
-        <ChooseSeats v-if="step === 1" @onStepChange="handleStep" />
-        <ChooseTickets v-if="step === 2" @onStepChange="handleStep" />
-        <BookingSuccess v-if="step === 3" />
+        <router-view />
       </div>
     </SectionContainer>
   </section>
