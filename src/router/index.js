@@ -59,15 +59,6 @@ const routes = [
     },
   },
   {
-    path: "/user",
-    name: "UserAccount",
-    components: {
-      default: () => import("@/pages/UserAccount.vue"),
-      Header: () => import("@/components/header/HeaderPrimary.vue"),
-    },
-    meta: { requiresUserRole: true },
-  },
-  {
     path: "/book-ticket/:movieSeanceId",
     name: "BookTicket",
     components: {
@@ -75,6 +66,35 @@ const routes = [
       Header: () => import("@/components/header/HeaderPrimary.vue"),
     },
     props: true,
+    children: [
+      {
+        path: "choose-seats",
+        name: "ChooseSeats",
+        component: () => import("@/components/booking/ChooseSeats.vue"),
+        props: true,
+      },
+      {
+        path: "choose-tickets",
+        name: "ChooseTickets",
+        component: () => import("@/components/booking/ChooseTickets.vue"),
+        props: true,
+      },
+      {
+        path: "success",
+        name: "BookingSuccess",
+        component: () => import("@/components/booking/BookingSuccess.vue"),
+        props: true,
+      },
+    ],
+  },
+  {
+    path: "/user",
+    name: "UserAccount",
+    components: {
+      default: () => import("@/pages/UserAccount.vue"),
+      Header: () => import("@/components/header/HeaderPrimary.vue"),
+    },
+    meta: { requiresUserRole: true },
   },
   {
     path: "/employee",

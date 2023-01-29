@@ -83,11 +83,20 @@ export default defineComponent({
   color: $colorGreyTuna;
   border: 2px solid $colorGreyTuna;
   &:hover {
-    border: 2px solid $colorGreyBombay;
+    color: $colorGreyTuna;
+    border: 2px solid $colorGreyTuna;
   }
   .booking__step-number {
     color: $colorWhiteSnow;
     background-color: $colorGreyTuna;
+  }
+}
+
+.booking__step {
+  cursor: auto;
+  &:hover {
+    border: 2px solid $colorRedSweetPink;
+    color: $colorRedSweetPink;
   }
 }
 </style>

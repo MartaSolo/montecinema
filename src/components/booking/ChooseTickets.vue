@@ -14,11 +14,15 @@ export interface ReservedSeatTicket {
 
 // hardcoded data cuz there is no tickets endpoint in the API
 const ticketTypes = [
-  { id: 1, type: "Adult", price: 13, label: "Adult - $13" },
-  { id: 2, type: "Student", price: 9, label: "Student - $9" },
-  { id: 3, type: "Senior", price: 7, label: "Senior - $7" },
-  { id: 4, type: "Child", price: 5, label: "Child - $5" },
+  { id: 1, type: "Adult", price: 20, label: "Adult - $20" },
+  { id: 2, type: "Student", price: 12, label: "Student - $12" },
+  { id: 3, type: "Senior", price: 15, label: "Senior - $15" },
+  { id: 4, type: "Child", price: 10, label: "Child - $10" },
 ];
+
+const props = defineProps<{
+  movieSeanceId: String;
+}>();
 
 const reservationStore = useReservationStore();
 const { reservedSeats } = storeToRefs(reservationStore);
@@ -64,6 +68,7 @@ const bookTickets = () => {
   if (isUserLoggedIn.value) {
     reservationStore.reserveSeance(reservedSeatsTickets.value);
     changeStep(3);
+    router.push({ name: "BookingSuccess" });
   } else {
     router.push({ name: "UserLogIn" });
   }
@@ -110,8 +115,9 @@ const bookTickets = () => {
           size="large"
           colorTheme="dark-empty"
           @click="removeSeat(seat)"
-          >Remove</BaseButton
         >
+          Remove
+        </BaseButton>
       </div>
       <BaseCheckbox
         class="tickets__terms"
@@ -119,8 +125,9 @@ const bookTickets = () => {
         name="terms"
         label="I accept"
         v-model="terms"
-        ><a href="#" class="terms__link">Terms & Conditions</a></BaseCheckbox
       >
+        <a href="#" class="terms__link">Terms & Conditions</a>
+      </BaseCheckbox>
     </div>
 
     <div class="tickets__actions">
@@ -128,17 +135,23 @@ const bookTickets = () => {
         class="tickets__back-btn"
         size="large"
         colorTheme="dark-empty"
-        @click="changeStep(1)"
-        >Go back</BaseButton
+        @click="changeStep(3)"
+        :to="{
+          name: 'ChooseSeats',
+          params: { movieSeanceId: movieSeanceId },
+        }"
       >
+        Go back
+      </BaseButton>
       <BaseButton
         class="tickets__book-btn"
         size="large"
         colorTheme="accent-filled"
         :disabled="!terms"
         @click="bookTickets"
-        >Book tickets - ${{ ticketsPrice() }}</BaseButton
       >
+        Book tickets - ${{ ticketsPrice() }}
+      </BaseButton>
     </div>
   </section>
 </template>
