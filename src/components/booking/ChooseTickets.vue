@@ -14,10 +14,10 @@ export interface ReservedSeatTicket {
 
 // hardcoded data cuz there is no tickets endpoint in the API
 const ticketTypes = [
-  { id: 1, type: "Adult", price: 20, label: "Adult - $13" },
-  { id: 2, type: "Student", price: 12, label: "Student - $9" },
-  { id: 3, type: "Senior", price: 15, label: "Senior - $7" },
-  { id: 4, type: "Child", price: 10, label: "Child - $5" },
+  { id: 1, type: "Adult", price: 20, label: "Adult - $20" },
+  { id: 2, type: "Student", price: 12, label: "Student - $12" },
+  { id: 3, type: "Senior", price: 15, label: "Senior - $15" },
+  { id: 4, type: "Child", price: 10, label: "Child - $10" },
 ];
 
 const props = defineProps<{
@@ -115,8 +115,9 @@ const bookTickets = () => {
           size="large"
           colorTheme="dark-empty"
           @click="removeSeat(seat)"
-          >Remove</BaseButton
         >
+          Remove
+        </BaseButton>
       </div>
       <BaseCheckbox
         class="tickets__terms"
@@ -124,8 +125,9 @@ const bookTickets = () => {
         name="terms"
         label="I accept"
         v-model="terms"
-        ><a href="#" class="terms__link">Terms & Conditions</a></BaseCheckbox
       >
+        <a href="#" class="terms__link">Terms & Conditions</a>
+      </BaseCheckbox>
     </div>
 
     <div class="tickets__actions">
@@ -147,8 +149,9 @@ const bookTickets = () => {
         colorTheme="accent-filled"
         :disabled="!terms"
         @click="bookTickets"
-        >Book tickets - ${{ ticketsPrice() }}</BaseButton
       >
+        Book tickets - ${{ ticketsPrice() }}
+      </BaseButton>
     </div>
   </section>
 </template>
