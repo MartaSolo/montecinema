@@ -133,7 +133,7 @@ const bookTickets = () => {
         class="tickets__back-btn"
         size="large"
         colorTheme="dark-empty"
-        @click="changeStep(1)"
+        @click="changeStep(3)"
         :to="{
           name: 'ChooseSeats',
           params: { movieSeanceId: movieSeanceId },
