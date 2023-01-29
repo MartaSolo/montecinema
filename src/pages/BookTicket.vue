@@ -8,20 +8,15 @@ import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue
 import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import ScreeningMovieCard from "@/components/screenings/ScreeningMovieCard.vue";
-// import ChooseSeats from "@/components/booking/ChooseSeats.vue";
-// import ChooseTickets from "@/components/booking/ChooseTickets.vue";
-// import BookingSuccess from "@/components/booking/BookingSuccess.vue";
 import { useMeta } from "vue-meta";
+
+const { meta } = useMeta({ title: "Montecinema | Book tickets" });
 
 const props = defineProps<{
   movieSeanceId: String;
 }>();
 
 const step = ref(1);
-
-const onStepChange = (step: number) => {
-  handleStep(step);
-};
 
 const handleStep = (stepNumber: number) => {
   step.value = stepNumber;
@@ -38,7 +33,9 @@ const {
   movieError,
 } = storeToRefs(reservationStore);
 
-const { meta } = useMeta({ title: "Montecinema | Book tickets" });
+const sectionTitle = () => {
+  return step.value === 1 ? "Choose your seats" : "Choose tickets";
+}
 
 onMounted(() => {
   reservationStore.getSeance(props.movieSeanceId);
@@ -50,10 +47,7 @@ onMounted(() => {
     <SectionContainer class="booking__container">
       <div v-if="step !== 3" class="booking__step-info">
         <BookTicketsSteps :step="step" />
-        <SectionTitleSecondary
-          class="booking__title"
-          title="Choose your seats"
-        />
+        <SectionTitleSecondary class="booking__title" :title="sectionTitle()" />
         <LoadingData v-if="seanceIsLoading || movieIsLoading" />
         <ErrorMessage v-else-if="seanceError || movieError">{{
           getSeanceErrorMessage
@@ -67,7 +61,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="booking__step">
-        <router-view />
+        <router-view @onStepChange="handleStep($event)" />
       </div>
     </SectionContainer>
   </section>
