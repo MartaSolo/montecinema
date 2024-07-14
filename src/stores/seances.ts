@@ -1,9 +1,16 @@
 import { defineStore } from "pinia";
 import { getAllSeances } from "@/api/services/Seances";
+import { Seance } from "@/types/seance";
+
+interface State {
+  seances: Seance[];
+  seancesIsLoading: boolean;
+  seancesError: any;
+}
 
 export const useSeancesStore = defineStore({
   id: "seances",
-  state: () => ({
+  state: (): State => ({
     seances: [],
     seancesIsLoading: false,
     seancesError: null,
@@ -17,7 +24,7 @@ export const useSeancesStore = defineStore({
     },
   },
   actions: {
-    async getSeances(date) {
+    async getSeances(date: string) {
       this.seances = [];
       this.seancesIsLoading = true;
       try {
