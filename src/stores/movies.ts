@@ -1,9 +1,19 @@
 import { defineStore } from "pinia";
 import { getAllMovies, getMovieById } from "@/api/services/Movies";
+import { Movie } from "@/types";
+
+interface Store {
+  movies: Movie[];
+  moviesIsLoading: boolean;
+  moviesError: any;
+  movie: Movie | null;
+  movieIsLoading: boolean;
+  movieError: any;
+}
 
 export const useMoviesStore = defineStore({
   id: "movies",
-  state: () => ({
+  state: (): Store => ({
     movies: [],
     moviesIsLoading: false,
     moviesError: null,
@@ -32,7 +42,7 @@ export const useMoviesStore = defineStore({
         this.moviesIsLoading = false;
       }
     },
-    async getMovie(movieId) {
+    async getMovie(movieId: string) {
       this.movie = null;
       this.movieIsLoading = true;
       try {
