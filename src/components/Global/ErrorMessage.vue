@@ -15,5 +15,7 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   font-size: 3rem;
+  text-align: center;
+  color: $colorRedCherry;
 }
 </style>
