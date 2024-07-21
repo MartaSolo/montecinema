@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { getAllSeances } from "@/api/services/Seances";
-import { Seance } from "@/types/seance";
+import { Seance } from "@/types";
 
 interface State {
   seances: Seance[];
