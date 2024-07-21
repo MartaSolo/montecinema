@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, reactive } from "vue";
 import { storeToRefs } from "pinia";
-import { useAuthStore } from "@/stores/auth.js";
+import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 import regex from "@/utils/regex.js";
 import isAdult from "@/utils/birthDayValidation.js";
@@ -10,40 +10,33 @@ import BaseInput from "@/components/global/BaseInput.vue";
 import InputErrorMessage from "@/components/authentication/InputErrorMessage.vue";
 import BaseButton from "@/components/global/BaseButton.vue";
 
-const authStore = useAuthStore();
-const { currentUser, updateUserStatus } = storeToRefs(authStore);
+import { Credentials } from "@/types";
 
-interface UpdatedUser {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  birthday: string;
-  newPassword: string;
-}
+const { updateUserData, clearUpdateStatus } = useAuthStore();
+const { user, updateUserStatus } = storeToRefs(useAuthStore());
 
 const router = useRouter();
 
-const updatedUser = ref<UpdatedUser>({
-  email: currentUser.value?.email,
+const updatedUser = reactive<Credentials>({
+  email: user.value?.email || "",
   password: "",
-  newPassword: "",
-  firstName: currentUser.value?.first_name,
-  lastName: currentUser.value?.last_name,
-  birthday: currentUser.value?.date_of_birth,
+  first_name: user.value?.first_name || "",
+  last_name: user.value?.last_name || "",
+  date_of_birth: user.value?.date_of_birth || "",
+  current_password: "",
 });
 
-const passwordTouched = ref(false);
-const passwordInputType = ref("password");
+const currentPasswordTouched = ref(false);
+const currentPasswordInputType = ref("password");
 const showNewPassword = ref(false);
 const newPasswordTouched = ref(false);
 const newPasswordInputType = ref("password");
 const birthdayTouched = ref(false);
 
 const togglePasswordInputType = () => {
-  return passwordInputType.value === "password"
-    ? (passwordInputType.value = "text")
-    : (passwordInputType.value = "password");
+  return currentPasswordInputType.value === "password"
+    ? (currentPasswordInputType.value = "text")
+    : (currentPasswordInputType.value = "password");
 };
 
 const toggleNewPasswordInputType = () => {
@@ -57,90 +50,85 @@ const toggleNewPassword = () => {
 };
 
 const emailError = computed(() => {
-  if (!updatedUser.value.email) return "Please enter your email";
-  if (!regex.email.test(updatedUser.value.email))
-    return "Please enter correct email";
+  if (!updatedUser.email) return "Please enter your email";
+  if (!regex.email.test(updatedUser.email)) return "Please enter correct email";
   return "";
 });
 
-const passwordError = computed(() => {
-  if (!updatedUser.value.password && !passwordTouched.value) return "";
-  if (!updatedUser.value.password && passwordTouched.value)
+const currentPasswordError = computed(() => {
+  if (!updatedUser.current_password && !currentPasswordTouched.value) return "";
+  if (!updatedUser.current_password && currentPasswordTouched.value)
     return "Please enter your password";
-  if (updatedUser.value.password.length < 8 && passwordTouched.value)
+  if (updatedUser.current_password.length < 8 && currentPasswordTouched.value)
     return "At least 8 characters";
   return "";
 });
 
 const newPasswordError = computed(() => {
-  if (!updatedUser.value.newPassword && !newPasswordTouched.value) return "";
-  if (!updatedUser.value.newPassword && newPasswordTouched.value)
+  if (!updatedUser.password && !newPasswordTouched.value) return "";
+  if (!updatedUser.password && newPasswordTouched.value)
     return "Please enter your password";
   if (
-    updatedUser.value.newPassword.length < 8 ||
-    !regex.oneLetter.test(updatedUser.value.newPassword) ||
-    !regex.oneDigit.test(updatedUser.value.newPassword)
+    updatedUser.current_password.length < 8 ||
+    !regex.oneLetter.test(updatedUser.password) ||
+    !regex.oneDigit.test(updatedUser.password)
   )
     return "At least 8 characters, one letter and one digit";
   return "";
 });
 
 const firstNameError = computed(() => {
-  if (!updatedUser.value.firstName) return "Please enter your first name";
-  if (!regex.name.test(updatedUser.value.firstName))
+  if (!updatedUser.first_name) return "Please enter your first name";
+  if (!regex.name.test(updatedUser.first_name))
     return "Please enter correct first name";
   return "";
 });
 
 const lastNameError = computed(() => {
-  if (!updatedUser.value.lastName) return "Please enter your last name";
-  if (!regex.name.test(updatedUser.value.lastName))
+  if (!updatedUser.last_name) return "Please enter your last name";
+  if (!regex.name.test(updatedUser.last_name))
     return "Please enter correct last name";
   return "";
 });
 
 const birthdayError = computed(() => {
-  if (!updatedUser.value.birthday) return "error";
-  if (!isAdult(updatedUser.value.birthday) && birthdayTouched.value)
+  if (!updatedUser.date_of_birth) return "error";
+  if (!isAdult(updatedUser.date_of_birth) && birthdayTouched.value)
     return "error";
-  if (isAdult(updatedUser.value.birthday) && birthdayTouched.value)
+  if (isAdult(updatedUser.date_of_birth) && birthdayTouched.value)
     return "correct";
   return "";
 });
 
-const isFormValid = () => {
+const isFormValid = computed(() => {
   let isValid = false;
   if (
-    updatedUser.value.email &&
+    updatedUser.email &&
     !emailError.value &&
-    updatedUser.value.password &&
-    !passwordError.value &&
-    updatedUser.value.firstName &&
+    updatedUser.current_password &&
+    !currentPasswordError.value &&
+    updatedUser.first_name &&
     !firstNameError.value &&
-    updatedUser.value.lastName &&
+    updatedUser.last_name &&
     !lastNameError.value &&
-    updatedUser.value.birthday
+    updatedUser.date_of_birth
   )
     isValid = true;
   if (birthdayTouched.value && birthdayError.value === "error") isValid = false;
-  if (
-    (showNewPassword.value && !updatedUser.value.newPassword) ||
-    (showNewPassword.value && newPasswordError.value)
-  )
-    isValid = false;
+  if (!updatedUser.password && newPasswordError.value) isValid = false;
   return isValid;
-};
+});
 
 const onSubmit = () => {
-  if (isFormValid()) {
-    authStore.updateUserData(updatedUser.value);
+  if (isFormValid.value) {
+    updateUserData(updatedUser);
   } else {
     return;
   }
 };
 
 router.afterEach((to, from) => {
-  authStore.clearUpdateStatus();
+  clearUpdateStatus();
 });
 </script>
 
@@ -163,13 +151,13 @@ router.afterEach((to, from) => {
 
       <BaseInput
         class="account__password"
-        :class="{ error: passwordError }"
-        :inputType="passwordInputType"
+        :class="{ error: currentPasswordError }"
+        :inputType="currentPasswordInputType"
         name="password"
         label="password"
         placeholder="Your current password"
-        v-model="updatedUser.password"
-        @blur="passwordTouched = true"
+        v-model="updatedUser.current_password"
+        @blur="currentPasswordTouched = true"
       >
         <BaseButton
           type="button"
@@ -180,9 +168,9 @@ router.afterEach((to, from) => {
         /></BaseButton>
       </BaseInput>
       <InputErrorMessage
-        v-if="passwordError"
+        v-if="currentPasswordError"
         class="account__password error"
-        :inputError="passwordError"
+        :inputError="currentPasswordError"
       />
 
       <BaseInput
@@ -193,7 +181,7 @@ router.afterEach((to, from) => {
         name="new_password"
         label="new password"
         placeholder="Your new password"
-        v-model="updatedUser.newPassword"
+        v-model="updatedUser.password"
         @blur="newPasswordTouched = true"
       >
         <BaseButton
@@ -226,7 +214,7 @@ router.afterEach((to, from) => {
         inputType="text"
         name="name"
         label="First name"
-        v-model="updatedUser.firstName"
+        v-model="updatedUser.first_name"
       ></BaseInput>
       <InputErrorMessage
         v-if="firstNameError"
@@ -240,7 +228,7 @@ router.afterEach((to, from) => {
         inputType="text"
         name="surname"
         label="Last name"
-        v-model="updatedUser.lastName"
+        v-model="updatedUser.last_name"
       ></BaseInput>
       <InputErrorMessage
         v-if="lastNameError"
@@ -254,7 +242,7 @@ router.afterEach((to, from) => {
         inputType="date"
         name="birthday"
         label="Date of birth"
-        v-model="updatedUser.birthday"
+        v-model="updatedUser.date_of_birth"
         @blur="birthdayTouched = true"
       ></BaseInput>
       <InputErrorMessage
@@ -267,7 +255,7 @@ router.afterEach((to, from) => {
         colorTheme="light-empty"
         class="account__button-save"
         type="submit"
-        :disabled="!isFormValid()"
+        :disabled="!isFormValid"
         >Save changes</BaseButton
       >
     </form>

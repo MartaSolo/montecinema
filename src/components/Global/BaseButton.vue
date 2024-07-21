@@ -98,11 +98,11 @@ export default defineComponent({
   background-color: $colorRedCherry;
   color: $colorWhiteSnow;
   border: 2px solid $colorRedCherry;
-  &:hover {
+  &:hover:not(:disabled) {
     border: 2px solid $colorRedTotemPole;
-    &:disabled {
-      border: 2px solid $colorRedCherry;
-    }
+  }
+  &:disabled {
+    border: 2px solid $colorRedCherry;
   }
 }
 
@@ -110,7 +110,7 @@ export default defineComponent({
   background-color: $colorWhiteSnow;
   color: $colorRedCherry;
   border: 2px solid $colorRedCherry;
-  &:hover {
+  &:hover:not(:disabled) {
     border: 2px solid $colorRedTotemPole;
   }
 }
@@ -118,7 +118,7 @@ export default defineComponent({
   background-color: $colorWhiteSnow;
   color: $colorRedCherry;
   border: 2px solid $colorWhiteSnow;
-  &:hover {
+  &:hover:not(:disabled) {
     border: 2px solid $colorRedBittersweet;
   }
 }
@@ -127,7 +127,7 @@ export default defineComponent({
   background-color: $colorRedFairPink;
   color: $colorRedCherry;
   border: 2px solid $colorRedFairPink;
-  &:hover {
+  &:hover:not(:disabled) {
     border: 2px solid $colorRedSweetPink;
   }
 }
@@ -135,7 +135,7 @@ export default defineComponent({
   background-color: $colorWhiteSnow;
   color: $colorRedSweetPink;
   border: 2px solid $colorRedSweetPink;
-  &:hover {
+  &:hover:not(:disabled) {
     border: 2px solid $colorRedCherry;
     color: $colorRedCherry;
   }
@@ -144,7 +144,7 @@ export default defineComponent({
   background-color: $colorGreyTuna;
   color: $colorWhiteSnow;
   border: 2px solid $colorGreyTuna;
-  &:hover {
+  &:hover:not(:disabled) {
     border: 2px solid $colorGreyBombay;
   }
 }
@@ -152,7 +152,7 @@ export default defineComponent({
   background-color: $colorWhiteSnow;
   color: $colorGreyTuna;
   border: 2px solid $colorGreyTuna;
-  &:hover {
+  &:hover:not(:disabled) {
     border: 2px solid $colorGreyBombay;
   }
 }

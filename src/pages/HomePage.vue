@@ -2,7 +2,6 @@
 import { defineComponent } from "vue";
 import { mapActions } from "pinia";
 import { useMoviesStore } from "@/stores/movies";
-import { useAuthStore } from "@/stores/auth";
 import WelcomeSection from "@/components/welcome/WelcomeSection.vue";
 import ComingSoonSection from "@/components/comingSoon/ComingSoonSection.vue";
 import ScreeningsSection from "@/components/screenings/ScreeningsSection.vue";
@@ -18,13 +17,9 @@ export default defineComponent({
   },
   methods: {
     ...mapActions(useMoviesStore, ["getMovies"]),
-    ...mapActions(useAuthStore, ["restoreUserData"]),
   },
   mounted() {
     this.getMovies();
-  },
-  created() {
-    this.restoreUserData();
   },
   metaInfo() {
     return {

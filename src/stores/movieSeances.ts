@@ -1,17 +1,11 @@
 import { defineStore } from "pinia";
 import { getMovieSeancesByDay } from "@/api/services/Seances";
+import { Seance } from "@/types";
 
 interface Store {
-  movieSeances: movieSeance[];
+  movieSeances: Seance[];
   movieSeancesIsLoading: boolean;
   movieSeancesError: any;
-}
-
-interface movieSeance {
-  id: number;
-  datetime: string;
-  movie: number;
-  hall: number;
 }
 
 export const useMovieSeancesStore = defineStore({

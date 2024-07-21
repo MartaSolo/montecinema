@@ -11,14 +11,16 @@ import {
 import { ReservedSeatTicket } from "@/components/booking/ChooseTickets.vue";
 import { useAuthStore } from "@/stores/auth.js";
 
+import { Hall, Movie, Reservation, ReservedSeance, SeanceInfo } from "@/types";
+
 interface Store {
   seance: SeanceInfo | null;
   seanceIsLoading: boolean;
   seanceError: any;
-  movie: MovieInfo | null;
+  movie: Movie | null;
   movieIsLoading: boolean;
   movieError: any;
-  hall: HallInfo | null;
+  hall: Hall | null;
   hallIsLoading: boolean;
   hallError: any;
   reservedSeats: string[];
@@ -27,82 +29,9 @@ interface Store {
   reservation: Reservation | null;
   reservationIsLoading: boolean;
   reservationError: any;
-  userReservations: UserReservation[] | null;
+  userReservations: Reservation[] | null;
   userReservationsIsLoading: boolean;
   userReservationsError: any;
-}
-
-interface SeanceInfo {
-  available_seats: string[];
-  datetime: string;
-  hall: number;
-  id: number;
-  movie: number;
-  taken_seats: string[];
-}
-
-interface MovieInfo {
-  description: string;
-  genre: Genre;
-  id: number;
-  length: number;
-  poster_url: string;
-  release_date: string;
-  title: string;
-}
-
-interface Genre {
-  id: number;
-  name: string;
-}
-
-interface HallInfo {
-  id: number;
-  name: string;
-  seats: number;
-}
-
-interface ReservedSeance {
-  id: number;
-  seance_id: number;
-  created_at: string;
-  updated_at: string;
-  ticket_desk_id: number;
-  user_id: number;
-}
-
-interface Status {
-  id: number;
-  name: string;
-}
-
-interface Ticket {
-  id: number;
-  price: string;
-  seat: string;
-  type: string;
-}
-
-interface Reservation {
-  id: number;
-  movie_title: string;
-  seance_datetime: string;
-  seance_id: number;
-  status: Status;
-  tickets: Ticket[];
-  user_email: string;
-  user_id: number;
-}
-
-interface UserReservation {
-  id: string;
-  user_id: number;
-  user_email: string;
-  movie_title: string;
-  seance_id: number;
-  seance_datetime: string;
-  status: Status;
-  tickets: Ticket[];
 }
 
 export const useReservationStore = defineStore({
@@ -223,10 +152,10 @@ export const useReservationStore = defineStore({
     async getUserReservations() {
       this.userReservations = null;
       this.userReservationsIsLoading = true;
-      const authStore = useAuthStore();
-      if (authStore.currentUser) {
+      const { user } = useAuthStore();
+      if (user) {
         try {
-          const respData = await listReservations(authStore.currentUser.email);
+          const respData = await listReservations(user.email);
           this.userReservations = respData.data;
         } catch (error) {
           this.userReservationsError = error;
