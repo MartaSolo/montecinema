@@ -1,5 +1,8 @@
 <script>
 import { defineComponent } from "vue";
+import { mapActions } from "pinia";
+import { useAuthStore } from "@/stores/auth";
+
 export default defineComponent({
   name: "App",
   data() {
@@ -14,10 +17,16 @@ export default defineComponent({
       return this.error?.message || "We are sorry, but some error occurred.";
     },
   },
+  methods: {
+    ...mapActions(useAuthStore, ["restoreUserData"]),
+  },
   errorCaptured(error, instance, info) {
     this.error = error;
     this.instance = instance;
     this.info = info;
+  },
+  created() {
+    this.restoreUserData();
   },
   metaInfo() {
     return {
