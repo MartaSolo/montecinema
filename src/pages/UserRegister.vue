@@ -2,6 +2,7 @@
 import { defineComponent } from "vue";
 import SectionContainer from "@/components/global/SectionContainer.vue";
 import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue";
+import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import RegisterFirstStep from "@/components/authentication/RegisterFirstStep.vue";
 import RegisterSecondStep from "@/components/authentication/RegisterSecondStep.vue";
 import { useAuthStore } from "@/stores/auth";
@@ -14,6 +15,7 @@ export default defineComponent({
     SectionTitleSecondary,
     RegisterFirstStep,
     RegisterSecondStep,
+    ErrorMessage,
   },
   data() {
     return {
@@ -21,11 +23,11 @@ export default defineComponent({
       form: {
         email: "",
         password: "",
-        firstName: "",
-        lastName: "",
-        birthDay: "",
-        privacyPolicy: "",
+        first_name: "",
+        last_name: "",
+        date_of_birth: "",
       },
+      privacyPolicy: "",
       registerError: null,
     };
   },
@@ -37,16 +39,17 @@ export default defineComponent({
       this.step++;
     },
     async onSecondStepForm(data) {
-      this.form.firstName = data.firstName;
-      this.form.lastName = data.lastName;
-      this.form.birthDay = data.birthDay;
-      this.form.privacyPolicy = data.privacyPolicy;
+      this.form.first_name = data.firstName;
+      this.form.last_name = data.lastName;
+      this.form.date_of_birth = data.birthDay;
+      this.privacyPolicy = data.privacyPolicy;
       try {
         await this.register(this.form);
+        this.$router.push({ name: "HomePage" });
       } catch (error) {
-        this.registerError = error;
+        this.registerError =
+          error.message || "An error occurred while registering";
       }
-      this.$router.back();
     },
   },
   metaInfo() {
@@ -72,6 +75,7 @@ export default defineComponent({
         subtitle="Now your name"
         class="register__title"
       />
+      <ErrorMessage v-if="registerError">{{ registerError }}</ErrorMessage>
       <div class="register__step">
         <div v-if="step === 1" class="register__step-inputs">
           <RegisterFirstStep @firstStepCompleted="onFirstStepForm" />
