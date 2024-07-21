@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onBeforeMount, onMounted, computed, watch } from "vue";
+import { ref, computed, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/stores/auth.js";
 import { useReservationStore } from "@/stores/reservation.js";
@@ -12,19 +12,15 @@ import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import { useMeta } from "vue-meta";
 
 const authStore = useAuthStore();
-const {
-  currentUser,
-  currentUserIsLoading,
-  currentUserError,
-  currentUserErrorMessage,
-} = storeToRefs(authStore);
+const { user, userIsLoading, userError, userErrorMessage } =
+  storeToRefs(authStore);
 
-const reservationStore = useReservationStore();
+const { getUserReservations } = useReservationStore();
 
 const activeTab = ref("personalDetails");
 
 const userEmail = computed(() => {
-  return currentUser.value?.email;
+  return user.value?.email;
 });
 
 const changeTab = (tab: string) => {
@@ -33,11 +29,7 @@ const changeTab = (tab: string) => {
 const { meta } = useMeta({ title: "Montecinema | User account" });
 
 watch(userEmail, (newValue, oldValue) => {
-  reservationStore.getUserReservations();
-});
-
-onBeforeMount(() => {
-  authStore.getCurrentUser();
+  getUserReservations();
 });
 </script>
 
@@ -45,10 +37,8 @@ onBeforeMount(() => {
   <section class="account">
     <SectionContainer class="account__container">
       <AccountTabs :activeTab="activeTab" @setActiveTab="changeTab" />
-      <LoadingData v-if="currentUserIsLoading" />
-      <ErrorMessage v-else-if="currentUserError">{{
-        currentUserErrorMessage
-      }}</ErrorMessage>
+      <LoadingData v-if="userIsLoading" />
+      <ErrorMessage v-else-if="userError">{{ userErrorMessage }}</ErrorMessage>
       <div v-else class="account__content">
         <PersonalDetails v-if="activeTab === 'personalDetails'" />
         <Reservations v-if="activeTab === 'reservations'" />
