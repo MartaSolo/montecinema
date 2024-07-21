@@ -2,7 +2,7 @@
 import { defineComponent } from "vue";
 import regex from "@/utils/regex.js";
 import { mapActions, mapState } from "pinia";
-import { useAuthStore } from "@/stores/auth.js";
+import { useAuthStore } from "@/stores/auth.ts";
 import SectionContainer from "@/components/global/SectionContainer.vue";
 import SectionTitleSecondary from "@/components/global/SectionTitleSecondary.vue";
 import BaseInput from "@/components/global/BaseInput.vue";
