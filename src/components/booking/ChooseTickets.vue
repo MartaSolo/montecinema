@@ -1,19 +1,23 @@
 <script setup lang="ts">
-import { Ref, ref } from "vue";
+import { Ref, ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useReservationStore } from "@/stores/reservation.js";
 import { useAuthStore } from "@/stores/auth.js";
 import BaseButton from "@/components/global/BaseButton.vue";
 import BaseCheckbox from "@/components/global/BaseCheckbox.vue";
-
-export interface ReservedSeatTicket {
-  seat: string;
-  ticket_type_id: number;
-}
+import { ReservedSeatTicket } from "@/types";
 
 // hardcoded data cuz there is no tickets endpoint in the API
-const ticketTypes = [
+
+interface TicketTypes {
+  id: number;
+  type: "Adult" | "Senior" | "Student" | "Child";
+  price: number;
+  label: string;
+}
+
+const ticketTypes: TicketTypes[] = [
   { id: 1, type: "Adult", price: 20, label: "Adult - $20" },
   { id: 2, type: "Student", price: 12, label: "Student - $12" },
   { id: 3, type: "Senior", price: 15, label: "Senior - $15" },
@@ -26,6 +30,8 @@ const props = defineProps<{
 
 const reservationStore = useReservationStore();
 const { reservedSeats } = storeToRefs(reservationStore);
+const { removeSelectedSeat, reserveSeance } = reservationStore;
+
 const authStore = useAuthStore();
 const { isUserLoggedIn } = storeToRefs(authStore);
 
@@ -42,23 +48,26 @@ const terms = ref(false);
 const emit = defineEmits<{ (e: "onStepChange", step: number): void }>();
 
 const removeSeat = (seat: string) => {
-  reservationStore.removeSelectedSeat(seat);
+  removeSelectedSeat(seat);
   const filteredReservedSeatsTickets = reservedSeatsTickets.value.filter(
     (reservedSeat) => seat !== reservedSeat.seat
   );
   reservedSeatsTickets.value = filteredReservedSeatsTickets;
 };
 
-const ticketsPrice = () => {
+const ticketsPrice = computed(() => {
   const merged = reservedSeatsTickets.value.map((ticket) => ({
     ...ticket,
     ...ticketTypes.find(
       (ticketType) => ticketType.id === ticket.ticket_type_id
     ),
   }));
-  const price = merged.reduce((acc, obj) => acc + obj.price, 0);
+  const price = merged.reduce(
+    (acc, obj) => (obj.price ? acc + obj.price : 0),
+    0
+  );
   return price;
-};
+});
 
 const changeStep = (step: number) => {
   emit("onStepChange", step);
@@ -66,7 +75,7 @@ const changeStep = (step: number) => {
 
 const bookTickets = () => {
   if (isUserLoggedIn.value) {
-    reservationStore.reserveSeance(reservedSeatsTickets.value);
+    reserveSeance(reservedSeatsTickets.value);
     changeStep(3);
     router.push({ name: "BookingSuccess" });
   } else {
@@ -105,7 +114,7 @@ const bookTickets = () => {
               :key="ticket.id"
               :value="ticket.id"
             >
-              {{ ticket.label }}
+              {{ ticket.type }}
             </option>
           </select>
         </div>
@@ -150,7 +159,7 @@ const bookTickets = () => {
         :disabled="!terms"
         @click="bookTickets"
       >
-        Book tickets - ${{ ticketsPrice() }}
+        Book tickets - ${{ ticketsPrice }}
       </BaseButton>
     </div>
   </section>
