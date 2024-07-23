@@ -10,6 +10,7 @@ import Reservations from "@/components/user/Reservations.vue";
 import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import { useMeta } from "vue-meta";
+import { ActiveTab } from "@/types";
 
 const authStore = useAuthStore();
 const { user, userIsLoading, userError, userErrorMessage } =
@@ -17,13 +18,13 @@ const { user, userIsLoading, userError, userErrorMessage } =
 
 const { getUserReservations } = useReservationStore();
 
-const activeTab = ref("personalDetails");
+const activeTab = ref<ActiveTab>("personalDetails");
 
 const userEmail = computed(() => {
   return user.value?.email;
 });
 
-const changeTab = (tab: string) => {
+const changeTab = (tab: ActiveTab) => {
   activeTab.value = tab;
 };
 const { meta } = useMeta({ title: "Montecinema | User account" });

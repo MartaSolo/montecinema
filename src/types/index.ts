@@ -1,3 +1,5 @@
+export type ActiveTab = "personalDetails" | "reservations";
+
 export interface Credentials {
   email: string;
   password: string;
@@ -46,6 +48,11 @@ export interface ReservedSeance {
   updated_at: string;
   ticket_desk_id: number;
   user_id: number;
+}
+
+export interface ReservedSeatTicket {
+  seat: string;
+  ticket_type_id: number;
 }
 
 export interface Seance {
