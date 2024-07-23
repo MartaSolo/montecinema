@@ -13,5 +13,6 @@
       "@/*": ["./src/*"]
     },
     "allowJs": true,
+    "types": ["vite-svg-loader", "vite/client"]
   }
 }
