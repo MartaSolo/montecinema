@@ -8,7 +8,7 @@ import {
   getReservation,
   listReservations,
 } from "@/api/services/Reservations.js";
-import { ReservedSeatTicket } from "@/components/booking/ChooseTickets.vue";
+import { ReservedSeatTicket } from "@/types";
 import { useAuthStore } from "@/stores/auth.js";
 
 import { Hall, Movie, Reservation, ReservedSeance, SeanceInfo } from "@/types";
