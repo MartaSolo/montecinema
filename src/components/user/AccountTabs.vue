@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import BaseButton from "@/components/global/BaseButton.vue";
+import { ActiveTab } from "@/types";
 
 const props = withDefaults(
   defineProps<{
-    activeTab: "personalDetails" | "reservations";
+    activeTab: ActiveTab;
   }>(),
   {
     activeTab: "personalDetails",
@@ -11,10 +12,10 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (e: "setActiveTab", tab: string);
+  (e: "setActiveTab", tab: ActiveTab): void;
 }>();
 
-const changeTab = (tab: string) => {
+const changeTab = (tab: ActiveTab) => {
   emit("setActiveTab", tab);
 };
 </script>
