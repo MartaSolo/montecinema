@@ -14,7 +14,7 @@ const {
   reservation,
   reservationIsLoading,
   reservationError,
-  getReservationErrorMessage,
+  reservationErrorMessage,
 } = storeToRefs(reservationStore);
 
 const reservationId = computed(() => {
@@ -46,7 +46,7 @@ const subtitle = () => {
   <section class="success">
     <LoadingData v-if="reservationIsLoading" />
     <ErrorMessage v-else-if="reservationError">{{
-      getReservationErrorMessage
+      reservationErrorMessage
     }}</ErrorMessage>
     <div v-else class="success__reservation">
       <BookingSuccessTitle :subtitle="subtitle()" />

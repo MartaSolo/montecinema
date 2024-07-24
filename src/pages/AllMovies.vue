@@ -40,7 +40,7 @@ export default defineComponent({
       "movies",
       "moviesIsLoading",
       "moviesError",
-      "getMoviesErrorMessage",
+      "moviesErrorMessage",
     ]),
     getMovieGenresErrorMessage() {
       return (
@@ -97,7 +97,7 @@ export default defineComponent({
       <SectionTitlePrimary title="All the movies" class="movies__title" />
       <LoadingData v-if="moviesIsLoading" />
       <ErrorMessage v-else-if="moviesError">{{
-        getMoviesErrorMessage
+        moviesErrorMessage
       }}</ErrorMessage>
 
       <div v-else class="movies__filters">

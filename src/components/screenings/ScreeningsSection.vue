@@ -33,13 +33,13 @@ export default defineComponent({
       "movies",
       "moviesIsLoading",
       "moviesError",
-      "getMoviesErrorMessage",
+      "moviesErrorMessage",
     ]),
     ...mapState(useSeancesStore, [
       "seances",
       "seancesIsLoading",
       "seancesError",
-      "getSeancesErrorMessage",
+      "seancesErrorMessage",
     ]),
     movieTitles() {
       return this.movies.map((movie) => movie.title);
@@ -99,7 +99,7 @@ export default defineComponent({
       <div class="screenings__movies">
         <LoadingData v-if="moviesIsLoading || seancesIsLoading" />
         <ErrorMessage v-else-if="moviesError || seancesError">{{
-          getMoviesErrorMessage
+          moviesErrorMessage
         }}</ErrorMessage>
         <div v-else class="screenings__movies-cards">
           <ScreeningMovieCard

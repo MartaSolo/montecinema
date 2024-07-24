@@ -1,8 +1,8 @@
 <script>
 import { defineComponent } from "vue";
-import { getMovieById } from "@/api/services/Movies";
 import { mapState, mapActions } from "pinia";
 import { useMovieSeancesStore } from "@/stores/movieSeances";
+import { useMoviesStore } from "@/stores/movies";
 import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
 import SectionContainer from "@/components/global/SectionContainer.vue";
@@ -36,9 +36,6 @@ export default defineComponent({
   },
   data() {
     return {
-      movie: null,
-      movieIsLoading: true,
-      movieError: null,
       date: new Date(),
     };
   },
@@ -49,12 +46,12 @@ export default defineComponent({
       "movieSeancesError",
       "movieSeancesErrorMessage",
     ]),
-    movieErrorMessage() {
-      return (
-        this.movieError?.message ||
-        "We are sorry, but the movie cannot be displayed"
-      );
-    },
+    ...mapState(useMoviesStore, [
+      "movie",
+      "movieIsLoading",
+      "movieError",
+      "movieErrorMessage",
+    ]),
     movieTitle() {
       return this.movie.title;
     },
@@ -86,21 +83,11 @@ export default defineComponent({
     },
   },
   methods: {
-    async getMovie() {
-      this.movieIsLoading = true;
-      try {
-        const respData = await getMovieById(this.movieId);
-        this.movie = respData.data;
-      } catch (error) {
-        this.movieError = error;
-      } finally {
-        this.movieIsLoading = false;
-      }
-    },
+    ...mapActions(useMoviesStore, ["getMovie"]),
     ...mapActions(useMovieSeancesStore, ["getMovieSeances"]),
   },
   mounted() {
-    this.getMovie();
+    this.getMovie(this.movieId);
     this.getMovieSeances(this.movieId, this.formattedDate);
   },
   metaInfo() {

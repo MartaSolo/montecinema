@@ -18,7 +18,7 @@ const props = defineProps<{
 const emit = defineEmits<{ (e: "onStepChange", step: number): void }>();
 
 const reservationStore = useReservationStore();
-const { getHallPlan, reservedSeats } = storeToRefs(reservationStore);
+const { hallPlan, reservedSeats } = storeToRefs(reservationStore);
 
 const toggleReservedSeat = (chosenSeat: ChosenSeat) => {
   if (!chosenSeat.available) return;
@@ -52,7 +52,7 @@ const changeStep = (step: number) => {
 <template>
   <section class="choose__seats">
     <div class="choose__seats-hall">
-      <div v-for="(row, i) in getHallPlan" :key="i" class="hall__row">
+      <div v-for="(row, i) in hallPlan" :key="i" class="hall__row">
         <div class="hall__row-letter">{{ row[0].row }}</div>
         <div
           v-for="seat in row"

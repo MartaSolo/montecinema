@@ -27,7 +27,7 @@ const {
   seance,
   seanceIsLoading,
   seanceError,
-  getSeanceErrorMessage,
+  seanceErrorMessage,
   movie,
   movieIsLoading,
   movieError,
@@ -35,7 +35,7 @@ const {
 
 const sectionTitle = () => {
   return step.value === 1 ? "Choose your seats" : "Choose tickets";
-}
+};
 
 onMounted(() => {
   reservationStore.getSeance(props.movieSeanceId);
@@ -50,7 +50,7 @@ onMounted(() => {
         <SectionTitleSecondary class="booking__title" :title="sectionTitle()" />
         <LoadingData v-if="seanceIsLoading || movieIsLoading" />
         <ErrorMessage v-else-if="seanceError || movieError">{{
-          getSeanceErrorMessage
+          seanceErrorMessage
         }}</ErrorMessage>
         <div v-else class="booking__movie-card">
           <ScreeningMovieCard
