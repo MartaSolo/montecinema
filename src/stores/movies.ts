@@ -18,14 +18,20 @@ export const useMoviesStore = defineStore({
     moviesIsLoading: false,
     moviesError: null,
     movie: null,
-    movieIsLoading: false,
+    movieIsLoading: true,
     movieError: null,
   }),
   getters: {
-    getMoviesErrorMessage(state) {
+    moviesErrorMessage(state) {
       return (
         state.moviesError?.message ||
         "We are sorry, but movies cannot be displayed."
+      );
+    },
+    movieErrorMessage(state) {
+      return (
+        state.movieError?.message ||
+        "We are sorry, but movie cannot be displayed."
       );
     },
   },
