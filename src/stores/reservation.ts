@@ -9,7 +9,7 @@ import {
   listReservations,
 } from "@/api/services/Reservations.js";
 import { ReservedSeatTicket } from "@/types";
-import { useAuthStore } from "@/stores/auth.js";
+import { useAuthStore } from "@/stores/auth";
 
 import { Hall, Movie, Reservation, ReservedSeance, SeanceInfo } from "@/types";
 
@@ -57,23 +57,23 @@ export const useReservationStore = defineStore({
     userReservationsError: null,
   }),
   getters: {
-    getSeanceErrorMessage(state) {
+    seanceErrorMessage(state) {
       return (
         state.seanceError?.message ||
         "We are sorry, but the seance cannot be displayed."
       );
     },
-    getAllSeats(state) {
+    allSeats(state) {
       if (state.seance) {
         return allSeats(state.seance.available_seats, state.seance.taken_seats);
       }
     },
-    getHallPlan() {
-      if (this.getAllSeats) {
-        return hallPlan(this.getAllSeats);
+    hallPlan() {
+      if (this.allSeats) {
+        return hallPlan(this.allSeats);
       }
     },
-    getReservationErrorMessage(state) {
+    reservationErrorMessage(state) {
       return (
         state.reservationError?.message ||
         "We are sorry, but the reservation cannot be displayed."
@@ -84,18 +84,20 @@ export const useReservationStore = defineStore({
     async getSeance(seanceId: String) {
       this.seance = null;
       this.seanceIsLoading = true;
-      this.movie = null;
-      this.movieIsLoading = true;
-      this.hall = null;
-      this.hallIsLoading = true;
       try {
         const respData = await getSeanceById(seanceId);
         this.seance = respData.data;
+        await this.getSeanceHall();
+        await this.getMovie();
       } catch (error) {
         this.seanceError = error;
       } finally {
         this.seanceIsLoading = false;
       }
+    },
+    async getMovie() {
+      this.movie = null;
+      this.movieError = null;
       try {
         const respData = await getMovieById(this.seance?.movie);
         this.movie = respData.data;
@@ -104,6 +106,10 @@ export const useReservationStore = defineStore({
       } finally {
         this.movieIsLoading = false;
       }
+    },
+    async getSeanceHall() {
+      this.hall = null;
+      this.hallIsLoading = true;
       try {
         const respData = await getHall(this.seance?.hall);
         this.hall = respData.data;
