@@ -14,7 +14,7 @@ export default defineComponent({
       "movies",
       "moviesIsLoading",
       "moviesError",
-      "getMoviesErrorMessage",
+      "moviesErrorMessage",
     ]),
     moviesComingSoon() {
       return this.movies.slice(0, 3);
@@ -27,7 +27,7 @@ export default defineComponent({
   <div class="soon__movies">
     <LoadingData v-if="moviesIsLoading" />
     <ErrorMessage v-else-if="moviesError">{{
-      getMoviesErrorMessage
+      moviesErrorMessage
     }}</ErrorMessage>
     <div v-else class="soon__movies-cards">
       <BaseMovieCard
