@@ -16,7 +16,7 @@ export const useSeancesStore = defineStore({
     seancesError: null,
   }),
   getters: {
-    getSeancesErrorMessage(state) {
+    seancesErrorMessage(state) {
       return (
         state.seancesError?.message ||
         "We are sorry, but seances cannot be displayed."
