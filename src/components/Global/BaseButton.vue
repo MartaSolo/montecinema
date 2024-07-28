@@ -72,21 +72,25 @@ export default defineComponent({
     cursor: not-allowed;
   }
 }
+
 .button__large {
   height: 56px;
   padding: 19px 40px;
   font-size: 1.1rem;
 }
+
 .button__medium {
   height: 40px;
   padding: 12px 32px;
   font-size: 1rem;
 }
+
 .button__small {
   height: 32px;
   padding: 9px 24px;
   font-size: 0.9rem;
 }
+
 .button__tiny {
   height: 24px;
   padding: 5px 16px;
@@ -131,6 +135,7 @@ export default defineComponent({
     border: 2px solid $colorRedSweetPink;
   }
 }
+
 .light-empty {
   background-color: $colorWhiteSnow;
   color: $colorRedSweetPink;
@@ -140,6 +145,7 @@ export default defineComponent({
     color: $colorRedCherry;
   }
 }
+
 .dark-filled {
   background-color: $colorGreyTuna;
   color: $colorWhiteSnow;
@@ -148,6 +154,7 @@ export default defineComponent({
     border: 2px solid $colorGreyBombay;
   }
 }
+
 .dark-empty {
   background-color: $colorWhiteSnow;
   color: $colorGreyTuna;
