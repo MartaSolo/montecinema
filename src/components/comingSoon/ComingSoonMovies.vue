@@ -2,13 +2,13 @@
 import { defineComponent } from "vue";
 import { mapState } from "pinia";
 import { useMoviesStore } from "@/stores/movies";
-import BaseMovieCard from "@/components/global/BaseMovieCard.vue";
+import MovieCard from "@/components/movies/MovieCard.vue";
 import LoadingData from "@/components/global/LoadingData.vue";
 import ErrorMessage from "@/components/global/ErrorMessage.vue";
 
 export default defineComponent({
   name: "ComingSoonMovies",
-  components: { BaseMovieCard, LoadingData, ErrorMessage },
+  components: { MovieCard, LoadingData, ErrorMessage },
   computed: {
     ...mapState(useMoviesStore, [
       "movies",
@@ -30,7 +30,7 @@ export default defineComponent({
       moviesErrorMessage
     }}</ErrorMessage>
     <div v-else class="soon__movies-cards">
-      <BaseMovieCard
+      <MovieCard
         v-for="movie in moviesComingSoon"
         :key="movie.id"
         :movie="movie"
@@ -46,26 +46,18 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 16px;
   @include mediumScreen {
     flex-direction: row;
-    align-items: stretch;
-    justify-content: space-around;
-  }
-  @include largeScreen {
-    gap: 62px;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 }
+
 .soon__movie-card {
-  display: flex;
+  width: 100%;
   @include mediumScreen {
-    &:nth-child(3) {
-      display: none;
-    }
-  }
-  @include largeScreen {
-    &:nth-child(3) {
-      display: flex;
-    }
+    width: 31%;
   }
 }
 </style>
