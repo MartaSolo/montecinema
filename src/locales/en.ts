@@ -11,7 +11,7 @@ export default {
     logout: "Logout",
   },
   welcome: {
-    title: "Welcome to the best cinema in Monterail",
+    title: "Welcome to the Montecinema",
     description:
       "Best movies, best experiences, best people. \n And all that doesn’t exist. Yikes.",
     booking: "Book a ticket",
