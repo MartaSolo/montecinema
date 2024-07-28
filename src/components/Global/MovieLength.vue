@@ -30,6 +30,5 @@ export default defineComponent({
   font-weight: 700;
   font-size: 0.9rem;
   color: $colorGreyJumbo;
-  padding: 16px 0;
 }
 </style>
