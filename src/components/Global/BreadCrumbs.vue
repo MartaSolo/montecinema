@@ -30,62 +30,51 @@ export default defineComponent({
 <template>
   <nav class="breadcrumbs">
     <SectionContainer class="breadcrumbs__container">
-      <BaseButton
-        class="breadcrumbs__back"
-        size="small"
-        colorTheme="dark-empty"
-        @click="goBack"
-      >
-        <div class="breadcrumbs__back-content">
-          <ArrowLeft class="breadcrumbs__back-icon" />
-          <div class="breadcrumbs__back-text">Back</div>
-        </div>
-      </BaseButton>
-      <BaseButton
-        v-if="parentPageName"
-        class="breadcrumbs__parent"
-        :to="parentRouteName"
-        size="small"
-        colorTheme="accent-text"
-        >{{ parentPageName }}</BaseButton
-      >
-      <ChevronRight v-if="parentPageName" />
-      <BaseButton
-        class="breadcrumbs__current"
-        :to="this.$route"
-        size="small"
-        colorTheme="dark-empty"
-        >{{ currentPageName }}
-      </BaseButton>
+      <div class="breadcrumbs__content">
+        <BaseButton
+          class="breadcrumbs__back"
+          size="small"
+          colorTheme="dark-empty"
+          @click="goBack"
+        >
+          <div class="breadcrumbs__back--content">
+            <ArrowLeft class="breadcrumbs__back--icon" />
+            <div class="breadcrumbs__back--text">Back</div>
+          </div>
+        </BaseButton>
+        <BaseButton
+          v-if="parentPageName"
+          class="breadcrumbs__parent"
+          :to="parentRouteName"
+          size="small"
+          colorTheme="accent-text"
+          >{{ parentPageName }}</BaseButton
+        >
+        <ChevronRight v-if="parentPageName" class="breadcrumbs__chevron" />
+        <span class="breadcrumbs__current">{{ currentPageName }} </span>
+      </div>
     </SectionContainer>
   </nav>
 </template>
 
 <style lang="scss" scoped>
-.breadcrumbs__container {
+.breadcrumbs__content {
   background-color: $colorRedWispPink;
   display: flex;
   align-items: center;
   gap: 5px;
-  height: 40px;
+  padding: 10px;
   @include mediumScreen {
-    height: 80px;
+    padding: 15px 20px;
   }
 }
+
 .breadcrumbs__back,
 .breadcrumbs__parent,
 .breadcrumbs__current {
   background-color: $colorRedWispPink;
   @include mediumScreen {
-    height: 40px;
     font-size: 1rem;
-  }
-}
-.breadcrumbs__parent,
-.breadcrumbs__current {
-  padding: 12px 5px;
-  @include mediumScreen {
-    padding: 12px 16px;
   }
 }
 
@@ -99,36 +88,47 @@ export default defineComponent({
       border: 2px solid $colorGreyBombay;
     }
   }
-}
 
-.breadcrumbs__back-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-}
-.breadcrumbs__back-text {
-  display: none;
-  @include mediumScreen {
+  &--content {
     display: flex;
-    font-family: $fontSecondary;
-    font-weight: 500;
-    line-height: 1.1rem;
-    font-size: 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
   }
-}
-.breadcrumbs__current {
-  display: flex;
-  border: 2px solid $colorRedWispPink;
-  @include mediumScreen {
-    &:hover {
-      border: 2px solid $colorRedCosmos;
+
+  &--text {
+    display: none;
+    @include mediumScreen {
+      display: flex;
+      font-family: $fontSecondary;
+      font-weight: 500;
+      line-height: 1.1rem;
+      font-size: 1rem;
     }
   }
 }
+
+.breadcrumbs__chevron {
+  flex-shrink: 0;
+}
+
+.breadcrumbs__current {
+  font-family: $fontSecondary;
+  font-weight: 500;
+  line-height: 1.1rem;
+  font-size: 0.9rem;
+  padding-left: 14px;
+  @include mediumScreen {
+    font-size: 1rem;
+    padding-left: 24px;
+  }
+}
+
 .breadcrumbs__parent {
   border: 2px solid $colorRedWispPink;
+  padding: 9px 14px;
   @include mediumScreen {
+    padding: 9px 24px;
     &:hover {
       border: 2px solid $colorRedCosmos;
     }

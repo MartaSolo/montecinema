@@ -128,7 +128,7 @@ export default defineComponent({
   }
   @include mediumScreen {
     height: 56px;
-    padding: 19px 40px;
+    padding: 10px 20px;
     font-size: 1.1rem;
     margin: 0 10px 0px 0;
     &:nth-child(4) {

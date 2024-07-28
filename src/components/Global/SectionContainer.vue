@@ -16,5 +16,8 @@ export default defineComponent({
   width: 100%;
   max-width: 1440px;
   padding: 0 1.5rem;
+  @include mediumScreen {
+    padding: 0 2.5rem;
+  }
 }
 </style>

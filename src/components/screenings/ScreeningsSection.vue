@@ -101,7 +101,7 @@ export default defineComponent({
         <ErrorMessage v-else-if="moviesError || seancesError">{{
           moviesErrorMessage
         }}</ErrorMessage>
-        <div v-else class="screenings__movies-cards">
+        <div v-else class="screenings__movies--cards">
           <ScreeningMovieCard
             v-for="movie in moviesFilteredByTitleAndDate"
             :key="movie.id"
@@ -116,8 +116,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .screenings__container {
-  padding-top: 40px;
+  padding: 40px 24px;
+  @include mediumScreen {
+    padding: 40px;
+  }
 }
+
 .screenings__filters {
   margin-bottom: 48px;
   @include mediumScreen {

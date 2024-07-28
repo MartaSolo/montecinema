@@ -11,7 +11,7 @@ export default {
     logout: "Wyloguj",
   },
   welcome: {
-    title: "Witamy w najlepszym kinie w Monterail",
+    title: "Witamy w Montecinema",
     description:
       "Najlepsze filmy, najlepsze doświadczenia, najlepsi ludzie. A wszystko to nie istnieje. Uff.",
     booking: "Zarezerwuj bilet",

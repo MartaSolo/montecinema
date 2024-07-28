@@ -7,7 +7,6 @@ import BaseButton from "@/components/global/BaseButton.vue";
 import BaseImage from "@/components/global/BaseImage.vue";
 
 export default defineComponent({
-  name: "WelcomeSection",
   components: {
     SectionContainer,
     SectionTitlePrimary,
@@ -19,8 +18,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <section class="welcome">
-    <SectionContainer class="welcome__container">
+  <SectionContainer class="welcome">
+    <section class="welcome__container">
       <div class="welcome__text">
         <SectionTitlePrimary
           :title="$t('welcome.title')"
@@ -42,77 +41,63 @@ export default defineComponent({
         <BaseImage
           src="/src/assets/images/cinema.jpeg"
           alt="spectators in the cinema hall"
-          class="welcome"
+          class="welcome__image--img"
         />
       </div>
-    </SectionContainer>
-  </section>
+    </section>
+  </SectionContainer>
 </template>
 
 <style lang="scss" scoped>
-.welcome {
-  height: 562px;
-  @include mediumScreen {
-    height: 618px;
-  }
-}
 .welcome__container {
-  height: 100%;
-  background-color: $colorRedWispPink;
   @include mediumScreen {
-    background-color: $colorWhiteSnow;
-    height: 100%;
-  }
-  @include largeScreen {
     display: flex;
   }
 }
+
 .welcome__text {
-  height: 100%;
-  max-width: 400px;
-  margin: 0 auto;
+  background-color: $colorRedWispPink;
+  padding: 50px 14px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
+  gap: 40px;
   @include mediumScreen {
-    background-color: $colorRedWispPink;
-    width: 100%;
-    max-width: 100%;
+    width: 69%;
+    padding: 50px;
+    align-items: flex-start;
     justify-content: space-between;
-    padding: 80px 66px;
-  }
-  @include largeScreen {
-    width: calc(100% - 457px);
-    margin: 0;
   }
 }
 
 .welcome__title {
+  text-align: center;
   @include mediumScreen {
-    width: 650px;
-    align-self: flex-start;
+    font-size: 3rem;
+    text-align: left;
+  }
+  @include mediumPlusScreen {
+    font-size: 5rem;
   }
 }
 
 .welcome__description {
-  align-self: flex-start;
+  text-align: center;
   @include mediumScreen {
-    width: 680px;
+    text-align: left;
   }
 }
-.welcome__link {
-  width: 310px;
-  @include mediumScreen {
-    width: 224px;
-    align-self: flex-start;
-    padding: 19px 20px;
-  }
-}
+
 .welcome__image {
   display: none;
-  @include largeScreen {
+  @include mediumScreen {
     display: block;
+    width: 31%;
+  }
+
+  &--img {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>
