@@ -1,12 +1,24 @@
-
 // breakpoints
 @mixin mediumScreen {
   @media (min-width: 1024px) {
     @content;
   }
 }
+
+@mixin mediumPlusScreen {
+  @media (min-width: 1224px) {
+    @content;
+  }
+}
+
 @mixin largeScreen {
   @media (min-width: 1440px) {
     @content;
   }
+}
+
+@mixin cardBoxShadow {
+  box-shadow: 0px 24px 78px rgba(0, 0, 0, 0.08),
+    0px 5.36071px 17.4223px rgba(0, 0, 0, 0.0238443),
+    0px 1.59602px 5.18708px rgba(0, 0, 0, 0.0161557);
 }
